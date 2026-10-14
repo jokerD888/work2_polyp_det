@@ -138,6 +138,8 @@ def assign_image(payload, b, target, options):
                 "n_cls_eligible": 0, "n_reg_eligible": 0,
                 "n_cls_owned": 0, "n_reg_owned": 0,
                 "n_cls_selected": 0, "n_reg_selected": 0,
+                "cls_token_indices": [], "reg_token_indices": [],
+                "cls_coverage": [], "reg_coverage": [],
             }
             entry["fill_ratio"] = entry["mask_area_pixels"] / entry["area_pixels"] if valid_box else None
             per_gt.append(entry)
@@ -186,10 +188,26 @@ def assign_image(payload, b, target, options):
                 entry[f"n_{task}_selected"] = indices.numel()
                 entry[f"{task}_full_quota"] = indices.numel() == k
                 entry[f"{task}_levels"] = keys[indices, 0].tolist()
+                entry[f"{task}_token_indices"] = indices.tolist()
+                entry[f"{task}_coverage"] = coverage[indices].tolist()
             p_list.append(indices)
             j_list.append(torch.full_like(indices, j))
         if entry is None:
             continue
+        cls_set, reg_set = set(entry["cls_token_indices"]), set(entry["reg_token_indices"])
+        high = torch.nonzero((owner == j) & (coverage >= options.tau_cls), as_tuple=True)[0]
+        high = _stable_rank(high, coverage, distance, keys)[:options.k_reg]
+        transition = sum(options.tau_reg <= value < options.tau_cls for value in entry["reg_coverage"])
+        entry.update({
+            "cls_subset_reg": cls_set <= reg_set,
+            "cls_reg_overlap_fraction": len(cls_set & reg_set) / len(cls_set) if cls_set else None,
+            "reg_only_fraction": len(reg_set - cls_set) / len(reg_set) if reg_set else None,
+            "reg_transition_count": transition,
+            "reg_transition_fraction": transition / len(reg_set) if reg_set else None,
+            "reg_high_threshold_token_indices": high.tolist(),
+            "reg_threshold_changes_selection": set(high.tolist()) != reg_set,
+            "both_tasks_empty": not (cls_set or reg_set),
+        })
         entry["per_level"] = []
         for level in range(len(payload["spatial_shapes"])):
             on_level = keys[:, 0] == level

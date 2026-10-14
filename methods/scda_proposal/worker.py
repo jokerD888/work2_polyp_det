@@ -68,7 +68,7 @@ def worker_main(args):
             "giou_weight": cfg.MODEL.MaskDINO.GIOU_WEIGHT,
             "box_coefficients": "reuse resolved native coefficients once, then lambda_box",
             "baseline_config_sha256": experiment["baseline_config_sha256"],
-            "precheck_status": "unverified; this file is not a GO result"})
+            "precheck_status": "See separate F_PRECHECK.md and run audit artifacts; this metadata is not a GO result"})
         if args.mode == "train" and cfg.MODEL.WEIGHTS:
             from detectron2.utils.file_io import PathManager
             cached = PathManager.get_local_path(cfg.MODEL.WEIGHTS)

@@ -38,5 +38,5 @@ def load_experiment(path):
     cfg.update({"name": name, "adapter": "scda_proposal", "scda": asdict(options),
                 "source_config": str(path), "baseline_config": str(baseline),
                 "baseline_config_sha256": sha256(baseline),
-                "implementation_status": "code_only_unverified"})
+                "implementation_status": "precheck_evidence_recorded_separately"})
     return cfg

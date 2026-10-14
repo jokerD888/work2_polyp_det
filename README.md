@@ -22,7 +22,7 @@ third_party/   固定版本的 MaskDINO 官方源码和许可证
 
 参数与跨方法比较约定见 [实验协议](docs/experiment_protocol.md)，本机验证结果见 [验证摘要](docs/validation.md)。调试日志、旧数据转换、预检配置和短试跑权重已清理。
 
-F-v1 MIPS-SCDA 的实现和独立入口见 [方法说明](methods/scda_proposal/README.md)。当前仅完成代码编写，尚未运行测试或训练；沿用 Kvasir 配置，SCDA 仅使用原始单框图片，详见 [预检记录](methods/scda_proposal/F_PRECHECK.md)。
+F-v1 MIPS-SCDA 的实现和独立入口见 [方法说明](methods/scda_proposal/README.md)。2026-10-15 已通过 CPU/Gloo、A/F参数对齐、真实GPU和50iter健康检查；发现回归阈值放宽没有改变当前样本的选点，正式长训等待方法定义决策。沿用 Kvasir 配置，SCDA 仅使用原始单框图片，详见 [预检记录](methods/scda_proposal/F_PRECHECK.md)。
 
 Git 仓库保存源码、配置、文档和依赖记录；`data/`、`weights/`、`runs/`、虚拟环境及 `third_party/` 均不提交。克隆后按下文重新准备数据和模型环境，安装脚本会获取固定版本的 MaskDINO 源码并应用兼容补丁。
 

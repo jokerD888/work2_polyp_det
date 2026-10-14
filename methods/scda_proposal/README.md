@@ -2,7 +2,7 @@
 
 基于当前固定版本 MaskDINO 的训练期 Proposal 辅助监督。方法放在本目录；通过新的 registry 名称接入，不修改 `third_party/MaskDINO` 或现有基线适配器。
 
-**当前状态：仅完成代码编写，未执行测试、模型导入、前向、反向、推理或训练。不能把本目录视为已通过工程验收。** 预检状态见 [F_PRECHECK.md](F_PRECHECK.md)。原始设计文档保存在 [docs/DESIGN_SPEC.md](docs/DESIGN_SPEC.md)，其中的数据集和验收安排以本次用户确认及预检记录为准。
+**当前状态：2026-10-15 CPU/Gloo、真实 GPU 验收和50iter健康检查已通过；候选统计显示回归阈值放宽没有改变选点，正式100epoch等待方法定义决策。** 预检状态见 [F_PRECHECK.md](F_PRECHECK.md)。原始设计文档保存在 [docs/DESIGN_SPEC.md](docs/DESIGN_SPEC.md)，其中的数据集和验收安排以本次用户确认及预检记录为准。
 
 ## 本次确认的实现
 
@@ -26,6 +26,7 @@
 | `diagnostics.py` | 候选统计、原始框与真实 decoder 初始化覆盖率、参数和梯度审计接口 |
 | `config.py` / `experiment.py` | 原生配置扩展及基线配置继承 |
 | `worker.py` / `run.py` | 独立进程与实验入口、源码快照、checkpoint、统一 bbox 评测 |
+| `precheck.py` / `audit_summary.py` / `tests/` | 真实模型验收、候选解耦汇总及 CPU/Gloo 测试 |
 | `configs/kvasir.yaml` | 本次确认的 F 配置 |
 
 ## 配置与环境
@@ -64,4 +65,4 @@ Top-Q 冗余按已确认的定义报告：IoU≥0.3 的逐 GT 候选数量；与
 
 梯度诊断默认不执行。授权预检时可在 `diagnostics: true` 下向派生模型的 `scda_audit_callback` 赋值，签名为 `(model, native_losses, auxiliary, payload, targets, assignments)`，在回调内调用 `gradient_audit` 并保存结果。它不应在正式长训里逐步执行。
 
-实际参数对齐、关闭开关/eval 一致性、真实增强后的坐标与覆盖案例、空/多 GT、极小目标、AMP 数值和多卡归一化仍待验收。本次没有生成 GO 结论、正式训练结果或消融决策。文档中的“显著比例”“严重干扰”没有数值定义；后续验收时需要先确认阈值，本实现不替用户设定。
+CPU/Gloo 的积分、部分 padding、空/多 GT、极小目标、正类梯度、逐 GT 均值和全局归一化已经通过 12 项测试。真实 A/F 参数、train-off/eval 等价、实际增强、AMP 梯度及候选分布由 `precheck.py` 在基线 train/predict 完成后验收，记录 `SCDA_DECOUPLING_EFFECTIVENESS.json`。没有生成研究 GO、正式结果或消融结论；“显著比例”“严重干扰”的门限不由实现擅自设定。
