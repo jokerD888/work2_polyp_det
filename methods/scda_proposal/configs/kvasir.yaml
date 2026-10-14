@@ -1,0 +1,16 @@
+# F-v1 only. Everything else is inherited from the current MaskDINO experiment.
+# No run has been started or validated with this preset.
+base_experiment: ../../../configs/maskdino_kvasir_official.yaml
+name: scda_proposal_r50_kvasir_official
+scda:
+  enabled: true  # module defaults remain False; this is the explicit F preset
+  tau_cls: 0.75
+  tau_reg: 0.25
+  k_cls: 2
+  k_reg: 4
+  lambda_cls: 0.05
+  lambda_box: 0.05
+  mask_policy: single_instance
+  geometry: padded_grid_exact_area_box_distance
+  padding_policy: full_cell_valid
+  diagnostics: false  # enable only for later authorized P0/pilot diagnostics

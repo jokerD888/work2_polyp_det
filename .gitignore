@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.egg-info/
+third_party/
+data/
+weights/
+runs/
+.pytest_cache/
+runs_*.log
