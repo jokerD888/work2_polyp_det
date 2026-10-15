@@ -1,5 +1,7 @@
 # MaskDINO 与 SCDA F-v2：seed42 完整预算结果
 
+> **2026-10-15 勘误：** 已确认这两组训练 mapper 的实例掩码补边存在 255 转前景和 padding 漏标问题。下表数字作为旧管线历史结果保留，不能视为修复版对照或将 F 的下降全部归因于 SCDA 设计。修复及实图 CPU 验证见 [说明](../instance_mask_padding_fix_20261015.md)。本轮未重训。
+
 2026-10-15，Asia/Shanghai。两组均完成100 epoch / 22000 iteration，使用各自按 val AP50:95 选出的 best checkpoint 进行相同的统一 COCO bbox 评测。
 
 | 方法 | AP50:95 (%) | AP50 (%) | AP75 (%) | Best iteration（零基） | Best epoch |

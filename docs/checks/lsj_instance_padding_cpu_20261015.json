@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "model_forward": false,
+  "seed": 42,
+  "dataset_sha256": "9b5d73d9b3206daa78ce57d15dbe9fe2dd75b432176419762475a4318ec727b6",
+  "mapper_settings": {
+    "IMAGE_SIZE": 512,
+    "MIN_SCALE": 0.5,
+    "MAX_SCALE": 1.5,
+    "RANDOM_FLIP": "horizontal",
+    "FORMAT": "RGB"
+  },
+  "torch": "2.7.1+cu128",
+  "source_sha256": {
+    "polypbench/adapters/instance_lsj.py": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+    "polypbench/adapters/bitmask_mapper.py": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+    "methods/scda_proposal/mapper.py": "5072b9ae6ac05a60d5c92e5d8d0690692720095b7fbce80183e722490364809b",
+    "scripts/check_lsj_instance_padding.py": "eeb2d28e2c2691a90ce7f7826b258a498c12bdc20f387f23247eef58dfdc8681"
+  },
+  "verified": [
+    "independent padding geometry",
+    "baseline/SCDA exact equality",
+    "legacy/fixed image and supplied box equality",
+    "nonpad masks unchanged",
+    "all fixed padding is background"
+  ],
+  "summary": {
+    "images": 128,
+    "images_with_padding": 77,
+    "legacy_images_reporting_padding": 0,
+    "padding_pixels": 7903200,
+    "legacy_padding_foreground_instance_pixels": 8224878,
+    "legacy_foreground_instance_pixels": 13174932,
+    "fixed_foreground_instance_pixels": 4950054
+  },
+  "examples": [
+    {
+      "image_id": 716,
+      "instances": 2,
+      "padding_pixels": 114236,
+      "legacy_reported_padding_pixels": 0,
+      "legacy_padding_foreground_instance_pixels": 228472,
+      "legacy_foreground_instance_pixels": 234451,
+      "fixed_foreground_instance_pixels": 5979
+    },
+    {
+      "image_id": 184,
+      "instances": 2,
+      "padding_pixels": 105744,
+      "legacy_reported_padding_pixels": 0,
+      "legacy_padding_foreground_instance_pixels": 211488,
+      "legacy_foreground_instance_pixels": 235198,
+      "fixed_foreground_instance_pixels": 23710
+    },
+    {
+      "image_id": 699,
+      "instances": 1,
+      "padding_pixels": 204905,
+      "legacy_reported_padding_pixels": 0,
+      "legacy_padding_foreground_instance_pixels": 204905,
+      "legacy_foreground_instance_pixels": 234221,
+      "fixed_foreground_instance_pixels": 29316
+    },
+    {
+      "image_id": 684,
+      "instances": 1,
+      "padding_pixels": 203941,
+      "legacy_reported_padding_pixels": 0,
+      "legacy_padding_foreground_instance_pixels": 203941,
+      "legacy_foreground_instance_pixels": 216673,
+      "fixed_foreground_instance_pixels": 12732
+    },
+    {
+      "image_id": 366,
+      "instances": 1,
+      "padding_pixels": 198256,
+      "legacy_reported_padding_pixels": 0,
+      "legacy_padding_foreground_instance_pixels": 198256,
+      "legacy_foreground_instance_pixels": 202956,
+      "fixed_foreground_instance_pixels": 4700
+    }
+  ]
+}

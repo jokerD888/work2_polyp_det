@@ -1,4 +1,4 @@
-"""Dedicated LSJ mapper. Baseline files and original native masks stay intact."""
+"""SCDA metadata on the same zero-mask-padding LSJ pipeline as the baseline."""
 import copy
 
 import numpy as np
@@ -6,12 +6,12 @@ import torch
 from detectron2.data import detection_utils as utils
 from detectron2.data import transforms as T
 from detectron2.structures import BitMasks
-from maskdino.data.dataset_mappers.coco_instance_new_baseline_dataset_mapper import build_transform_gen
+from polypbench.adapters.instance_lsj import build_instance_lsj_augmentations
 
 
 class SCDALSJMapper:
     def __init__(self, cfg, mask_policy):
-        self.augmentations = build_transform_gen(cfg, True)
+        self.augmentations = build_instance_lsj_augmentations(cfg)
         self.image_format = cfg.INPUT.FORMAT
         self.mask_policy = mask_policy
 
@@ -23,7 +23,7 @@ class SCDALSJMapper:
         single_instance = len(original_annotations) == 1
         image = utils.read_image(record["file_name"], format=self.image_format)
         utils.check_image_size(record, image)
-        padding = np.ones(image.shape[:2])
+        padding = np.ones(image.shape[:2], dtype=np.uint8)
         image, transforms = T.apply_transform_gens(self.augmentations, image)
         padding = ~transforms.apply_segmentation(padding).astype(bool)
         shape = image.shape[:2]

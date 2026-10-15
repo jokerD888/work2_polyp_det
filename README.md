@@ -4,6 +4,8 @@
 
 首轮使用 Kvasir-SEG 官方 **880/120 train/val** 划分，以及原始 `kavsir_bboxes.json` 的 **1,071 个框**（train 941，val 130）。框仅转换为 COCO xywh 格式，保留原始坐标与数量；训练时不从 mask 重算 bbox 标签。val 用于权重选择和 val AP 汇报。
 
+**2026-10-15 数据管线修复：** 原生和 SCDA 的 RLE 实例掩码现统一使用零补边，修复默认 255 被当成前景且未标出 padding 的问题。旧 A/F 训练结果受此问题影响，保留为历史记录；新对照须使用新 run-id，不能只重训 F 后与旧 A 比较。详见 [修复说明与 CPU 验证](docs/instance_mask_padding_fix_20261015.md)。
+
 ## 目录
 
 ```text
@@ -40,8 +42,8 @@ Git 仓库保存源码、配置、文档和依赖记录；`data/`、`weights/`�
 ./scripts/run_wsl.ps1 doctor --config configs/maskdino_kvasir_official.yaml
 
 # 正式配置：R50、512 输入、总 batch 4、100 epochs、seed 42
-./scripts/run_wsl.ps1 train --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-s42
-./scripts/run_wsl.ps1 predict --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-s42 --split val
+./scripts/run_wsl.ps1 train --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-pad0-s42
+./scripts/run_wsl.ps1 predict --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-pad0-s42 --split val
 ./scripts/run_wsl.ps1 summarize
 ```
 
@@ -76,8 +78,8 @@ export CUDA_HOME=/usr/local/cuda-12.8
 bash scripts/bootstrap_maskdino.sh
 source ~/.venvs/polypbench-maskdino/bin/activate
 python -m polypbench validate --config configs/maskdino_kvasir_official.yaml
-python -m polypbench train --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-s42
-python -m polypbench predict --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-s42 --split val
+python -m polypbench train --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-pad0-s42
+python -m polypbench predict --config configs/maskdino_kvasir_official.yaml --run-id maskdino-official-pad0-s42 --split val
 ```
 
 双卡运行时修改 `runtime.num_gpus: 2`、`visible_gpus: "0,1"`，总 batch 4 保持不变。不同 GPU 架构重新编译 CUDA 扩展。

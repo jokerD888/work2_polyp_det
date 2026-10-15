@@ -1,6 +1,7 @@
 """RLE-compatible LSJ data plumbing, preserving native MaskDINO augmentation.
 
-Uses the native resize/crop/padding. training_boxes="annotations" preserves
+Uses native image resize/crop/padding with zero instance-mask padding.
+training_boxes="annotations" preserves
 supplied box supervision; legacy "mask" reproduces mask-derived upstream boxes.
 BitMasks avoids polygon conversion loss, including holes in Kvasir masks.
 """
@@ -11,12 +12,12 @@ import torch
 from detectron2.data import detection_utils as utils
 from detectron2.data import transforms as T
 from detectron2.structures import BitMasks
-from maskdino.data.dataset_mappers.coco_instance_new_baseline_dataset_mapper import build_transform_gen
+from .instance_lsj import build_instance_lsj_augmentations
 
 
 class BitmaskLSJMapper:
     def __init__(self, cfg, training_boxes="mask"):
-        self.augmentations = build_transform_gen(cfg, True)
+        self.augmentations = build_instance_lsj_augmentations(cfg)
         self.image_format = cfg.INPUT.FORMAT
         self.training_boxes = training_boxes
 
@@ -24,7 +25,7 @@ class BitmaskLSJMapper:
         record = copy.deepcopy(original)
         image = utils.read_image(record["file_name"], format=self.image_format)
         utils.check_image_size(record, image)
-        padding = np.ones(image.shape[:2])
+        padding = np.ones(image.shape[:2], dtype=np.uint8)
         image, transforms = T.apply_transform_gens(self.augmentations, image)
         padding = ~transforms.apply_segmentation(padding).astype(bool)
         shape = image.shape[:2]

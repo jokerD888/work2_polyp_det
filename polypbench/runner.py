@@ -32,7 +32,7 @@ def adapter_sources(cfg):
     root = Path(cfg["project_root"])
     files = ["polypbench/adapters/maskdino_worker.py"]
     if cfg["dataset"].get("mask_format") == "bitmask":
-        files.append("polypbench/adapters/bitmask_mapper.py")
+        files.extend(["polypbench/adapters/bitmask_mapper.py", "polypbench/adapters/instance_lsj.py"])
     return {file: sha256(root / file) for file in files}
 
 

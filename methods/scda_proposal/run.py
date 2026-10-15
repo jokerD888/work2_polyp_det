@@ -33,7 +33,8 @@ def verify_repo(cfg):
 def adapter_sources(cfg):
     root = Path(cfg["project_root"])
     files = ["polypbench/config.py", "polypbench/data.py", "polypbench/evaluation.py",
-             "polypbench/io.py", "polypbench/adapters/bitmask_mapper.py", "methods/__init__.py"]
+             "polypbench/io.py", "polypbench/adapters/bitmask_mapper.py",
+             "polypbench/adapters/instance_lsj.py", "methods/__init__.py"]
     files.extend(path.relative_to(root).as_posix()
                  for path in sorted((root / "methods" / "scda_proposal").rglob("*"))
                  if path.is_file() and path.suffix in (".py", ".yaml"))

@@ -33,7 +33,8 @@ def verify_repo(cfg):
 def adapter_sources(cfg):
     root = Path(cfg["project_root"])
     files = ["polypbench/config.py", "polypbench/data.py", "polypbench/evaluation.py",
-             "polypbench/io.py", "polypbench/adapters/bitmask_mapper.py", "methods/__init__.py"]
+             "polypbench/io.py", "polypbench/adapters/bitmask_mapper.py",
+             "polypbench/adapters/instance_lsj.py", "methods/__init__.py"]
     files.append("configs/maskdino_kvasir_official.yaml")
     for package in ("scda_proposal", "proposal_dcnv4"):
         files.extend(path.relative_to(root).as_posix()
