@@ -1,0 +1,11 @@
+base_experiment: ../../scda_proposal/configs/kvasir_v2.yaml
+base_kind: scda
+name: proposal_conv3x3_scda_v2_r50_kvasir_official
+dcnv4:
+  enabled: true
+  operator: conv3x3
+  channels: 256
+  feature_stride: 8
+  kernel_size: 3
+  alpha: 0.1
+  force_fp32: true

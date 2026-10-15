@@ -4,6 +4,7 @@ from detectron2.modeling import SEM_SEG_HEADS_REGISTRY
 from maskdino.modeling.meta_arch.maskdino_head import MaskDINOHead
 
 from .config import DCNv4Options
+from .conv3x3_adapter import Conv3x3Residual
 from .dcnv4_adapter import DCNv4Residual
 
 
@@ -28,7 +29,14 @@ class ProposalDCNv4Head(MaskDINOHead):
     def __init__(self, input_shape, *, dcnv4_options, adapter=None, **native_kwargs):
         super().__init__(input_shape, **native_kwargs)
         self.dcnv4_options = dcnv4_options.validate()
-        self.dcnv4_adapter = adapter if adapter is not None else DCNv4Residual(dcnv4_options)
+        # Keep this state_dict prefix for existing DCNv4 checkpoints. Under
+        # conv3x3 it contains .conv.*, and never constructs/imports DCNv4's op.
+        if adapter is not None:
+            self.dcnv4_adapter = adapter
+        elif dcnv4_options.operator == "conv3x3":
+            self.dcnv4_adapter = Conv3x3Residual(dcnv4_options)
+        else:
+            self.dcnv4_adapter = DCNv4Residual(dcnv4_options)
         strides = feature_strides(self.pixel_decoder)
         if strides.count(dcnv4_options.feature_stride) != 1:
             raise ValueError(f"Requested stride {dcnv4_options.feature_stride} not unique in {strides}")

@@ -3,6 +3,7 @@
 No original worker/mapper/SCDA decoder is modified. CUDA tests are separate.
 """
 import argparse
+import logging
 import os
 from pathlib import Path
 import subprocess
@@ -64,14 +65,18 @@ def worker_main(args):
     cfg.freeze()
     default_setup(cfg, args)
     setup_logger(output=cfg.OUTPUT_DIR, distributed_rank=comm.get_rank(), name="maskdino")
+    logging.getLogger("maskdino").info(
+        "Proposal adapter enabled=%s operator=%s selection=%s",
+        dcn_options.enabled, dcn_options.operator, experiment["operator_selection"])
     if comm.is_main_process():
         write_json(Path(args.output) / "environment.json", {
             "python": sys.version, "torch": torch.__version__, "cuda": torch.version.cuda,
             "gpu": torch.cuda.get_device_name(),
             "packages": subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True).splitlines()})
         write_json(Path(args.output) / "method.json", {
-            "method": "Proposal DCNv4 adapter", "scda": experiment["scda"],
+            "method": "Proposal residual adapter", "scda": experiment["scda"],
             "dcnv4": experiment["dcnv4"],
+            "operator_selection": experiment["operator_selection"],
             "box_weight": cfg.MODEL.MaskDINO.BOX_WEIGHT,
             "giou_weight": cfg.MODEL.MaskDINO.GIOU_WEIGHT,
             "box_coefficients": "reuse resolved native coefficients once, then lambda_box",
@@ -90,8 +95,13 @@ def worker_main(args):
                 from methods.scda_proposal.diagnostics import parameter_audit
                 audit = parameter_audit(model)
                 adapter = getattr(model.sem_seg_head, "dcnv4_adapter", None)
-                audit["dcnv4_backend"] = adapter.backend_identity if adapter is not None else None
-                audit["dcnv4_parameter_count"] = sum(p.numel() for p in adapter.parameters()) if adapter is not None else 0
+                audit["adapter_operator"] = dcn_options.operator if adapter is not None else None
+                audit["adapter_backend"] = adapter.backend_identity if adapter is not None else None
+                audit["adapter_parameter_count"] = sum(p.numel() for p in adapter.parameters()) if adapter is not None else 0
+                # Historical DCNv4 keys stay unambiguous in ordinary Conv mode.
+                is_dcn = adapter is not None and dcn_options.operator == "dcnv4"
+                audit["dcnv4_backend"] = adapter.backend_identity if is_dcn else None
+                audit["dcnv4_parameter_count"] = audit["adapter_parameter_count"] if is_dcn else 0
                 audit["feature_strides"] = getattr(model.sem_seg_head, "dcnv4_feature_strides", None)
                 write_json(Path(args.output) / "model_parameters.json", audit)
             return model

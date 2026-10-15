@@ -1,5 +1,5 @@
 """Load a new experiment without altering the baseline/F-v2 presets."""
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 import re
 
@@ -14,7 +14,7 @@ from .config import DCNv4Options
 from .integration import NATIVE_COMMIT
 
 
-def load_experiment(path):
+def load_experiment(path, *, operator=None):
     path = Path(path).resolve()
     raw = yaml.safe_load(path.read_text(encoding="utf-8-sig"))
     if not isinstance(raw, dict) or set(raw) != {"base_experiment", "base_kind", "name", "dcnv4"}:
@@ -41,9 +41,18 @@ def load_experiment(path):
         raise ValueError("Invalid experiment name")
     if any(key.startswith(("MODEL.PROPOSAL_DCNV4.", "MODEL.SCDA.")) for key in cfg["overrides"]):
         raise ValueError("Method switches belong in method configuration")
-    options = DCNv4Options(**raw["dcnv4"]).validate()
+    options = DCNv4Options(**raw["dcnv4"])
+    configured_operator = options.operator
+    if configured_operator not in ("dcnv4", "conv3x3"):
+        raise ValueError("Configured operator must be dcnv4 or conv3x3")
+    if operator is not None:
+        options = replace(options, operator=operator)
+    options.validate()
     cfg.update(name=raw["name"], adapter="proposal_dcnv4", dcnv4=asdict(options),
                source_config=str(path), method_base_config=str(base),
                method_base_config_sha256=sha256(base),
-               baseline_config=str(baseline), implementation_status="CPU_ONLY_GPU_GATES_PENDING")
+               baseline_config=str(baseline), implementation_status="CPU_ONLY_GPU_GATES_PENDING",
+               operator_selection={"configured": configured_operator,
+                                   "effective": options.operator,
+                                   "source": "command_line" if operator is not None else "configuration"})
     return cfg

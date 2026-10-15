@@ -3,6 +3,7 @@ base_kind: scda
 name: proposal_dcnv4_scda_v2_r50_kvasir_official
 dcnv4:
   enabled: true
+  operator: dcnv4
   channels: 256
   feature_stride: 8
   kernel_size: 3

@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-15T05:22:59.340106+00:00",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "torch": "2.7.1+cu128",
+  "tests_run": 26,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "passed": true,
+  "cuda_context_created": false,
+  "operator_scope": "Real torch.nn.Conv2d CPU checks; DCNv4 uses explicit TokenProbe only, official CUDA operator NOT validated",
+  "real_components": [
+    "MaskDINO head",
+    "full native/SCDA model construction",
+    "configuration",
+    "native optimizer",
+    "SCDA F-v2 preset inheritance",
+    "Conv3x3Residual forward/backward and zero initialization",
+    "operator CLI overrides, fingerprints and prediction mismatch rejection"
+  ],
+  "gpu_tests": "NOT_RUN_USER_REQUEST",
+  "official_extension_build": "NOT_RUN_USER_REQUEST"
+}

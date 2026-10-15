@@ -60,7 +60,11 @@ def environment(cfg):
 
 def run_process(args, cfg, output):
     output = Path(output)
-    write_json(output / "command.json", {"argv": args, "cwd": cfg["repo"]["path"], "visible_gpus": cfg["runtime"].get("visible_gpus")})
+    write_json(output / "command.json", {"argv": args, "cwd": cfg["repo"]["path"],
+               "visible_gpus": cfg["runtime"].get("visible_gpus"),
+               "adapter_enabled": cfg["dcnv4"]["enabled"],
+               "operator": cfg["dcnv4"]["operator"],
+               "operator_selection": cfg["operator_selection"]})
     with (output / "console.log").open("w", encoding="utf-8") as log:
         process = subprocess.Popen(args, cwd=cfg["repo"]["path"], env=environment(cfg), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace")
         try:
@@ -88,6 +92,8 @@ def run(cfg, mode, run_id=None, split="val", checkpoint=None):
     if mode == "train":
         root.mkdir(parents=True, exist_ok=False)
         manifest = {"run_id": run_id, "name": cfg["name"], "adapter": cfg["adapter"], "seed": cfg["seed"], "supervision": cfg["dataset"]["supervision"], "purpose": cfg.get("purpose", "research"), "config_fingerprint": fingerprint(cfg), "dataset": data, "repo": repo, "created_at": dt.datetime.now(dt.timezone.utc).isoformat()}
+        manifest["adapter_operator"] = cfg["dcnv4"]["operator"]
+        manifest["operator_selection"] = cfg["operator_selection"]
         write_json(root / "manifest.json", manifest)
         write_json(root / "experiment.json", cfg)
         sources = adapter_sources(cfg)
@@ -104,6 +110,11 @@ def run(cfg, mode, run_id=None, split="val", checkpoint=None):
         if not root.is_dir():
             raise ValueError("predict needs an existing training run-id")
         manifest = read_json(root / "manifest.json")
+        trained_operator = manifest.get("adapter_operator")
+        if trained_operator is not None and trained_operator != cfg["dcnv4"]["operator"]:
+            raise ValueError(
+                f"Operator differs from training: {trained_operator} vs {cfg['dcnv4']['operator']}; "
+                "use the training configuration and repeat its --operator override")
         if manifest["config_fingerprint"] != fingerprint(cfg) or manifest["dataset"] != data:
             raise ValueError("Experiment or dataset changed since training; use the original configuration/data")
         if manifest["repo"] != repo:
@@ -160,8 +171,10 @@ def main():
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--split", choices=("val", "test"), default="val")
     parser.add_argument("--checkpoint")
+    parser.add_argument("--operator", choices=("dcnv4", "conv3x3"),
+                        help="Override YAML operator; recorded in experiment, fingerprint and logs")
     args = parser.parse_args()
-    cfg = load_experiment(args.config)
+    cfg = load_experiment(args.config, operator=args.operator)
     if args.split not in cfg["dataset"]:
         raise ValueError(f"No {args.split} split in the confirmed baseline dataset")
     run(cfg, args.mode, run_id=args.run_id, split=args.split, checkpoint=args.checkpoint)

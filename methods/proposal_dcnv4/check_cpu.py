@@ -15,8 +15,11 @@ def main():
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     import torch
     from polypbench.io import write_json
-    from .tests import test_cpu
-    suite = unittest.defaultTestLoader.loadTestsFromModule(test_cpu)
+    from .tests import test_cpu, test_conv_control
+    suite = unittest.TestSuite([
+        unittest.defaultTestLoader.loadTestsFromModule(test_cpu),
+        unittest.defaultTestLoader.loadTestsFromModule(test_conv_control),
+    ])
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     created = torch.cuda.is_initialized()
     report = {
@@ -25,9 +28,11 @@ def main():
         "tests_run": result.testsRun, "failures": result.failures, "errors": result.errors,
         "skipped": result.skipped, "passed": result.wasSuccessful() and not created,
         "cuda_context_created": created,
-        "operator_scope": "Explicit TokenProbe test double only; official CUDA operator NOT validated",
+        "operator_scope": "Real torch.nn.Conv2d CPU checks; DCNv4 uses explicit TokenProbe only, official CUDA operator NOT validated",
         "real_components": ["MaskDINO head", "full native/SCDA model construction",
-                            "configuration", "native optimizer", "SCDA F-v2 preset inheritance"],
+                            "configuration", "native optimizer", "SCDA F-v2 preset inheritance",
+                            "Conv3x3Residual forward/backward and zero initialization",
+                            "operator CLI overrides, fingerprints and prediction mismatch rejection"],
         "gpu_tests": "NOT_RUN_USER_REQUEST", "official_extension_build": "NOT_RUN_USER_REQUEST",
     }
     # unittest failures contain TestCase instances, which are not JSON objects.

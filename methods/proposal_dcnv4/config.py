@@ -6,6 +6,7 @@ import math
 @dataclass(frozen=True)
 class DCNv4Options:
     enabled: bool = False
+    operator: str = "dcnv4"
     channels: int = 256
     feature_stride: int = 8
     kernel_size: int = 3
@@ -21,7 +22,10 @@ class DCNv4Options:
         for name in ("channels", "feature_stride", "kernel_size", "group", "dilation"):
             if type(getattr(self, name)) is not int or getattr(self, name) <= 0:
                 raise ValueError(f"{name} must be a positive integer")
-        if self.channels % self.group or (self.channels // self.group) % 16:
+        if self.operator not in ("dcnv4", "conv3x3"):
+            raise ValueError("operator must be dcnv4 or conv3x3")
+        # group configures DCNv4 only. The ordinary Conv control always uses 1.
+        if self.operator == "dcnv4" and (self.channels % self.group or (self.channels // self.group) % 16):
             raise ValueError("Official DCNv4 requires channels/group divisible by 16")
         if self.kernel_size != 3 or self.dilation != 1:
             raise ValueError("Initial protocol fixes kernel=3, stride=1, pad=1, dilation=1")
@@ -31,7 +35,7 @@ class DCNv4Options:
         if self.alpha < 0 or self.offset_scale <= 0:
             raise ValueError("Require alpha >= 0 and offset_scale > 0")
         if not self.force_fp32:
-            raise ValueError("Initial protocol requires FP32 DCNv4 execution")
+            raise ValueError("Initial protocol requires FP32 adapter execution")
         return self
 
     @classmethod
