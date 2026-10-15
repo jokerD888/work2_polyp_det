@@ -1,6 +1,11 @@
 """Explicit GPU diagnostic; invoke only after baseline has released the GPU."""
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', default='methods/scda_proposal/configs/kvasir.yaml')
+    parser.add_argument('--output', default='runs/scda-real-geometry.json')
+    args = parser.parse_args()
     import sys
     from pathlib import Path
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -18,7 +23,8 @@ def main():
     from detectron2.modeling import build_model
     from detectron2.structures import Instances,Boxes
     from detectron2.utils.events import EventStorage
-    cfg=load_experiment('methods/scda_proposal/configs/kvasir.yaml')
+    if Path(args.output).exists(): raise FileExistsError(args.output)
+    cfg=load_experiment(args.config)
     sys.path.insert(0,cfg['repo']['path'])
     import train_net
     register(cfg['repo']['path'])
@@ -60,7 +66,7 @@ def main():
         with torch.autocast('cuda',enabled=True):losses=model(batch)
         total=sum(losses.values());assert torch.isfinite(total);total.backward()
     assert all(p.grad is None or torch.isfinite(p.grad).all() for p in model.parameters())
-    write_json('runs/scda-real-geometry.json',{'passed':True,'real_variable_batch':observations,'note':'Controlled pixel cropping, native ImageList padding, actual GT/anchor/cell coordinates, AMP backward; no source dataset mutation'})
+    write_json(args.output,{'passed':True,'scda_options':cfg['scda'],'real_variable_batch':observations,'note':'Controlled pixel cropping, native ImageList padding, actual GT/anchor/cell coordinates, AMP backward; no source dataset mutation'})
     print(json.dumps(observations))
 
 

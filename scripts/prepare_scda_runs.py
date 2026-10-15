@@ -14,6 +14,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--control", default="runs/_launcher/scda-proposal-kvasir-s42")
     parser.add_argument("--smoke-iterations", type=int, default=50)
+    parser.add_argument("--method-config", default="methods/scda_proposal/configs/kvasir.yaml")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     control = (root / args.control).resolve()
@@ -22,7 +23,7 @@ def main():
     control.mkdir(parents=True, exist_ok=True)
     base = yaml.safe_load((root / "configs/maskdino_kvasir_official.yaml").read_text(encoding="utf-8-sig"))
     base["project_root"] = os.path.relpath(root, control).replace("\\", "/")
-    method = yaml.safe_load((root / "methods/scda_proposal/configs/kvasir.yaml").read_text(encoding="utf-8-sig"))
+    method = yaml.safe_load((root / args.method_config).read_text(encoding="utf-8-sig"))
     formal = copy.deepcopy(method)
     formal["base_experiment"] = "formal_base.yaml"
     smoke_base = copy.deepcopy(base)

@@ -1,6 +1,12 @@
 """Explicit GPU diagnostic; invoke only after baseline has released the GPU."""
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', default='methods/scda_proposal/configs/kvasir.yaml')
+    parser.add_argument('--output', default='runs/SCDA_DECOUPLING_MATURE_BASELINE.json')
+    parser.add_argument('--checkpoint', default='runs/maskdino-official-s42/train/model_best.pth')
+    args = parser.parse_args()
     import sys
     from pathlib import Path
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -12,24 +18,25 @@ def main():
     from methods.scda_proposal.precheck import build_cfg
     from methods.scda_proposal.integration import register
     from methods.scda_proposal.mapper import SCDALSJMapper
-    from methods.scda_proposal.audit_summary import summarize_decoupling
+    from methods.scda_proposal.audit_summary import summarize_decoupling, validate_v2_assignments
     from methods.scda_proposal.diagnostics import proposal_diagnostics
     from detectron2.data import DatasetCatalog,MetadataCatalog
     from detectron2.data.datasets import load_coco_json
     from detectron2.modeling import build_model
     from detectron2.checkpoint import DetectionCheckpointer
     from detectron2.utils.events import EventStorage
-    cfg=load_experiment('methods/scda_proposal/configs/kvasir.yaml')
+    if Path(args.output).exists(): raise FileExistsError(args.output)
+    cfg=load_experiment(args.config)
     sys.path.insert(0,cfg['repo']['path'])
     import train_net
     register(cfg['repo']['path'])
     e=cfg['dataset']['train']
     DatasetCatalog.register('bench_train',lambda:load_coco_json(e['annotations'],e['image_root'],'bench_train',extra_annotation_keys=['id']))
     MetadataCatalog.get('bench_train').set(json_file=e['annotations'],image_root=e['image_root'],evaluator_type='coco')
-    c=build_cfg(cfg,True,pathlib.Path('runs/scda-mature-baseline-profile'))
+    c=build_cfg(cfg,True,Path(args.output).parent)
     torch.set_num_threads(2);torch.manual_seed(42);np.random.seed(42);random.seed(42)
     model=build_model(c)
-    checkpoint='runs/maskdino-official-s42/train/model_best.pth'
+    checkpoint=args.checkpoint
     DetectionCheckpointer(model).load(checkpoint)
     model.cuda().train()
     records=DatasetCatalog.get('bench_train')
@@ -48,8 +55,10 @@ def main():
                 with torch.autocast('cuda',enabled=True):model(mapped[start:start+4])
                 storage.step()
     summary=summarize_decoupling(images)
+    if cfg['scda']['reg_selection'] == 'core_plus_transition':
+        summary['confirmed_v2_policy'] = validate_v2_assignments(images)
     summary.update(parameter_stage='Mature original baseline best checkpoint, offline diagnostic only; NOT F training initialization',checkpoint_sha256=sha256(checkpoint),seed=42,proposal_diagnostics=proposals)
-    write_json('runs/SCDA_DECOUPLING_MATURE_BASELINE.json',summary)
+    write_json(args.output,summary)
     print(json.dumps({k:v for k,v in summary.items() if k not in ('per_image','proposal_diagnostics')}))
 
 

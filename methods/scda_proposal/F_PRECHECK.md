@@ -1,6 +1,22 @@
-# F_PRECHECK — 代码阶段记录
+# F_PRECHECK — 实际验收与历史记录
 
-记录日期：2026-10-15。**状态：ENGINEERING_PRECHECK_PASSED / RESEARCH_DECISION_PENDING；正式 F 尚未启动。**
+记录日期：2026-10-15。**最新状态（11:37）：F-v2 用户确认完成，重新验收与50步健康检查通过，准备完整100epoch实验。** 以下先记录最新结果，再保留 F-v1 历史过程；历史中的“待授权/待决策”不再代表当前状态。
+
+## F-v2 最新验收（用户明确确认核心2＋中覆盖率2，不跨区间补位）
+
+新定义见 `docs/F_V2_RULES.md`，显式配置 `configs/kvasir_v2.yaml`。F-v1 默认配置与旧产物保留。用户已经授权验收通过后完整训练，不需要再次请求相同批准。
+
+- `runs/_launcher/scda-proposal-v2-kvasir-s42/cpu_tests.log`：20项CPU/Gloo测试通过（3.318秒）。新增覆盖区间边界 .25/.75、核心/中覆盖率缺额不互补、平局排序、Top-Q排除、中覆盖率仅回归梯度、实际3点均值、无候选/无效/可靠性及策略配置拒绝。
+- `runs/scda-v2-precheck-20261015/report.json`：真实模型验收通过。unique/trainable参数52,017,477、397个optimizer组，A/F一致；128图mapper精确一致；SCDA-off FP32/AMP loss及梯度检查通过；eval逐元素完全相同；共享分类/框头辅助梯度非零、总梯度有限；峰值7.72GiB。沿用前次固定数值容差与原生自身重复检查，没有放宽预算。
+- 初始和成熟原生权重各128张train图：121个可靠有效GT，242个cls点、484个reg点，其中242个为中覆盖率，比例50%；核心和中覆盖率都无缺额。逐GT验证实际cls复用、各区间配额、无重复、不跨区间补位。证据 `SCDA_DECOUPLING_EFFECTIVENESS.json` 和 `mature_baseline_diagnostic.json`（均在上述v2预检目录）。成熟权重只用于诊断，无更新、无val调参、不作为F训练初始化。
+- `real_geometry.json`：真实混合尺寸319×447/383×511、pad384×512、合法anchor/token/GT坐标、整单元padding排除、AMP反向通过。
+- `scda-proposal-v2-kvasir-smoke50` 于11:36:45完成50iter（保持原始warmup与LR）。188次可靠GT观察均满核心2＋中覆盖率2，376/752 reg点中覆盖率；最终训练记录iter49：total_loss424.8065、weighted cls0.152839、weighted box0.176847，全部有限。末次val bbox AP约0.01445%，仍在warmup，只用于健康检查，不作为与成熟A的性能结论。
+- `post_smoke_gradients.json`：加载独立smoke50 final，仅在train batch诊断，不做optimizer更新。AMP损失/总梯度有限，共享分类/框头有辅助梯度；box辅助到encoder/backbone的梯度非零，分别约0.001086/0.000333，排除“初始化零末层导致上游永远无梯度”的误解。bbox头weighted aux/native范数比约0.00163，cosine约0.593；没有据此调整lambda或研究规则。
+- `scripts/verify_scda_v2_readiness.py` 已生成 `runs/_launcher/scda-proposal-v2-kvasir-s42/acceptance.json`：检查实际方法源文件SHA与预检/短跑一致、50步完整审计、各项通过、正式配置和基线协议相同。正式run为 `scda-proposal-v2-kvasir-s42`，从同一ImageNet R50重新初始化，100epoch/22000iter，batch4、512增强、AMP、官方bbox/划分、相同LR与val选best。
+
+正式链路保存源码/配置/commit与SHA，依次train、best-val预测、统一评测、CSV及Markdown比较。正式训练后不修改纳入快照的.py/.yaml；不覆盖基线/F-v1/短跑，不把50步AP当作完整性能结果。`scripts/compare_detection_runs.py` 只接受两者均完整结束并且协议一致的结果。
+
+## F-v1 历史过程（保留原始失败与复验）
 
 初次提交只编写代码。随后用户明确授权：基线训练和预测全部完成后执行诊断、修复实现问题，验收通过后启动完整 F。2026-10-15 06:45 开始接续，GPU 仍被基线使用时先以 `CUDA_VISIBLE_DEVICES=""` 执行 CPU 验收，12 项测试通过（日志 `runs/scda-cpu-tests-20261015.log`，3.164 秒）。未中断基线、未改其 adapter/native 源码，真实模型/GPU/正式 F 验收仍待完成。
 

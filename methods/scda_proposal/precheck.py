@@ -131,7 +131,8 @@ def run_precheck(experiment, output, batches=32):
     from .mapper import SCDALSJMapper
     from polypbench.adapters.bitmask_mapper import BitmaskLSJMapper
     from .diagnostics import parameter_audit, gradient_audit, proposal_diagnostics
-    from .audit_summary import summarize_decoupling
+    from .audit_summary import summarize_decoupling, validate_v2_assignments
+    from .run import adapter_sources
     import train_net
     register(experiment["repo"]["path"])
     for split in ("train", "val"):
@@ -151,6 +152,7 @@ def run_precheck(experiment, output, batches=32):
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cuda.matmul.allow_tf32 = False
     report = {"status": "running", "seed": experiment["seed"], "checks": {},
+              "scda_options": experiment["scda"], "method_sources": adapter_sources(experiment),
               "verification_math": {"cudnn_deterministic": True, "tf32": False,
                                     "training_worker_unchanged": True}}
     def save(phase):
@@ -281,6 +283,8 @@ def run_precheck(experiment, output, batches=32):
                     f(mapped[start:start+4])
                 storage.step()
     summary = summarize_decoupling(images)
+    if options.reg_selection == "core_plus_transition":
+        report["checks"]["confirmed_v2_policy"] = validate_v2_assignments(images)
     summary["seed"] = experiment["seed"]
     summary["parameter_stage"] = "ImageNet initialization, no optimizer update"
     summary["proposal_diagnostics"] = proposals

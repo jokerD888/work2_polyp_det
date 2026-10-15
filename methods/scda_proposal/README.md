@@ -1,8 +1,8 @@
-# F-v1 MIPS-SCDA
+# MIPS-SCDA（F-v1 / F-v2）
 
 基于当前固定版本 MaskDINO 的训练期 Proposal 辅助监督。方法放在本目录；通过新的 registry 名称接入，不修改 `third_party/MaskDINO` 或现有基线适配器。
 
-**当前状态：2026-10-15 CPU/Gloo、真实 GPU 验收和50iter健康检查已通过；候选统计显示回归阈值放宽没有改变选点，正式100epoch等待方法定义决策。** 预检状态见 [F_PRECHECK.md](F_PRECHECK.md)。原始设计文档保存在 [docs/DESIGN_SPEC.md](docs/DESIGN_SPEC.md)，其中的数据集和验收安排以本次用户确认及预检记录为准。
+**当前状态：2026-10-15 用户已确认 F-v2；20项CPU/Gloo、真实GPU验收、50iter短跑和更新后的梯度检查通过，准备独立100epoch实验。** F-v1 的回归阈值放宽未改变选点；F-v2 的两阶段121个可靠GT及短跑188次可靠GT观察均取得核心2点＋中覆盖率2点。新定义见 [F_V2_RULES.md](docs/F_V2_RULES.md)，验收见 [F_PRECHECK.md](F_PRECHECK.md)。原始 [DESIGN_SPEC.md](docs/DESIGN_SPEC.md) 保留。
 
 ## 本次确认的实现
 
@@ -10,6 +10,7 @@
 - SCDA 只使用**增强前只有一个非 crowd bbox 的图片**对应的裁剪语义 mask。原始多框图片即使裁剪后只剩一框，也全部跳过 SCDA；这些图片仍参与全部原生 MaskDINO 损失。
 - 以实际多尺度 feature grid 对应的 padded 像素矩形作为 token 单元，按分段常值像素精确积分 foreground 面积。任何与 padding 像素相交的单元都被排除。
 - 中心距离为 `((anchor_cx-gt_cx)/gt_w)^2 + ((anchor_cy-gt_cy)/gt_h)^2`。排序为覆盖率降序、距离升序、`(level,u=x,v=y,GT id)`；先统一 owner，再选两个任务的候选。
+- F-v2 分类取高覆盖率前2点；回归复用实际分类点，加中覆盖率 `[.25,.75)` 前2点，各区间不足不互补。使用 `configs/kvasir_v2.yaml`；原 `kvasir.yaml` 保留 F-v1。
 - 使用原生 pre-TopQ 类别和框输出，排除原生 Top-Q；不改变其排序、Hungarian、intermediate loss、DN、mask2box、decoder、mask loss 或推理评分。
 - 分类仅监督真实 GT 类别的 positive BCE；回归使用完整 bbox、FP32 L1/GIoU，复用 resolved native `BOX_WEIGHT/GIOU_WEIGHT`。分别进行每 GT 内均值和全局有效 GT 均值，最后各乘 `0.05`，在原生加权循环**之后**加入损失。
 - 不创建辅助预测层、`nn.Parameter` 或 buffer。参数和 optimizer 对齐仍需后续实际验证。`TWO_STAGE=False`、softmax CE 配置和不匹配的原生源码会明确报错，不自动改配置。
@@ -39,18 +40,18 @@
 
 从项目根目录以 source-tree 方式运行；现有 `polypbench` setuptools 包暂未打包 `methods`，所以只复制已安装的 `polypbench` 包不足以运行本方法，应同步完整项目源码。
 
-## 后续入口（本次均未执行）
+## 实验入口
 
 以下命令供后续完成预检和获准训练后使用。执行前须在 WSL 或 Linux 激活已有 MaskDINO 环境，使 `python` 指向该环境，并进入项目根目录。
 
 ```bash
 python -m methods.scda_proposal.run \
-  --config methods/scda_proposal/configs/kvasir.yaml \
-  --mode train --run-id scda-proposal-kvasir-s42
+  --config methods/scda_proposal/configs/kvasir_v2.yaml \
+  --mode train --run-id scda-proposal-v2-kvasir-s42
 
 python -m methods.scda_proposal.run \
-  --config methods/scda_proposal/configs/kvasir.yaml \
-  --mode predict --split val --run-id scda-proposal-kvasir-s42
+  --config methods/scda_proposal/configs/kvasir_v2.yaml \
+  --mode predict --split val --run-id scda-proposal-v2-kvasir-s42
 ```
 
 入口明确使用 `methods.scda_proposal.run`；现有 `python -m polypbench train` 仍指向原生基线，不会自动发现本方法。输出为 `runs/<新 run-id>/`，保留 best/final 权重、bbox 预测和 `metrics.json`。同一 run-id 已存在时拒绝重建训练目录。

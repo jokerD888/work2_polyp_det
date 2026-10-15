@@ -160,6 +160,103 @@ class AssignmentTests(unittest.TestCase):
         self.assertNotIn(6, assigned.reg.token_indices.tolist())
 
 
+class V2AssignmentTests(unittest.TestCase):
+    def setUp(self):
+        self.options = SCDAOptions(enabled=True, diagnostics=True, reg_selection="core_plus_transition")
+
+    def case(self, values):
+        payload, target = fixture()
+        target.boxes[:] = torch.tensor([.5, .5, 1., 1.])
+        target.masks[:] = False
+        for token, value in enumerate(values):
+            y, x = divmod(token, 4)
+            for pixel in range(round(value * 4)):
+                dy, dx = divmod(pixel, 2)
+                target.masks[0, y*2+dy, x*2+dx] = True
+        return payload, target, assign_scda(payload, [target], self.options)[0]
+
+    def test_two_core_two_transition_despite_surplus_core(self):
+        values = [1.] * 12 + [.75, .5, .25, 0.]
+        payload, target, assigned = self.case(values)
+        entry = assigned.audit["per_gt"][0]
+        self.assertEqual(entry["n_reg_core_selected"], 2)
+        self.assertEqual(entry["n_reg_transition_selected"], 2)
+        self.assertEqual(entry["reg_transition_shortfall"], 0)
+        self.assertEqual(entry["reg_only_fraction"], .5)
+        self.assertTrue(entry["reg_threshold_changes_selection"])
+        self.assertEqual(assigned.reg.token_indices[:2].tolist(), assigned.cls.token_indices.tolist())
+        self.assertEqual(assigned.reg.token_indices[2:].tolist(), [13, 14])
+        self.assertNotIn(0, assigned.reg.token_indices.tolist())
+        # Exact boundaries: .75 is core and .25 is medium.
+        self.assertEqual(entry["n_cls_owned"], 12)
+        legacy = assign_scda(payload, [target], SCDAOptions(enabled=True, diagnostics=True))[0]
+        self.assertEqual(legacy.audit["per_gt"][0]["reg_transition_count"], 0)
+
+    def test_missing_medium_never_refills_from_core(self):
+        for medium_count in (0, 1):
+            with self.subTest(medium_count=medium_count):
+                values = [1.] * 16
+                if medium_count: values[15] = .5
+                _, _, assigned = self.case(values)
+                entry = assigned.audit["per_gt"][0]
+                self.assertEqual(len(assigned.reg.token_indices), 2 + medium_count)
+                self.assertEqual(entry["reg_transition_shortfall"], 2 - medium_count)
+                self.assertEqual(entry["reg_core_shortfall"], 0)
+
+    def test_missing_core_never_refills_from_medium(self):
+        for core_count in (0, 1):
+            values = [.5] * 16
+            if core_count: values[5] = 1.
+            _, _, assigned = self.case(values)
+            self.assertEqual(len(assigned.cls.token_indices), core_count)
+            self.assertEqual(len(assigned.reg.token_indices), core_count + 2)
+            self.assertEqual(assigned.audit["per_gt"][0]["reg_core_shortfall"], 2-core_count)
+
+    def test_medium_ranking_distance_then_lexicographic_tie(self):
+        _, _, assigned = self.case([.5] * 16)
+        # Central four cells have equal coverage and distance. u before v.
+        self.assertEqual(assigned.reg.token_indices.tolist(), [5, 9])
+        _, _, assigned = self.case([0.] * 16)
+        self.assertEqual(len(assigned.reg.token_indices), 0)
+
+    def test_medium_receives_only_box_auxiliary_gradients(self):
+        payload, target, assigned = self.case([1.] * 12 + [.75, .5, .25, 0.])
+        losses = scda_losses(payload, [target], [assigned], self.options, 5, 2)
+        sum(losses.losses.values()).backward()
+        self.assertEqual(float(payload["raw_cls"].grad[0, [13, 14]].abs().sum()), 0)
+        self.assertGreater(float(payload["raw_box_sigmoid"].grad[0, [13, 14]].abs().sum()), 0)
+        self.assertEqual(float(payload["raw_box_sigmoid"].grad[0, 0].abs().sum()), 0)
+
+    def test_shortfall_box_loss_averages_actual_three_points(self):
+        from methods.scda_proposal.scda_loss import aligned_giou, cxcywh_to_xyxy
+        payload, target, assigned = self.case([1.] * 15 + [.5])
+        p = assigned.reg.token_indices
+        self.assertEqual(len(p), 3)
+        boxes = payload["raw_box_sigmoid"][0, p] * assigned.box_scale[p]
+        truth = target.boxes.repeat(3, 1)
+        expected = (5 * (boxes - truth).abs().sum(-1) +
+                    2 * (1 - aligned_giou(cxcywh_to_xyxy(boxes), cxcywh_to_xyxy(truth)))).mean()
+        actual = scda_losses(payload, [target], [assigned], self.options, 5, 2)
+        torch.testing.assert_close(actual.unweighted["box"], expected)
+
+    def test_v2_validity_owner_and_source_reliability(self):
+        for case in ("empty", "unreliable", "invalid", "padding", "overlap"):
+            payload, target = fixture(gt_count=0 if case == "empty" else (2 if case == "overlap" else 1))
+            if case == "unreliable": target.reliable[:] = False
+            if case == "invalid": payload["valid_token_mask"][:] = False
+            if case == "padding": target.valid_pixels[:] = False
+            assigned = assign_scda(payload, [target], self.options)[0]
+            if case == "overlap":
+                self.assertTrue((assigned.reg.gt_indices == 0).all())
+            else:
+                self.assertEqual(len(assigned.reg.token_indices), 0, case)
+
+    def test_unknown_or_unconfirmed_policy_parameters_rejected(self):
+        for changes in ({"reg_selection": "other"}, {"k_reg": 5}, {"k_cls": 1}, {"tau_reg": .1}):
+            with self.assertRaises(ValueError):
+                dataclasses.replace(self.options, **changes).validate()
+
+
 class LossTests(unittest.TestCase):
     def test_positive_class_only_and_box_gradients(self):
         payload, target = fixture()

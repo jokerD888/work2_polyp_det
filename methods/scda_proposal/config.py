@@ -1,4 +1,4 @@
-"""Non-learned F-v1 options, separate from native prediction configuration."""
+"""Non-learned, versioned assignment options; native prediction is unchanged."""
 from dataclasses import asdict, dataclass
 import math
 
@@ -16,6 +16,7 @@ class SCDAOptions:
     geometry: str = "padded_grid_exact_area_box_distance"
     diagnostics: bool = False
     padding_policy: str = "full_cell_valid"
+    reg_selection: str = "coverage_topk"  # F-v1 compatibility, explicit F-v2 preset
 
     def validate(self):
         if type(self.enabled) is not bool or type(self.diagnostics) is not bool:
@@ -31,7 +32,13 @@ class SCDAOptions:
         if self.enabled and self.geometry != "padded_grid_exact_area_box_distance":
             raise ValueError("SCDA cell geometry and distance convention need confirmation")
         if self.padding_policy != "full_cell_valid":
-            raise ValueError("F-v1 discards any cell containing padding")
+            raise ValueError("SCDA discards any cell containing padding")
+        if self.reg_selection not in ("coverage_topk", "core_plus_transition"):
+            raise ValueError("Unknown regression selection policy")
+        if self.reg_selection == "core_plus_transition" and (
+            self.k_cls != 2 or self.k_reg != 4 or self.tau_cls != .75 or self.tau_reg != .25
+        ):
+            raise ValueError("Confirmed F-v2 requires cls2 + reg(core2/transition2), thresholds .75/.25")
         return self
 
     @classmethod

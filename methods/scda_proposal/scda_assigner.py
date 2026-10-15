@@ -1,4 +1,4 @@
-"""F-v1 pure-function assignment. Only labels and geometry are detached.
+"""Versioned pure-function assignment. Only labels and geometry are detached.
 
 Pixel masks are piecewise constant on unit pixel squares. Continuous rectangle
 integration exactly accounts for fractional feature-grid cell edges. No fixed
@@ -176,15 +176,27 @@ def assign_image(payload, b, target, options):
             continue
         entry = entry_by_gt.get(j)
         coverage, distance = coverages[j], distances[j]
-        for task, threshold, k, p_list, j_list in (
-            ("cls", options.tau_cls, options.k_cls, cls_p, cls_j),
-            ("reg", options.tau_reg, options.k_reg, reg_p, reg_j),
+        high = torch.nonzero((owner == j) & (coverage >= options.tau_cls), as_tuple=True)[0]
+        low = torch.nonzero((owner == j) & (coverage >= options.tau_reg), as_tuple=True)[0]
+        high = _stable_rank(high, coverage, distance, keys)
+        cls_indices = high[:options.k_cls]
+        transition = torch.nonzero((owner == j) & (coverage >= options.tau_reg) &
+                                   (coverage < options.tau_cls), as_tuple=True)[0]
+        transition = _stable_rank(transition, coverage, distance, keys)
+        if options.reg_selection == "core_plus_transition":
+            # User-confirmed F-v2: reuse the ACTUAL cls set, then up to two
+            # medium-coverage cells. Never refill one band from the other.
+            reg_indices = torch.cat((cls_indices, transition[:2]))
+            counterfactual = cls_indices  # raising tau_reg to tau_cls empties this band
+        else:
+            reg_indices = _stable_rank(low, coverage, distance, keys)[:options.k_reg]
+            counterfactual = high[:options.k_reg]
+        for task, owned, indices, k, p_list, j_list in (
+            ("cls", high, cls_indices, options.k_cls, cls_p, cls_j),
+            ("reg", low, reg_indices, options.k_reg, reg_p, reg_j),
         ):
-            indices = torch.nonzero((owner == j) & (coverage >= threshold), as_tuple=True)[0]
             if entry is not None:
-                entry[f"n_{task}_owned"] = indices.numel()
-            indices = _stable_rank(indices, coverage, distance, keys)[:k]
-            if entry is not None:
+                entry[f"n_{task}_owned"] = owned.numel()
                 entry[f"n_{task}_selected"] = indices.numel()
                 entry[f"{task}_full_quota"] = indices.numel() == k
                 entry[f"{task}_levels"] = keys[indices, 0].tolist()
@@ -195,17 +207,24 @@ def assign_image(payload, b, target, options):
         if entry is None:
             continue
         cls_set, reg_set = set(entry["cls_token_indices"]), set(entry["reg_token_indices"])
-        high = torch.nonzero((owner == j) & (coverage >= options.tau_cls), as_tuple=True)[0]
-        high = _stable_rank(high, coverage, distance, keys)[:options.k_reg]
-        transition = sum(options.tau_reg <= value < options.tau_cls for value in entry["reg_coverage"])
+        transition_count = sum(options.tau_reg <= value < options.tau_cls for value in entry["reg_coverage"])
         entry.update({
+            "reg_selection": options.reg_selection,
+            "n_transition_owned": transition.numel(),
+            "n_reg_core_selected": len(reg_set) - transition_count,
+            "n_reg_transition_selected": transition_count,
+            "cls_shortfall": options.k_cls - len(cls_set),
+            "reg_shortfall": options.k_reg - len(reg_set),
+            "reg_core_shortfall": options.k_cls - len(cls_set) if options.reg_selection == "core_plus_transition" else None,
+            "reg_transition_shortfall": 2 - transition_count if options.reg_selection == "core_plus_transition" else None,
             "cls_subset_reg": cls_set <= reg_set,
             "cls_reg_overlap_fraction": len(cls_set & reg_set) / len(cls_set) if cls_set else None,
             "reg_only_fraction": len(reg_set - cls_set) / len(reg_set) if reg_set else None,
-            "reg_transition_count": transition,
-            "reg_transition_fraction": transition / len(reg_set) if reg_set else None,
-            "reg_high_threshold_token_indices": high.tolist(),
-            "reg_threshold_changes_selection": set(high.tolist()) != reg_set,
+            "reg_transition_count": transition_count,
+            "reg_transition_fraction": transition_count / len(reg_set) if reg_set else None,
+            "reg_high_threshold_token_indices": counterfactual.tolist(),
+            "reg_counterfactual_definition": "same policy with tau_reg=tau_cls; F-v2 has no cross-band refill",
+            "reg_threshold_changes_selection": set(counterfactual.tolist()) != reg_set,
             "both_tasks_empty": not (cls_set or reg_set),
         })
         entry["per_level"] = []
@@ -230,6 +249,7 @@ def assign_image(payload, b, target, options):
             "n_available": int(available.sum()), "n_conflicting_tokens": int((claimants > 1).sum()),
             "n_claimed_tokens": int((claimants > 0).sum()), "per_gt": per_gt,
             "padding_policy": options.padding_policy, "geometry": options.geometry,
+            "reg_selection": options.reg_selection,
             "per_level_valid": [
                 {"level": level, "n_valid": int((valid & (keys[:, 0] == level)).sum()),
                  "n_available": int((available & (keys[:, 0] == level)).sum())}

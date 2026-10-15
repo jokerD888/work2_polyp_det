@@ -1,6 +1,32 @@
 """Aggregate measured assignments; no research GO thresholds or label changes."""
 
 
+def validate_v2_assignments(images):
+    """Exact confirmed quota identities, not empirical performance thresholds."""
+    checked = 0
+    for image in images:
+        if image.get("reg_selection") != "core_plus_transition":
+            raise AssertionError("Expected explicit F-v2 audit policy")
+        for entry in image["per_gt"]:
+            if "reg_shortfall" not in entry:  # unreliable/empty/invalid GT skipped
+                if entry["n_cls_selected"] or entry["n_reg_selected"]:
+                    raise AssertionError("Skipped GT received supervision")
+                continue
+            cls, reg = entry["cls_token_indices"], entry["reg_token_indices"]
+            expected_cls = min(2, entry["n_cls_owned"])
+            expected_medium = min(2, entry["n_transition_owned"])
+            if (len(cls) != expected_cls or len(reg) != expected_cls + expected_medium or
+                    reg[:len(cls)] != cls or len(set(reg)) != len(reg)):
+                raise AssertionError("F-v2 quota/reuse/no-refill identity violated")
+            if (any(value < .75 for value in entry["cls_coverage"]) or
+                    any(not .25 <= value < .75 for value in entry["reg_coverage"][len(cls):]) or
+                    entry["reg_coverage"][:len(cls)] != entry["cls_coverage"]):
+                raise AssertionError("F-v2 coverage band identity violated")
+            checked += 1
+    return {"passed": True, "checked_gt_count": checked,
+            "rule": "actual cls core (<=2) + medium (<=2); no cross-band refill"}
+
+
 def summarize_decoupling(images):
     entries = [entry for image in images for entry in image["per_gt"]]
     reliable = [entry for entry in entries if entry["reliable"]]
@@ -22,6 +48,12 @@ def summarize_decoupling(images):
             "reg_only_fraction": reg_only / reg_count if reg_count else None,
             "threshold_changes_gt_count": sum(entry.get("reg_threshold_changes_selection", False) for entry in items),
             "cls_subset_reg_violations": sum(not entry.get("cls_subset_reg", True) for entry in items),
+            "quota_evaluated_gt_count": sum("reg_shortfall" in entry for entry in items),
+            "reg_shortfall_gt_count": sum(entry.get("reg_shortfall", 0) > 0 for entry in items),
+            "reg_core_shortfall_gt_count": sum((entry.get("reg_core_shortfall") or 0) > 0 for entry in items),
+            "reg_transition_shortfall_gt_count": sum((entry.get("reg_transition_shortfall") or 0) > 0 for entry in items),
+            "reg_core_selected_count": sum(entry.get("n_reg_core_selected", 0) for entry in items),
+            "reg_transition_selected_count": transition,
         }
 
     return {"images": len(images), "all_augmented_gt": group(entries),
@@ -29,5 +61,6 @@ def summarize_decoupling(images):
             "original_gt_count": sum(image.get("n_original_gt") or 0 for image in images),
             "original_multibox_images": sum((image.get("n_original_gt") or 0) > 1 for image in images),
             "original_multibox_image_fraction": sum((image.get("n_original_gt") or 0) > 1 for image in images) / len(images) if images else None,
-            "note": "Overlap=1 is expected for nonempty cls with the confirmed nested selection. No new thresholds or candidate rules applied.",
+            "reg_selection": sorted({image.get("reg_selection", "coverage_topk") for image in images}),
+            "note": "Overlap=1 is expected for nested selection. F-v2 reserves two regression slots for medium coverage without cross-band refill. Counterfactual retains the active policy, not a top4-core replacement.",
             "per_image": images}
