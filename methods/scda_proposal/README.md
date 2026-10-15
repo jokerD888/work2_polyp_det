@@ -2,7 +2,7 @@
 
 基于当前固定版本 MaskDINO 的训练期 Proposal 辅助监督。方法放在本目录；通过新的 registry 名称接入，不修改 `third_party/MaskDINO` 或现有基线适配器。
 
-**当前状态：2026-10-15 用户已确认 F-v2；20项CPU/Gloo、真实GPU验收、50iter短跑和更新后的梯度检查通过，准备独立100epoch实验。** F-v1 的回归阈值放宽未改变选点；F-v2 的两阶段121个可靠GT及短跑188次可靠GT观察均取得核心2点＋中覆盖率2点。新定义见 [F_V2_RULES.md](docs/F_V2_RULES.md)，验收见 [F_PRECHECK.md](F_PRECHECK.md)。原始 [DESIGN_SPEC.md](docs/DESIGN_SPEC.md) 保留。
+**当前状态：2026-10-15 11:39，F-v2 正式100epoch实验已启动，run-id `scda-proposal-v2-kvasir-s42`。** 20项CPU/Gloo、真实GPU验收、50iter短跑和更新后梯度检查通过。F-v1 的回归阈值放宽未改变选点；F-v2 的两阶段121个可靠GT及短跑188次可靠GT观察均取得核心2点＋中覆盖率2点。新定义见 [F_V2_RULES.md](docs/F_V2_RULES.md)，验收见 [F_PRECHECK.md](F_PRECHECK.md)。原始 [DESIGN_SPEC.md](docs/DESIGN_SPEC.md) 保留。
 
 ## 本次确认的实现
 

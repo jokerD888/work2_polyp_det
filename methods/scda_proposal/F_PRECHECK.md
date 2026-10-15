@@ -1,6 +1,6 @@
 # F_PRECHECK — 实际验收与历史记录
 
-记录日期：2026-10-15。**最新状态（11:37）：F-v2 用户确认完成，重新验收与50步健康检查通过，准备完整100epoch实验。** 以下先记录最新结果，再保留 F-v1 历史过程；历史中的“待授权/待决策”不再代表当前状态。
+记录日期：2026-10-15。**最新状态（11:39）：F-v2 用户确认完成，重新验收与50步健康检查通过，正式100epoch实验已启动。** 以下先记录最新结果，再保留 F-v1 历史过程；历史中的“待授权/待决策”不再代表当前状态。
 
 ## F-v2 最新验收（用户明确确认核心2＋中覆盖率2，不跨区间补位）
 
@@ -15,6 +15,8 @@
 - `scripts/verify_scda_v2_readiness.py` 已生成 `runs/_launcher/scda-proposal-v2-kvasir-s42/acceptance.json`：检查实际方法源文件SHA与预检/短跑一致、50步完整审计、各项通过、正式配置和基线协议相同。正式run为 `scda-proposal-v2-kvasir-s42`，从同一ImageNet R50重新初始化，100epoch/22000iter，batch4、512增强、AMP、官方bbox/划分、相同LR与val选best。
 
 正式链路保存源码/配置/commit与SHA，依次train、best-val预测、统一评测、CSV及Markdown比较。正式训练后不修改纳入快照的.py/.yaml；不覆盖基线/F-v1/短跑，不把50步AP当作完整性能结果。`scripts/compare_detection_runs.py` 只接受两者均完整结束并且协议一致的结果。
+
+11:38提交正式后台链路，11:39训练worker实际启动。run-id `scda-proposal-v2-kvasir-s42`，实现commit `5188ba8` 已推送私人origin/main；Windows wsl PID14484，Linux supervisor PGID1753，实际训练worker PID3146（后续状态以真实进程为准）。冻结配置SHA `c15d89aa87dc5e1c2e8c03db66bbd4d83e8744e02da7d81a44083d433aba0fd9`，继承基线配置SHA `a0cb684f079354fd92b7152a66c9e7af1a8a33faaf2fc39e5d8c0ecd8f7cb758`。`freeze.json` 和run内source保存代码/配置；正式预测自动检查一致性。每15分钟跟进的原自动任务已恢复，仅实质变化通知；最终输出 `runs/maskdino_vs_scda_v2.csv` / `.md`。
 
 ## F-v1 历史过程（保留原始失败与复验）
 
