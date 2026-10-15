@@ -1,0 +1,13 @@
+base_experiment: ../../scda_proposal/configs/kvasir_v2.yaml
+base_kind: scda
+name: proposal_dcnv4_scda_v2_r50_kvasir_official
+dcnv4:
+  enabled: true
+  channels: 256
+  feature_stride: 8
+  kernel_size: 3
+  group: 4
+  dilation: 1
+  offset_scale: 1.0
+  alpha: 0.1
+  force_fp32: true
