@@ -1,0 +1,18 @@
+# F-Reg-Quality: mask eligibility, detached predicted-box IoU ranking, box only.
+# Keeps F-v1/F-v2 presets unchanged. Uses the reported A6000 B16 protocol.
+base_experiment: ../../../configs/maskdino_kvasir_official_b16.yaml
+name: scda_freg_quality_r50_kvasir_official_b16
+scda:
+  enabled: true
+  reg_selection: quality_iou
+  tau_cls: 0.75
+  tau_reg: 0.25
+  k_cls: 2
+  k_reg: 4
+  lambda_cls: 0.0
+  lambda_box: 0.05
+  cls_loss_form: bce
+  mask_policy: single_instance
+  geometry: padded_grid_exact_area_box_distance
+  padding_policy: full_cell_valid
+  diagnostics: false

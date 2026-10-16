@@ -36,6 +36,10 @@ def adapter_sources(cfg):
              "polypbench/io.py", "polypbench/adapters/bitmask_mapper.py",
              "polypbench/adapters/instance_lsj.py", "methods/__init__.py"]
     files.append("configs/maskdino_kvasir_official.yaml")
+    if cfg.get("baseline_config"):
+        baseline = Path(cfg["baseline_config"])
+        if baseline.is_relative_to(root):
+            files.append(baseline.relative_to(root).as_posix())
     for package in ("scda_proposal", "proposal_dcnv4"):
         files.extend(path.relative_to(root).as_posix()
                      for path in sorted((root / "methods" / package).rglob("*"))

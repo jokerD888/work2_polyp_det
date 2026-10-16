@@ -20,6 +20,7 @@ class SCDAOptions:
     cls_loss_form: str = "bce"  # "bce" (F-v1/v2) or "focal_positive" (native-aligned)
     focal_alpha: float = 0.25  # mirrors native criterion.py sigmoid_focal_loss constants
     focal_gamma: float = 2.0
+    box_gate_rho: float | None = None  # populated ONLY by a verified train calibration
 
     def validate(self):
         if type(self.enabled) is not bool or type(self.diagnostics) is not bool:
@@ -40,13 +41,21 @@ class SCDAOptions:
             raise ValueError("SCDA cell geometry and distance convention need confirmation")
         if self.padding_policy != "full_cell_valid":
             raise ValueError("SCDA discards any cell containing padding")
-        if self.reg_selection not in ("coverage_topk", "core_plus_transition", "quality_iou", "quality_iou_boxonly"):
+        if self.reg_selection not in ("coverage_topk", "core_plus_transition", "quality_iou", "quality_iou_boxonly", "quality_iou_boxgate"):
             raise ValueError("Unknown regression selection policy")
+        if self.reg_selection == "quality_iou_boxgate":
+            if (type(self.box_gate_rho) not in (int, float) or
+                    not math.isfinite(self.box_gate_rho) or not 0 < self.box_gate_rho <= 1):
+                raise ValueError("Box-Gated IoU needs a train-calibrated box_gate_rho in (0,1]")
+            if self.mask_policy != "single_instance" or self.lambda_cls != 0 or self.lambda_box != .05:
+                raise ValueError("Confirmed Box-Gated is single-instance, lambda_cls=0, lambda_box=.05")
+        elif self.box_gate_rho is not None:
+            raise ValueError("box_gate_rho is only valid for quality_iou_boxgate")
         if self.reg_selection == "core_plus_transition" and (
             self.k_cls != 2 or self.k_reg != 4 or self.tau_cls != .75 or self.tau_reg != .25
         ):
             raise ValueError("Confirmed F-v2 requires cls2 + reg(core2/transition2), thresholds .75/.25")
-        if self.reg_selection in ("quality_iou", "quality_iou_boxonly") and (
+        if self.reg_selection in ("quality_iou", "quality_iou_boxonly", "quality_iou_boxgate") and (
             self.k_cls != 2 or self.k_reg != 4 or self.tau_cls != .75 or self.tau_reg != .25
         ):
             raise ValueError("quality_iou presets keep the confirmed pool and quotas: cls2 + reg4, thresholds .75/.25")

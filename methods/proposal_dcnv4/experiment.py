@@ -27,10 +27,15 @@ def load_experiment(path, *, operator=None):
         cfg["baseline_config"] = str(base)
         cfg["baseline_config_sha256"] = sha256(base)
     elif raw["base_kind"] == "scda":
-        cfg = load_scda(base)  # inherit the ACTUAL confirmed F-v2 rule
+        cfg = load_scda(base)  # inherit an explicit, reviewed SCDA preset
         baseline = Path(cfg["baseline_config"])
-        if not cfg["scda"]["enabled"] or cfg["scda"]["reg_selection"] != "core_plus_transition":
-            raise ValueError("Combined preset must inherit the confirmed F-v2 configuration")
+        scda = cfg["scda"]
+        if not scda["enabled"] or scda["reg_selection"] not in ("core_plus_transition", "quality_iou"):
+            raise ValueError("Combined preset must inherit confirmed F-v2 or F-Reg-Quality")
+        if scda["reg_selection"] == "quality_iou" and (
+            scda["lambda_cls"] != 0.0 or scda["lambda_box"] != 0.05
+        ):
+            raise ValueError("Combined F-Reg-Quality requires lambda_cls=0 and lambda_box=0.05")
     else:
         raise ValueError("base_kind must be native or scda")
     if cfg["repo"]["commit"] != NATIVE_COMMIT:

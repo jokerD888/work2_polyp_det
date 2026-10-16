@@ -1,4 +1,32 @@
 """Aggregate measured assignments; no research GO thresholds or label changes."""
+import math
+
+
+def validate_candidate_availability(summary, options):
+    """Inactive objectives and non-nested quality selections are intentional."""
+    counts = summary["nonempty_valid_reliable_gt"]
+    for task, weight in (("cls", options.lambda_cls), ("reg", options.lambda_box)):
+        if weight > 0 and not counts[f"{task}_positive_count"]:
+            raise AssertionError(f"No candidates for active auxiliary {task}")
+    if (options.reg_selection in ("coverage_topk", "core_plus_transition") and
+            counts["cls_subset_reg_violations"]):
+        raise AssertionError("Nested-set policy violated")
+    return {"passed": True, "active_cls": options.lambda_cls > 0,
+            "active_box": options.lambda_box > 0, "reg_selection": options.reg_selection}
+
+
+def validate_head_gradients(report, options):
+    """Zero lambda must give zero weighted gradients, not a false failure/GO."""
+    for head, objective, weight in (("class_embed", "cls_weighted", options.lambda_cls),
+                                    ("bbox_embed", "box_weighted", options.lambda_box)):
+        values = report["parameter_space"][head]["gradient_norms"]
+        if any(not math.isfinite(values[name]) for name in ("cls_weighted", "box_weighted")):
+            raise FloatingPointError("Non-finite auxiliary gradient")
+        if weight > 0 and values[objective] <= 0:
+            raise AssertionError(f"No active auxiliary gradient to shared {head}")
+        if weight == 0 and values[objective] != 0:
+            raise AssertionError(f"Inactive auxiliary {objective} has a nonzero gradient")
+    return {"passed": True}
 
 
 def validate_v2_assignments(images):

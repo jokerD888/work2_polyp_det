@@ -1,0 +1,61 @@
+# A6000 controlled-budget protocol used by the 2026-10-16 quality experiments.
+# Dataset/runtime paths still need to match the training machine's frozen run.
+project_root: ..
+name: maskdino_r50_kvasir_official_b16
+adapter: maskdino
+purpose: controlled_budget_comparison
+seed: 42
+checkpoint_selection: best_val_ap
+checkpoint_keep: 2
+training_budget:
+  train_images: 880
+  iterations_per_epoch: 55
+  epochs: 100
+repo:
+  path: third_party/MaskDINO
+  commit: 3831d8514a3728535ace8d4ecc7d28044c42dd14
+runtime:
+  python: python
+  num_gpus: 1
+  visible_gpus: "0"
+dataset:
+  supervision: bbox+mask
+  mask_format: bitmask
+  bbox_source: provided
+  training_boxes: annotations
+  train: {annotations: data/kvasir_official_bbox_coco/train.json, image_root: data/kvasir_official_bbox_coco/train}
+  val: {annotations: data/kvasir_official_bbox_coco/val.json, image_root: data/kvasir_official_bbox_coco/val}
+model:
+  config: configs/coco/instance-segmentation/maskdino_R50_bs16_50ep_3s_dowsample1_2048.yaml
+  num_classes: 1
+  weights: detectron2://ImageNetPretrained/torchvision/R-50.pkl
+  detections_per_image: 100
+overrides:
+  SOLVER.IMS_PER_BATCH: 16
+  SOLVER.OPTIMIZER: ADAMW
+  SOLVER.BASE_LR: 0.0004
+  SOLVER.BACKBONE_MULTIPLIER: 0.1
+  SOLVER.WEIGHT_DECAY: 0.05
+  SOLVER.LR_SCHEDULER_NAME: WarmupMultiStepLR
+  SOLVER.MAX_ITER: 5500
+  SOLVER.STEPS: [4400, 4950]
+  SOLVER.GAMMA: 0.1
+  SOLVER.WARMUP_ITERS: 125
+  SOLVER.WARMUP_FACTOR: 0.001
+  SOLVER.CHECKPOINT_PERIOD: 275
+  SOLVER.AMP.ENABLED: true
+  SOLVER.REFERENCE_WORLD_SIZE: 0
+  SOLVER.CLIP_GRADIENTS.ENABLED: true
+  SOLVER.CLIP_GRADIENTS.CLIP_TYPE: full_model
+  SOLVER.CLIP_GRADIENTS.CLIP_VALUE: 0.01
+  INPUT.IMAGE_SIZE: 512
+  INPUT.MIN_SCALE: 0.5
+  INPUT.MAX_SCALE: 1.5
+  INPUT.RANDOM_FLIP: horizontal
+  INPUT.MIN_SIZE_TEST: 512
+  INPUT.MAX_SIZE_TEST: 512
+  DATALOADER.NUM_WORKERS: 2
+  TEST.EVAL_PERIOD: 275
+evaluation:
+  max_dets: [1, 10, 100]
+output_root: runs

@@ -127,6 +127,9 @@ def _empty_task(device):
 
 @torch.no_grad()
 def assign_image(payload, b, target, options):
+    if options.reg_selection == "quality_iou_boxgate":
+        from .box_gate import assign_box_gate_image
+        return assign_box_gate_image(payload, b, target, options)
     cells, box_scale, keys = token_geometry(payload, b, target)
     device = cells.device
     n = cells.shape[0]
@@ -145,7 +148,8 @@ def assign_image(payload, b, target, options):
     per_gt = []
     coverages, distances = {}, {}
     # GT ID is the final ownership tie break. This same owner is used by BOTH
-    # tasks. Assignment never depends on logits, learned centers, or IoU scores.
+    # tasks. Ownership never depends on logits, learned centers, or IoU scores;
+    # quality policies use predicted IoU only in the later per-owner ranking.
     gt_order = torch.argsort(target.gt_ids, stable=True).tolist()
     for j in gt_order:
         box = target.boxes[j].float()
@@ -208,6 +212,9 @@ def assign_image(payload, b, target, options):
     for j in gt_order:
         if j not in coverages:
             continue
+        # The previous eligibility loop may end on another (even unreliable)
+        # GT. Quality ranking must use this owner's box, not that last box.
+        box = target.boxes[j].float()
         entry = entry_by_gt.get(j)
         coverage, distance = coverages[j], distances[j]
         high = torch.nonzero((owner == j) & (coverage >= options.tau_cls), as_tuple=True)[0]

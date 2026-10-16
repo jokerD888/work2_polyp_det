@@ -1,5 +1,7 @@
 # MIPS-SCDA（F-v1 / F-v2）
 
+**2026-10-16 更新：当前研究基线采用 F-Reg-Quality（quality_iou、λ_cls=0、λ_box=.05）。** 已接入独立质量配置、S8 DCNv4组合和用户确认的收缩框 Box-Gated IoU；后者须先完成train-only全局ρ校准，禁止缺省ρ开训。本机本轮仅执行CPU验证，未做GPU校准/训练。定义、训练机配置准备与执行入口见 [新方法说明](../../docs/scda_quality_dcn_boxgate_20261016.md)。训练机的新基线结果见 [质量归因与复现报告](../../docs/results/scda_quality_attribution_and_repro_20261016.md)。下文保留历史F-v1/F-v2实现记录；旧补边管线的AP不能作为当前新基线。
+
 基于当前固定版本 MaskDINO 的训练期 Proposal 辅助监督。方法放在本目录；通过新的 registry 名称接入，不修改 `third_party/MaskDINO` 或现有基线适配器。
 
 **当前状态：2026-10-15 18:41，F-v2 正式100epoch训练、best-val预测和统一比较全部完成，run-id `scda-proposal-v2-kvasir-s42`。** seed42的val AP50:95为65.7202%，原生为67.5271%，差-1.8070个百分点；本轮未获得AP收益。完整结果与限制见 [seed42结果记录](../../docs/results/maskdino_vs_scda_v2_seed42.md)。20项CPU/Gloo、真实GPU验收、50iter短跑和更新后梯度检查通过；F-v2候选配额与梯度通路已验证，但不等于检测性能提高。规则见 [F_V2_RULES.md](docs/F_V2_RULES.md)，验收与历史记录见 [F_PRECHECK.md](F_PRECHECK.md)，原始 [DESIGN_SPEC.md](docs/DESIGN_SPEC.md) 保留。

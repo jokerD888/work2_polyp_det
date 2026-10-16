@@ -1,5 +1,7 @@
 # Proposal Residual Adapter：DCNv4 / Conv3×3
 
+**2026-10-16 更新：新增 `configs/dcn_freg_quality.yaml`，组合当前有效的 F-Reg-Quality，而不是旧F-v2。** 仍是现有S8残差Adapter，没有FCOS辅助头。历史训练机已报告旧F-v2组合实验，但其batch4/旧补边结果不能替代当前DCNv4-only。新组合本机只完成CPU接口/整网构建验证，真实CUDA验收和正式训练待训练机执行；详见 [新方法说明](../../docs/scda_quality_dcn_boxgate_20261016.md)。下文的“未执行GPU”等状态属于本机/历史阶段记录，不能概括训练机此前已完成的工作。
+
 **状态（2026-10-15）：代码与 CPU 接口检查已完成；未安装/编译 DCNv4，未执行 GPU 验收或新训练。** 用户明确选择先完成 CPU 阶段，GPU 阶段待正在运行的 F-v2 结束后再进行。
 
 已增加普通 Conv3×3 对照。当前合计 **26 项 CPU 检查通过**，其中 Conv 使用真实 `torch.nn.Conv2d`，不依赖 DCNv4 扩展；DCNv4 部分仍使用明确标注的 CPU 测试替身。新增检查见 `checks/conv_control_cpu_report.json`；首次18项结果与 manifest 作为 `ee1f5fb` 阶段记录保留。

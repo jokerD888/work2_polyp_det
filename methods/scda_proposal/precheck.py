@@ -260,13 +260,8 @@ def run_precheck(experiment, output, batches=32, baseline_gate=None):
                 losses = f(batch if amp else batch[:1])
             gradient_report = health["gradient_report"]
             write_json(output / f"gradients_{'amp' if amp else 'fp32'}.json", gradient_report)
-            for head in ("class_embed", "bbox_embed"):
-                for name in ("cls_weighted", "box_weighted"):
-                    value = gradient_report["parameter_space"][head]["gradient_norms"][name]
-                    if not np.isfinite(value): raise FloatingPointError("Non-finite auxiliary gradient")
-                relevant = "cls_weighted" if head == "class_embed" else "box_weighted"
-                if gradient_report["parameter_space"][head]["gradient_norms"][relevant] <= 0:
-                    raise AssertionError(f"No auxiliary gradient to shared {head}")
+            from .audit_summary import validate_head_gradients
+            validate_head_gradients(gradient_report, options)
             total = sum(losses.values())
             if not torch.isfinite(total): raise FloatingPointError("Non-finite enabled loss")
             total.backward()
@@ -290,9 +285,8 @@ def run_precheck(experiment, output, batches=32, baseline_gate=None):
     summary["parameter_stage"] = "ImageNet initialization, no optimizer update"
     summary["proposal_diagnostics"] = proposals
     write_json(output / "SCDA_DECOUPLING_EFFECTIVENESS.json", summary)
-    counts = summary["nonempty_valid_reliable_gt"]
-    if counts["cls_subset_reg_violations"] or not counts["cls_positive_count"] or not counts["reg_positive_count"]:
-        raise AssertionError("Candidate validation failed: no auxiliary supervision or nested-set violation")
+    from .audit_summary import validate_candidate_availability
+    report["checks"]["active_auxiliary_policy"] = validate_candidate_availability(summary, options)
     report["checks"]["candidate_availability"] = {"passed": True, **{key: value for key, value in summary.items() if key not in ("per_image", "proposal_diagnostics")}}
     report["peak_cuda_memory_bytes"] = torch.cuda.max_memory_allocated()
     report["status"] = "passed"

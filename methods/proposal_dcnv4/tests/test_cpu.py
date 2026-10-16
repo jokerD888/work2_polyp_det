@@ -234,7 +234,7 @@ class CPUContracts(unittest.TestCase):
         from methods.proposal_dcnv4.integration import configure_model, register
         register(ROOT / "third_party/MaskDINO")
 
-        def config(dcn, scda):
+        def config(dcn, scda, policy="coverage_topk"):
             cfg = get_cfg()
             add_deeplab_config(cfg)
             train_net.add_maskdino_config(cfg)
@@ -246,6 +246,10 @@ class CPUContracts(unittest.TestCase):
             cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = 1
             cfg.MODEL.PROPOSAL_DCNV4.ENABLED = dcn
             cfg.MODEL.SCDA.ENABLED = scda
+            cfg.MODEL.SCDA.REG_SELECTION = policy
+            if policy == "quality_iou":
+                cfg.MODEL.SCDA.LAMBDA_CLS = 0.0
+                cfg.MODEL.SCDA.LAMBDA_BOX = 0.05
             cfg.SOLVER.OPTIMIZER = "ADAMW"
             configure_model(cfg)
             return cfg
@@ -254,8 +258,9 @@ class CPUContracts(unittest.TestCase):
         native = build_model(config(False, False))
         reference = {key: value.clone() for key, value in native.state_dict().items()}
         del native
-        for scda in (False, True):
-            cfg = config(True, scda)
+        for scda, policy in ((False, "coverage_topk"), (True, "coverage_topk"),
+                             (True, "quality_iou")):
+            cfg = config(True, scda, policy)
             torch.manual_seed(42)
             with patch("methods.proposal_dcnv4.dcnv4_head.DCNv4Residual",
                        side_effect=lambda options: DCNv4Residual(options, operator_factory=TokenProbe)):

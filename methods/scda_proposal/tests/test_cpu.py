@@ -306,6 +306,26 @@ class QualityAssignmentTests(unittest.TestCase):
         # Equal IoU and distance: (level,u=x,v=y) puts token 5 before 6.
         self.assertEqual(assigned.reg.token_indices[:2].tolist(), [5, 6])
 
+    def test_quality_uses_each_owner_box_not_last_visited_gt(self):
+        # A later unreliable GT must not change the first GT's IoU ranking.
+        # Explicit multi-GT fixtures test the generic API; Kvasir's confirmed
+        # single-instance mapper marks all original multi-GT images unreliable.
+        for policy in ("quality_iou", "quality_iou_boxonly"):
+            with self.subTest(policy=policy):
+                payload, target = fixture(gt_count=2)
+                target.boxes[0] = torch.tensor([.4, .5, .7, .8])
+                target.boxes[1] = torch.tensor([.6, .5, .7, .8])
+                target.reliable[1] = False
+                with torch.no_grad():
+                    payload["raw_box_sigmoid"][0, 5] = target.boxes[0]
+                    payload["raw_box_sigmoid"][0, 6] = target.boxes[1]
+                options = SCDAOptions(enabled=True, diagnostics=True, reg_selection=policy,
+                                      lambda_cls=0., lambda_box=.05)
+                assigned = assign_scda(payload, [target], options)[0]
+                self.assertEqual(assigned.reg.token_indices[0].item(), 5)
+                self.assertTrue((assigned.reg.gt_indices == 0).all())
+                self.assertAlmostEqual(assigned.audit["per_gt"][0]["reg_iou"][0], 1., places=5)
+
     def test_pool_threshold_and_topq_exclusion_still_apply(self):
         perfect = [.5, .5, 1., 1.]
         # Perfect box but zero mask coverage stays outside the confirmed pool.

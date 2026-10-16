@@ -38,6 +38,12 @@ def adapter_sources(cfg):
     files.extend(path.relative_to(root).as_posix()
                  for path in sorted((root / "methods" / "scda_proposal").rglob("*"))
                  if path.is_file() and path.suffix in (".py", ".yaml"))
+    if cfg.get("baseline_config"):
+        baseline = Path(cfg["baseline_config"])
+        if baseline.is_relative_to(root):
+            files.append(baseline.relative_to(root).as_posix())
+    if cfg.get("box_gate_calibration"):
+        files.append("scripts/calibrate_scda_box_gate.py")
     return {file: sha256(root / file) for file in files}
 
 
@@ -89,6 +95,8 @@ def run(cfg, mode, run_id=None, split="val", checkpoint=None):
         manifest = {"run_id": run_id, "name": cfg["name"], "adapter": cfg["adapter"], "seed": cfg["seed"], "supervision": cfg["dataset"]["supervision"], "purpose": cfg.get("purpose", "research"), "config_fingerprint": fingerprint(cfg), "dataset": data, "repo": repo, "created_at": dt.datetime.now(dt.timezone.utc).isoformat()}
         write_json(root / "manifest.json", manifest)
         write_json(root / "experiment.json", cfg)
+        if cfg.get("box_gate_calibration"):
+            write_json(root / "box_gate_calibration.json", cfg["box_gate_calibration"]["record"])
         sources = adapter_sources(cfg)
         write_json(root / "adapter_sources.json", sources)
         for file in sources:

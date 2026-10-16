@@ -30,10 +30,13 @@ def main():
     from methods.scda_proposal.integration import register
     from methods.scda_proposal.mapper import SCDALSJMapper
     from methods.scda_proposal.diagnostics import gradient_audit
-    from methods.scda_proposal.audit_summary import validate_v2_assignments, summarize_decoupling
+    from methods.scda_proposal.config import SCDAOptions
+    from methods.scda_proposal.audit_summary import (validate_v2_assignments, summarize_decoupling,
+                                                    validate_candidate_availability, validate_head_gradients)
     from polypbench.io import write_json, sha256
     import train_net
     experiment = load_experiment(args.config)
+    options = SCDAOptions(**experiment["scda"])
     register(experiment["repo"]["path"])
     entry = experiment["dataset"]["train"]
     DatasetCatalog.register("bench_train", lambda: load_coco_json(
@@ -62,8 +65,10 @@ def main():
     def callback(current, native, auxiliary, payload, targets, assignments):
         report["gradients"] = gradient_audit(current, native, auxiliary, payload)
         audits = [assignment.audit for assignment in assignments]
-        report["policy"] = validate_v2_assignments(audits)
         report["assignments"] = summarize_decoupling(audits)
+        report["policy"] = validate_candidate_availability(report["assignments"], options)
+        if options.reg_selection == "core_plus_transition":
+            report["v2_quota_identity"] = validate_v2_assignments(audits)
     model.scda_audit_callback = callback
     with EventStorage():
         with torch.autocast("cuda", enabled=True):
@@ -74,10 +79,10 @@ def main():
     if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
         raise FloatingPointError("Non-finite smoke checkpoint gradient")
     report["losses"] = {key: float(value.detach()) for key, value in losses.items() if key.startswith("loss_scda")}
-    for group, objective in (("class_embed", "cls_weighted"), ("bbox_embed", "box_weighted"),
-                             ("encoder", "box_weighted"), ("backbone", "box_weighted")):
+    validate_head_gradients(report["gradients"], options)
+    for group, objective in (("encoder", "box_weighted"), ("backbone", "box_weighted")):
         norm = report["gradients"]["parameter_space"][group]["gradient_norms"][objective]
-        if not np.isfinite(norm) or norm <= 0:
+        if not np.isfinite(norm) or (options.lambda_box > 0 and norm <= 0) or (options.lambda_box == 0 and norm != 0):
             raise AssertionError(f"No finite nonzero {objective} gradient to {group} after smoke updates")
     report["passed"] = True
     write_json(args.output, report)

@@ -1,0 +1,14 @@
+base_experiment: ../../scda_proposal/configs/kvasir_freg_quality.yaml
+base_kind: scda
+name: proposal_dcnv4_freg_quality_r50_kvasir_official_b16
+dcnv4:
+  enabled: true
+  operator: dcnv4
+  channels: 256
+  feature_stride: 8
+  kernel_size: 3
+  group: 4
+  dilation: 1
+  offset_scale: 1.0
+  alpha: 0.1
+  force_fp32: true

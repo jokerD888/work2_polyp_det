@@ -1,0 +1,18 @@
+# Deliberately refuses to load before the matching train-only calibration.
+base_experiment: ../../../configs/maskdino_kvasir_official_b16.yaml
+name: scda_box_gated_iou_r50_kvasir_official_b16
+box_gate_calibration: ../../../runs/scda-boxgate-calibration-s42/calibration.json
+scda:
+  enabled: true
+  reg_selection: quality_iou_boxgate
+  tau_cls: 0.75
+  tau_reg: 0.25
+  k_cls: 2
+  k_reg: 4
+  lambda_cls: 0.0
+  lambda_box: 0.05
+  cls_loss_form: bce
+  mask_policy: single_instance
+  geometry: padded_grid_exact_area_box_distance
+  padding_policy: full_cell_valid
+  diagnostics: false
