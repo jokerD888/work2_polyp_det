@@ -39,6 +39,10 @@ g_y - rho*h/2 <= c_y < g_y + rho*h/2
 
 新配置 `methods/scda_proposal/configs/kvasir_box_gated_iou.yaml` 必须绑定校准JSON；无默认ρ、禁止YAML直接填写ρ绕过证据。数据、源码或协议身份变化后旧校准会被拒绝。证据嵌入 experiment.json，并另存到run，参与配置指纹。
 
+校准证据使用 **schema_version=2**：除 train 标注、源码及初始化权重外，绑定实际抽样 train 图片的原始文件 SHA256（按样本ID顺序），以及原生模型入口 YAML 和全部递归 `_BASE_` 文件的 SHA256。校准前记录内容身份、完成前再次核对；加载 Box-Gated 实验时重新读取核对。即使文件路径、图片尺寸及标注没有变化，图片内容替换或任一模型配置修改也会拒绝旧校准。只校验抽样训练图，不读取验证图。
+
+**如果训练机已经生成 schema_version=1 的旧校准，必须保留旧证据并用新脚本重新校准，输出到新文件后更新 `box_gate_calibration` 引用。禁止给旧文件补哈希或只改版本号来沿用旧ρ。** 此修复不改变门控公式、ρ网格、拟合目标、配额、损失或训练日程。
+
 ## 在训练机准备配置
 
 先核对空闲GPU和当前进程。以下仅是执行入口，不表示本机已经运行。进入真正的项目根目录（这台训练机是 `/home/ouc1/code/work2_polyp_det/work2_polyp_det`），激活原 `maskdino` 环境。
@@ -98,3 +102,9 @@ DCNv4 CPU 路由使用明确的 TokenProbe 测试替身；不等同于官方DCNv
 另修正了通用多GT API的一处错误：IoU排序不再误用上一循环最后一个GT框。当前可靠原始单框策略下历史有效GT只有一个，这项修复不用于解释既有AP收益。Box-Gated不擅自扩展可靠多GT owner策略，遇到这类未确认输入会报错。
 
 首次整套CPU回归的两处快照接口错误已保留并修复，记录位于 `runs/quality-boxgate-implementation-20261016/`；最终测试结果以该目录最新报告为准。
+
+## 校准内容身份修复验证
+
+对 `93bde04` 的审查曾复现：替换同路径同尺寸训练图，或修改同路径原生模型 YAML，加载器仍接受旧ρ。原始证据保留在 `runs/review-93bde04/identity_findings.json`。
+
+修复后 **112项CPU测试全部通过，无跳过，cuda_context_created=false**。报告和逐项日志位于 `runs/quality-boxgate-identity-fix-20261016/cpu-report.json` / `.log`。其中校准加载检查由5项扩展为14项，验证了同尺寸图片替换、入口/直接/传递模型配置修改、缺失依赖、循环依赖、共享多父配置、旧schema拒绝、样本ID与计数一致性，以及验证文件缺失时仍可仅依据train完成校验。未运行GPU、真实ρ校准或训练；旧审查与测试证据均未覆盖。

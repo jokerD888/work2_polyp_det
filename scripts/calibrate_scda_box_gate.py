@@ -30,7 +30,8 @@ def main():
     from methods.scda_proposal.experiment import load_experiment
     from methods.scda_proposal.config import SCDAOptions
     from methods.scda_proposal.box_gate_calibration import (
-        RHO_GRID, IMAGENET_R50_SHA256, fit_count_calibration, protocol_signature, source_identity)
+        RHO_GRID, CALIBRATION_SCHEMA_VERSION, IMAGENET_R50_SHA256, fit_count_calibration,
+        protocol_signature, source_identity, native_config_identity, training_images_identity)
     from polypbench.io import sha256
     experiment = load_experiment(args.config)
     options = SCDAOptions(**experiment["scda"])
@@ -38,6 +39,8 @@ def main():
         raise ValueError("Calibrate against the confirmed F-Reg-Quality reference")
     identity = source_identity(root)
     signature = protocol_signature(experiment, options)
+    model_identity = native_config_identity(experiment["model"]["config"])
+    train_annotations_sha = sha256(experiment["dataset"]["train"]["annotations"])
     sys.path.insert(0, experiment["repo"]["path"])
     import numpy as np
     import torch
@@ -74,11 +77,12 @@ def main():
     if args.samples > len(records):
         raise ValueError("Requested sample count exceeds training images")
     order = torch.randperm(len(records), generator=torch.Generator().manual_seed(seed)).tolist()[:args.samples]
+    image_ids = [int(records[index]["image_id"]) for index in order]
+    image_identity = training_images_identity(experiment, image_ids)
     mapper = SCDALSJMapper(cfg, options.mask_policy)
     mapped = [mapper(records[index]) for index in order]
     # Audit callback is training-only. No validation images/evaluator are loaded.
     rows = []
-    image_ids = [int(records[index]["image_id"]) for index in order]
     def callback(current, native_losses, auxiliary, payload, targets, assignments):
         for b, target in enumerate(targets):
             row = calibration_observation(payload, b, target, options.tau_reg, RHO_GRID)
@@ -106,11 +110,12 @@ def main():
         "box_pool_per_level": [sum(row["box_counts_per_level_by_rho"][chosen_index][i] for row in rows)
                                for i in range(level_count)],
         "note": "Descriptive only; fitting uses total pool counts, not per-GT/per-level matches or gradient norms"}
-    record = {"schema_version": 1, "status": "calibrated", "split": "train",
+    record = {"schema_version": CALIBRATION_SCHEMA_VERSION, "status": "calibrated", "split": "train",
               "parameter_stage": "ImageNet initialization; no updates",
               "seed": seed, "samples": args.samples, "forward_batch_size": args.batch_size,
               "image_ids": image_ids, "protocol_signature": signature,
-              "source_sha256": identity, "train_annotations_sha256": sha256(entry["annotations"]),
+              "source_sha256": identity, "train_annotations_sha256": train_annotations_sha,
+              "native_model_config": model_identity, "training_images": image_identity,
               "initialization_sha256": weights_sha, "observations": rows, "fit": fit,
               "matching_descriptives": descriptives,
               "native_commit": experiment["repo"]["commit"], "torch": torch.__version__,
@@ -118,6 +123,12 @@ def main():
               "scope": "global train-pool retention match; not per-image/per-level/gradient matching"}
     if source_identity(root) != identity:
         raise RuntimeError("Source changed during calibration")
+    if native_config_identity(experiment["model"]["config"]) != model_identity:
+        raise RuntimeError("Native model configuration changed during calibration")
+    if sha256(entry["annotations"]) != train_annotations_sha:
+        raise RuntimeError("Training annotations changed during calibration")
+    if training_images_identity(experiment, image_ids) != image_identity:
+        raise RuntimeError("Training image contents changed during calibration")
     output.parent.mkdir(parents=True, exist_ok=True)
     # Exclusive creation protects evidence even against concurrent calibrators.
     with output.open("x", encoding="utf-8") as stream:
