@@ -120,7 +120,7 @@ def eval_snapshot(model, batch, amp=False):
              for name, field in prediction["instances"].get_fields().items()} for prediction in predictions]
 
 
-def run_precheck(experiment, output, batches=32):
+def run_precheck(experiment, output, batches=32, baseline_gate=None):
     from detectron2.data import DatasetCatalog, MetadataCatalog, DatasetMapper
     from detectron2.data.datasets import load_coco_json
     from detectron2.modeling import build_model
@@ -153,6 +153,7 @@ def run_precheck(experiment, output, batches=32):
     torch.backends.cuda.matmul.allow_tf32 = False
     report = {"status": "running", "seed": experiment["seed"], "checks": {},
               "scda_options": experiment["scda"], "method_sources": adapter_sources(experiment),
+              "baseline_gate": baseline_gate or {"enforced": True},
               "verification_math": {"cudnn_deterministic": True, "tf32": False,
                                     "training_worker_unchanged": True}}
     def save(phase):
@@ -304,13 +305,21 @@ def main():
     parser.add_argument("--config", default="methods/scda_proposal/configs/kvasir.yaml")
     parser.add_argument("--output", required=True)
     parser.add_argument("--batches", type=int, default=32)
+    parser.add_argument("--skip-baseline-gate", action="store_true",
+                        help="Independent training machine without a completed native baseline: "
+                             "run_precheck uses ImageNet initialization only and never loads one.")
     args = parser.parse_args()
     experiment = load_experiment(args.config)
     root = Path(experiment["project_root"])
     # Check durable phase markers before importing/building native GPU modules.
-    baseline = root / "runs" / "maskdino-official-s42"
-    if read_json(baseline / "train" / "state.json")["status"] != "completed" or read_json(baseline / "predict_val" / "state.json")["status"] != "completed":
-        raise RuntimeError("Wait until baseline training AND prediction complete")
+    baseline_gate = {"enforced": not args.skip_baseline_gate}
+    if args.skip_baseline_gate:
+        baseline_gate["note"] = ("Skipped on the independent training machine: no completed native "
+                                 "baseline run exists here; run_precheck uses ImageNet initialization only.")
+    else:
+        baseline = root / "runs" / "maskdino-official-s42"
+        if read_json(baseline / "train" / "state.json")["status"] != "completed" or read_json(baseline / "predict_val" / "state.json")["status"] != "completed":
+            raise RuntimeError("Wait until baseline training AND prediction complete")
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     os.environ["TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD"] = "1"
@@ -318,7 +327,7 @@ def main():
     sys.path.insert(0, experiment["repo"]["path"])
     try:
         import train_net  # makes native registration available
-        run_precheck(experiment, output, args.batches)
+        run_precheck(experiment, output, args.batches, baseline_gate=baseline_gate)
     except BaseException as error:
         failure = {"status": "failed", "error": str(error), "traceback": traceback.format_exc(),
                    "updated_at": dt.datetime.now(dt.timezone.utc).isoformat()}
