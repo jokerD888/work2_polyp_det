@@ -12,6 +12,20 @@ def connected_zero(tensor):
     return tensor.reshape(-1)[:0].float().sum()
 
 
+def positive_cls_loss(logits, options):
+    """Positive-term objective on selected tokens, FP32.
+
+    "bce" is the confirmed F-v1/v2 plain softplus(-logit). "focal_positive"
+    multiplies the same term by alpha*(1-p)^gamma with the resolved native
+    sigmoid_focal_loss constants (criterion.py), so an already-confident token
+    is down-weighted exactly the way native positives are.
+    """
+    values = F.softplus(-logits)
+    if options.cls_loss_form == "focal_positive":
+        values = values * options.focal_alpha * (1 - torch.sigmoid(logits)) ** options.focal_gamma
+    return values
+
+
 def cxcywh_to_xyxy(boxes):
     center, half = boxes[..., :2], boxes[..., 2:] / 2
     return torch.cat((center - half, center + half), dim=-1)
@@ -55,7 +69,7 @@ def scda_losses(payload, targets, assignments, options, box_weight, giou_weight)
                 labels = target.labels[j]
                 if ((labels < 0) | (labels >= raw_cls.shape[-1])).any():
                     raise ValueError("GT class index outside native sigmoid classifier")
-                values = F.softplus(-raw_cls[b, p, labels].float())
+                values = positive_cls_loss(raw_cls[b, p, labels].float(), options)
                 contribution, count = _per_gt_sum(values, j)
                 numerator_cls = numerator_cls + contribution
                 n_cls += count

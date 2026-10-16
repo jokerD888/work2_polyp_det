@@ -257,6 +257,133 @@ class V2AssignmentTests(unittest.TestCase):
                 dataclasses.replace(self.options, **changes).validate()
 
 
+class QualityAssignmentTests(unittest.TestCase):
+    """quality_iou keeps the confirmed pool and quotas; only the ranking input
+    changes from mask coverage to predicted-box IoU (detached, FP32)."""
+
+    def case(self, coverage_values, boxes_by_token=None, topk=(0,), options=None):
+        payload, target = fixture()
+        target.boxes[:] = torch.tensor([.5, .5, 1., 1.])
+        target.masks[:] = False
+        for token, value in enumerate(coverage_values):
+            y, x = divmod(token, 4)
+            for pixel in range(round(value * 4)):
+                dy, dx = divmod(pixel, 2)
+                target.masks[0, y * 2 + dy, x * 2 + dx] = True
+        if boxes_by_token is not None:
+            payload["raw_box_sigmoid"] = payload["raw_box_sigmoid"].detach().clone()
+            for token, box in boxes_by_token.items():
+                payload["raw_box_sigmoid"][0, token] = torch.tensor(box)
+        payload["topk_indices"] = torch.tensor([list(topk)])
+        opts = options or SCDAOptions(enabled=True, diagnostics=True, reg_selection="quality_iou")
+        return payload, target, assign_scda(payload, [target], opts)[0]
+
+    def test_quality_ranking_changes_set_and_order_vs_coverage(self):
+        # Top row fully covered but their default anchor boxes barely overlap the
+        # GT; token 5 has 0.5 coverage yet its predicted box equals the GT.
+        # topk=(15,) keeps the far corner out of the pool for this fixture.
+        coverage = [1., 1., 1., 1.] + [0.] * 12
+        coverage[5] = .5
+        perfect = [.5, .5, 1., 1.]
+        _, _, quality = self.case(coverage, boxes_by_token={5: perfect}, topk=(15,))
+        _, _, coverage_rule = self.case(coverage, topk=(15,),
+                                        options=SCDAOptions(enabled=True, diagnostics=True))
+        self.assertEqual(quality.reg.token_indices.tolist(), [5, 1, 2, 0])
+        self.assertEqual(coverage_rule.reg.token_indices.tolist(), [1, 2, 0, 3])
+        self.assertAlmostEqual(quality.audit["per_gt"][0]["reg_iou"][0], 1.0, places=5)
+        self.assertEqual(quality.cls.token_indices.tolist(), [1, 2])
+
+    def test_equal_iou_breaks_by_distance_then_lexicographic(self):
+        perfect = [.5, .5, 1., 1.]
+        coverage = [0.] * 16
+        coverage[1] = coverage[5] = .5
+        _, _, assigned = self.case(coverage, boxes_by_token={5: perfect, 1: perfect}, topk=(15,))
+        # Equal IoU: nearer center (token 5, d=.031) before token 1 (d=.156).
+        self.assertEqual(assigned.reg.token_indices[:2].tolist(), [5, 1])
+        coverage[1] = 0.
+        coverage[6] = .5
+        _, _, assigned = self.case(coverage, boxes_by_token={5: perfect, 6: perfect}, topk=(15,))
+        # Equal IoU and distance: (level,u=x,v=y) puts token 5 before 6.
+        self.assertEqual(assigned.reg.token_indices[:2].tolist(), [5, 6])
+
+    def test_pool_threshold_and_topq_exclusion_still_apply(self):
+        perfect = [.5, .5, 1., 1.]
+        # Perfect box but zero mask coverage stays outside the confirmed pool.
+        _, _, assigned = self.case([0.] * 16, boxes_by_token={5: perfect})
+        self.assertEqual(len(assigned.reg.token_indices), 0)
+        # A Top-Q token is never selected, regardless of its box quality.
+        _, _, assigned = self.case([1.] * 16, boxes_by_token={5: perfect}, topk=(5,))
+        self.assertNotIn(5, assigned.reg.token_indices.tolist())
+
+    def test_boxonly_drops_coverage_gate_but_keeps_rest(self):
+        perfect = [.5, .5, 1., 1.]
+        # Zero-coverage tokens enter the pool and win purely by IoU ranking;
+        # the high-coverage far corner loses despite its coverage.
+        coverage = [0.] * 16
+        coverage[15] = 1.
+        boxes = {5: perfect, 6: perfect, 7: perfect}
+        boxonly_opts = SCDAOptions(enabled=True, diagnostics=True, reg_selection="quality_iou_boxonly")
+        _, _, boxonly = self.case(coverage, boxes_by_token=boxes, topk=(15,), options=boxonly_opts)
+        self.assertEqual(boxonly.reg.token_indices[:3].tolist(), [5, 6, 7])
+        self.assertNotIn(15, boxonly.reg.token_indices.tolist())
+        # The coverage gate keeps the same tokens out under quality_iou.
+        gated_opts = SCDAOptions(enabled=True, diagnostics=True, reg_selection="quality_iou")
+        _, _, gated = self.case(coverage, boxes_by_token=boxes, topk=(15,), options=gated_opts)
+        self.assertNotIn(5, gated.reg.token_indices.tolist())
+        self.assertNotIn(6, gated.reg.token_indices.tolist())
+        # Wider owner set does not change the cls core under this single-GT target.
+        self.assertEqual(boxonly.cls.token_indices.tolist(), gated.cls.token_indices.tolist())
+        self.assertAlmostEqual(boxonly.audit["per_gt"][0]["reg_iou"][0], 1.0, places=5)
+
+    def test_defaults_and_validation(self):
+        defaults = SCDAOptions()
+        self.assertEqual(defaults.reg_selection, "coverage_topk")
+        self.assertEqual(defaults.cls_loss_form, "bce")
+        SCDAOptions(reg_selection="quality_iou").validate()
+        SCDAOptions(reg_selection="quality_iou_boxonly").validate()
+        for changes in ({"reg_selection": "quality_iou", "k_reg": 5},
+                        {"reg_selection": "quality_iou_boxonly", "k_reg": 5},
+                        {"cls_loss_form": "mse"}, {"focal_gamma": -1.}, {"focal_alpha": float("inf")}):
+            with self.assertRaises(ValueError):
+                SCDAOptions(**changes).validate()
+
+
+class FocalClsLossTests(unittest.TestCase):
+    """focal_positive = native-aligned positive focal term; opt-in, FP32."""
+
+    def test_value_matches_native_positive_focal_term(self):
+        from methods.scda_proposal.scda_loss import positive_cls_loss
+        options = SCDAOptions(cls_loss_form="focal_positive")
+        logits = torch.tensor([-7., -0.5, 0., 1.5, 6.])
+        p = torch.sigmoid(logits)
+        expected = options.focal_alpha * (1 - p) ** options.focal_gamma * torch.nn.functional.softplus(-logits)
+        torch.testing.assert_close(positive_cls_loss(logits, options), expected)
+
+    def test_downweights_confident_tokens_keeps_hard_ones(self):
+        from methods.scda_proposal.scda_loss import positive_cls_loss
+        focal, bce = SCDAOptions(cls_loss_form="focal_positive"), SCDAOptions()
+        hard = positive_cls_loss(torch.tensor([-8.]), focal) / positive_cls_loss(torch.tensor([-8.]), bce)
+        easy = positive_cls_loss(torch.tensor([8.]), focal) / positive_cls_loss(torch.tensor([8.]), bce)
+        self.assertAlmostEqual(float(hard), 0.25, places=3)
+        self.assertLess(float(easy), 1e-3)
+
+    def test_per_gt_mean_and_zero_lambda_exact_zero(self):
+        from methods.scda_proposal.scda_loss import positive_cls_loss, scda_losses as _  # noqa: F401
+        payload, target = fixture()
+        assigned = assign_scda(payload, [target], SCDAOptions(enabled=True))[0]
+        options = SCDAOptions(enabled=True, cls_loss_form="focal_positive")
+        result = scda_losses(payload, [target], [assigned], options, 5, 2)
+        p = assigned.cls.token_indices
+        torch.testing.assert_close(result.unweighted["cls"],
+                                   positive_cls_loss(payload["raw_cls"][0, p, 0].float(), options).mean())
+        zero = dataclasses.replace(options, lambda_cls=0.0)
+        zero_result = scda_losses(payload, [target], [assigned], zero, 5, 2)
+        self.assertEqual(float(zero_result.losses["loss_scda_cls"]), 0.0)
+        payload["raw_cls"].grad = None
+        sum(zero_result.losses.values()).backward()
+        self.assertEqual(float(payload["raw_cls"].grad.abs().sum()), 0)
+
+
 class LossTests(unittest.TestCase):
     def test_positive_class_only_and_box_gradients(self):
         payload, target = fixture()

@@ -2,7 +2,10 @@
 
 Pixel masks are piecewise constant on unit pixel squares. Continuous rectangle
 integration exactly accounts for fractional feature-grid cell edges. No fixed
-stride assumptions, adaptive pooling, predicted-score ranking, or learned state.
+stride assumptions, adaptive pooling, or learned state. The confirmed F-v1/v2
+policies never rank by predicted scores; the opt-in quality_iou policy ranks
+regression candidates by their current predicted-box IoU with the GT, read
+from the detached payload inside this no_grad assignment.
 """
 import torch
 from torch.nn import functional as F
@@ -92,6 +95,31 @@ def _stable_rank(indices, coverage, distance, keys):
     return indices[torch.argsort(coverage[indices], descending=True, stable=True)]
 
 
+def _stable_rank_quality(indices, quality, distance, keys):
+    """Stable successive sorts: quality desc, distance asc, level/u/v asc."""
+    for column in (2, 1, 0):
+        indices = indices[torch.argsort(keys[indices, column], stable=True)]
+    indices = indices[torch.argsort(distance[indices], stable=True)]
+    return indices[torch.argsort(quality[indices], descending=True, stable=True)]
+
+
+def _token_gt_iou(payload, batch_index, tokens, gt_box, box_scale):
+    """Paired IoU between the token's current predicted box and the GT, FP32.
+
+    Same coordinate convention as the auxiliary box loss: normalized cxcywh
+    proposal scaled into the valid-image domain before comparison. Pure
+    ranking input for quality_iou selection; detached with the assignment.
+    """
+    from .scda_loss import cxcywh_to_xyxy
+    prediction = cxcywh_to_xyxy(payload["raw_box_sigmoid"][batch_index, tokens].float() * box_scale[tokens])
+    truth = cxcywh_to_xyxy(gt_box.float()[None].expand(tokens.numel(), 4))
+    intersection = (torch.minimum(prediction[:, 2:], truth[:, 2:]) -
+                    torch.maximum(prediction[:, :2], truth[:, :2])).clamp(min=0).prod(-1)
+    area_p = (prediction[:, 2:] - prediction[:, :2]).clamp(min=0).prod(-1)
+    area_t = (truth[:, 2:] - truth[:, :2]).clamp(min=0).prod(-1)
+    return intersection / (area_p + area_t - intersection).clamp(min=torch.finfo(torch.float32).tiny)
+
+
 def _empty_task(device):
     empty = torch.empty(0, dtype=torch.long, device=device)
     return TaskAssignment(empty, empty.clone())
@@ -153,7 +181,13 @@ def assign_image(payload, b, target, options):
         inside = ((center >= box[:2] - box[2:] / 2) &
                   (center < box[:2] + box[2:] / 2)).all(-1)
         geometry = valid & inside
-        eligible = available & inside & (coverage >= options.tau_reg)
+        if options.reg_selection == "quality_iou_boxonly":
+            # Q-BoxOnly ablation: the GT-mask coverage gate is the only removed
+            # constraint. Box containment, validity, padding and Top-Q exclusion
+            # still apply; the IoU ranking below is unchanged.
+            eligible = available & inside
+        else:
+            eligible = available & inside & (coverage >= options.tau_reg)
         claimants += eligible.long()
         better = eligible & ((coverage > best_coverage) |
                               ((coverage == best_coverage) & (distance < best_distance)))
@@ -188,6 +222,31 @@ def assign_image(payload, b, target, options):
             # medium-coverage cells. Never refill one band from the other.
             reg_indices = torch.cat((cls_indices, transition[:2]))
             counterfactual = cls_indices  # raising tau_reg to tau_cls empties this band
+        elif options.reg_selection == "quality_iou":
+            # Same pool and quota as the confirmed rule; ranking is by the
+            # token's current box-vs-GT IoU instead of mask coverage alone.
+            # Ranking quantizes IoU to 1e-4 so FP32 arithmetic noise cannot
+            # override the documented distance/lexicographic tie-breaks.
+            quality = _token_gt_iou(payload, b, low, box, box_scale)
+            ranked = torch.round(quality * 1e4) / 1e4
+            local = _stable_rank_quality(torch.arange(low.numel(), device=low.device),
+                                         ranked, distance[low], keys[low])
+            reg_indices = low[local[:options.k_reg]]
+            if entry is not None:
+                entry["reg_iou"] = quality[local[:options.k_reg]].tolist()
+            counterfactual = high[:options.k_reg]
+        elif options.reg_selection == "quality_iou_boxonly":
+            # Same IoU ranking as quality_iou, over the mask-free pool
+            # (owner == j only): the coverage gate was already dropped above.
+            pool = torch.nonzero(owner == j, as_tuple=True)[0]
+            quality = _token_gt_iou(payload, b, pool, box, box_scale)
+            ranked = torch.round(quality * 1e4) / 1e4
+            local = _stable_rank_quality(torch.arange(pool.numel(), device=pool.device),
+                                         ranked, distance[pool], keys[pool])
+            reg_indices = pool[local[:options.k_reg]]
+            if entry is not None:
+                entry["reg_iou"] = quality[local[:options.k_reg]].tolist()
+            counterfactual = high[:options.k_reg]
         else:
             reg_indices = _stable_rank(low, coverage, distance, keys)[:options.k_reg]
             counterfactual = high[:options.k_reg]
