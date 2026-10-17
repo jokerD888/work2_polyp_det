@@ -72,7 +72,11 @@ def main():
     # Batch size is a memory-bound forward choice, not an optimization batch.
     # Mapping every selected image once fixes augmentation independently of it.
     entry = experiment["dataset"]["train"]
+    # dataset_name mirrors the formal train loader: it remaps category_id=1 to
+    # contiguous 0. Without it, gt labels exceed num_classes=1 and the DN label
+    # embedding raises a device-side assert on the real forward.
     records = load_coco_json(entry["annotations"], entry["image_root"],
+                             "scda_boxgate_calibration_train",
                              extra_annotation_keys=["id", "scda_reliable"])
     if args.samples > len(records):
         raise ValueError("Requested sample count exceeds training images")
