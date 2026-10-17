@@ -1,0 +1,12 @@
+name: scda_v3a_kvasir_b16_lr1e4
+base_experiment: base_kvasir.yaml
+v3:
+  enabled: true
+  assignment_policy: legacy_quality_iou
+  lambda_aux: 0.05
+  tau_reg: 0.25
+  k_reg: 4
+  mask_policy: single_instance
+  diagnostics: true
+  target_cells: 8.0
+  preferred_levels: 2
