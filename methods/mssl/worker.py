@@ -116,6 +116,9 @@ def worker_main(args):
                 from .gradient_probe import GradientProbe
                 probe = GradientProbe(self.model, Path(args.output) / "gradient_probes.jsonl",
                                       experiment["gradient_probe_period"])
+            if experiment.get("quality_alignment", {}).get("enabled", False):
+                from methods.quality_alignment.probe import QualityGradientProbe
+                probe = QualityGradientProbe(self.model, Path(args.output) / "quality_gradient_probes.jsonl", 275)
             self._trainer = AccumulatingAMPTrainer(self.model, self.data_loader, self.optimizer, steps, probe)
 
         @classmethod
@@ -135,8 +138,9 @@ def worker_main(args):
 
     if comm.is_main_process():
         write_json(Path(args.output) / "method.json", {
-            "method": "CIoU-Replace" if "box_regression" in experiment else "MSSL V1",
-            "options": experiment.get("box_regression", experiment["mssl"]),
+            "method": ("MSSL V1 + IA-BCE-Final" if experiment["mssl"]["enabled"] else "IA-BCE-Final") if "quality_alignment" in experiment else ("CIoU-Replace" if "box_regression" in experiment else "MSSL V1"),
+            "options": experiment.get("quality_alignment", experiment.get("box_regression", experiment["mssl"])),
+            "mssl_options": experiment["mssl"],
             "effective_batch": cfg.SOLVER.IMS_PER_BATCH,
             "micro_batch": experiment["runtime"]["micro_batch"],
             "accumulation_steps": cfg.SOLVER.IMS_PER_BATCH // experiment["runtime"]["micro_batch"],

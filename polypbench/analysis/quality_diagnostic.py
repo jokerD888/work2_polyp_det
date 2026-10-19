@@ -286,7 +286,7 @@ def run(output):
 def report(out, result):
     c = result["cohort"]
     lines = ["# Kvasir Val：质量错排、Query筛选与GT辅助排序诊断", "",
-             f"只读重放Baseline/MSSL各{c['images']}张图像；{c['gt']}个GT，{c['multi_gt_images']}张多GT图，{c['negative_images']}张纯负图。",
+             f"只读重放模型 {', '.join(result['models'])}，各{c['images']}张图像；{c['gt']}个GT，{c['multi_gt_images']}张多GT图，{c['negative_images']}张纯负图。",
              "源域Val已参与选权，本报告是探索性开发诊断；没有训练、更新模型、目标域分析或Quality Head。", "",
              "## Q1：同一GT的高IoU候选是否被低质量候选压过？", "",
              "主诊断：仅纳入IoU≥0.5且只兼容一个GT的Top100候选；多GT歧义候选不硬分组。",

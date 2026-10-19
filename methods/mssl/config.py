@@ -71,6 +71,12 @@ def build_cfg(experiment, output, device=None):
         from methods.ciou_replace.model import CIoUReplaceMaskDINO
         validate(experiment)
         cfg.MODEL.META_ARCHITECTURE = "CIoUReplaceMaskDINO"
+    if "quality_alignment" in experiment:
+        from methods.quality_alignment.config import validate
+        from methods.quality_alignment.model import QualityAlignMaskDINO
+        validate(experiment)
+        cfg.MODEL.META_ARCHITECTURE = "QualityAlignMaskDINO"
+        cfg.MODEL.QUALITY_ALIGNMENT_ENABLED = experiment["quality_alignment"]["enabled"]
     cfg.DATASETS.TRAIN, cfg.DATASETS.TEST = ("bench_train",), ("bench_val",)
     cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = experiment["model"]["num_classes"]
     cfg.MODEL.WEIGHTS = experiment["model"]["weights"]

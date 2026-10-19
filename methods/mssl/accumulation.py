@@ -25,6 +25,7 @@ class AccumulatingAMPTrainer(AMPTrainer):
         data_time = 0.
         eligible = 0
         side_sums = [0.] * 4
+        quality_means = {}
         for micro_index in range(self.accumulation_steps):
             start = time.perf_counter()
             data = next(self._data_loader_iter)
@@ -43,6 +44,8 @@ class AccumulatingAMPTrainer(AMPTrainer):
             if diagnostics:
                 eligible += diagnostics["eligible"]
                 side_sums = [a+b for a,b in zip(side_sums,diagnostics["side_loss"])]
+            for key, value in getattr(self.model.criterion, "last_q_stats", {}).items():
+                quality_means[key] = quality_means.get(key, 0.) + value / self.accumulation_steps
             for key, value in loss_dict.items():
                 means[key] = means.get(key, 0.) + value.detach() / self.accumulation_steps
         self.after_backward()
@@ -56,6 +59,8 @@ class AccumulatingAMPTrainer(AMPTrainer):
         storage.put_scalar("amp/loss_scale", self.grad_scaler.get_scale(), smoothing_hint=False)
         storage.put_scalar("amp/skipped_step", int(skipped), smoothing_hint=False)
         storage.put_scalar("optimizer/successful_updates", self.successful_updates, smoothing_hint=False)
+        for key, value in quality_means.items():
+            storage.put_scalar("quality/" + key, value)
         if hasattr(self.model.criterion,"last_diagnostics"):
             storage.put_scalar("mssl/eligible_per_microbatch",eligible/self.accumulation_steps)
             for name,value in zip(("left","top","right","bottom"),side_sums):
