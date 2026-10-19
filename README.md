@@ -2,6 +2,8 @@
 
 **2026-10-20：MSSL V1及五组实验已完成并归档。** 当前统一入口为[方法冻结与五组证据索引](docs/mssl_v1_release_20261020.md)，包含实际训练源码包、配置、选定权重SHA256、全部指标和验收记录。CIoU链路13阶段全部通过；PolypsSet/PolypDB尚未评估，独立外测与多Seed尚未完成。
 
+2026-10-20补充：[源域质量错排与Query筛选诊断](docs/results/mssl_quality_source_20261020.md)已完成。两组全部240张原生预测重放一致；MSSL的300→100覆盖无损失，同GT候选仍有有限质量错排。建议下一步设计一个保留一对一语义的成熟最终Box质量对齐对照，尚未开发Quality Head或启动新训练。
+
 跨仓库目标检测实验入口。目前已接入官方 MaskDINO，统一配置、运行记录、COCO bbox 评测和结果汇总。
 
 首轮使用 Kvasir-SEG 官方 **880/120 train/val** 划分，以及原始 `kavsir_bboxes.json` 的 **1,071 个框**（train 941，val 130）。框仅转换为 COCO xywh 格式，保留原始坐标与数量；训练时不从 mask 重算 bbox 标签。val 用于权重选择和 val AP 汇报。

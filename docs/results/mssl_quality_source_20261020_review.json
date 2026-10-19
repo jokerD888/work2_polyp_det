@@ -1,0 +1,35 @@
+{
+  "scope": "Post-result verification only; no change to frozen primary rules or scores",
+  "fixed_box_and_score_checks": {
+    "baseline": "passed: all variants retain exact boxes/counts; both permutations retain per-image score multisets",
+    "mssl": "passed: all variants retain exact boxes/counts; both permutations retain per-image score multisets"
+  },
+  "global_first100_official_matches": {
+    "baseline/native": {
+      "predictions": 100,
+      "tp_at_075": 88,
+      "tp_at_090": 55
+    },
+    "baseline/direct_gt_iou": {
+      "predictions": 100,
+      "tp_at_075": 20,
+      "tp_at_090": 20
+    },
+    "mssl/native": {
+      "predictions": 100,
+      "tp_at_075": 91,
+      "tp_at_090": 60
+    },
+    "mssl/direct_gt_iou": {
+      "predictions": 100,
+      "tp_at_075": 18,
+      "tp_at_090": 18
+    }
+  },
+  "original_inputs_and_study_source_unchanged": true,
+  "synthetic_pure_iou_duplicate_counterexample": {
+    "native_AP": 1.0,
+    "direct_iou_AP": 0.5949594959495947,
+    "passed": true
+  }
+}
