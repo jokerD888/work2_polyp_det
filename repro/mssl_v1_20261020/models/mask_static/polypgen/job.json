@@ -1,0 +1,9 @@
+{
+  "experiment": "/mnt/d/code/work2_polypy_det/runs/mssl-mask-static-s42-20261018T114010Z/experiment.json",
+  "checkpoint": "/mnt/d/code/work2_polypy_det/runs/mssl-mask-static-s42-20261018T114010Z/train/model_best.pth",
+  "checkpoint_sha256": "63170268153229b4876bfcdfe0f9949a5ce49e5ab96bacccca493477b0915ead",
+  "output": "/mnt/d/code/work2_polypy_det/runs/mssl-attribution-20261018-r2/external/mask_static",
+  "image_root": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3",
+  "all_images": "/mnt/d/code/work2_polypy_det/data/polypgen_zeroshot_stills_v2/all_stills.images.json",
+  "source_predictions": "/mnt/d/code/work2_polypy_det/runs/mssl-mask-static-s42-20261018T114010Z/predict_val/predictions.bbox.json"
+}

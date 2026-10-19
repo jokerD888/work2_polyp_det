@@ -1,0 +1,14 @@
+{
+  "path": "/mnt/d/code/work2_polypy_det/runs/ciou-replace-s42-20261019T073936Z/train/model_best.pth",
+  "sha256": "0e59311fd3c4d36b05c930ee027e9c80ccc52ddd08af7e83d4a69faab9562836",
+  "selection": "best_val_ap",
+  "validation": {
+    "file": "model_best.pth",
+    "split": "val",
+    "metric": "bbox/AP",
+    "metric_percent": 65.58239332095039,
+    "iteration": 2750,
+    "tie_break": "earliest",
+    "rule": "maximum validation AP50:95"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "path": "/mnt/d/code/work2_polypy_det/runs/mssl-mask-static-s42-20261018T114010Z/train/model_best.pth",
+  "sha256": "63170268153229b4876bfcdfe0f9949a5ce49e5ab96bacccca493477b0915ead",
+  "selection": "best_val_ap"
+}

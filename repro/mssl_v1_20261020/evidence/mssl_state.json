@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "pipeline_pid": 3833,
+  "completed": [
+    "smoke_train_reused",
+    "smoke_predict_reused",
+    "smoke_health_gate",
+    "method_train",
+    "method_predict",
+    "control_train",
+    "control_predict"
+  ],
+  "updated_at": "2026-10-18T08:04:12.980899+00:00",
+  "stage": "control_predict",
+  "run_id": "maskdino-mssl-control-s42-20261018T025946",
+  "command": [
+    "/home/joker/.venvs/polypbench-maskdino/bin/python",
+    "-m",
+    "methods.mssl",
+    "predict",
+    "--config",
+    "/mnt/d/code/work2_polypy_det/runs/mssl-implementation-20261018/campaign-r2/source/configs/formal.yaml",
+    "--run-id",
+    "maskdino-mssl-control-s42-20261018T025946",
+    "--baseline"
+  ],
+  "child_pid": 1730152
+}

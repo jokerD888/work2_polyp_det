@@ -1,0 +1,5 @@
+{
+  "path": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/train/model_best.pth",
+  "sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+  "selection": "best_val_ap"
+}

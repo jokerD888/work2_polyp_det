@@ -1,0 +1,52 @@
+{
+  "metrics": {
+    "AP": 0.6597771148891036,
+    "AP50": 0.8548694102221626,
+    "AP75": 0.7466696946132642,
+    "AP_small": 0.0,
+    "AP_medium": 0.6169424179260031,
+    "AP_large": 0.6836006871175537,
+    "AR1": 0.6784615384615384,
+    "AR10": 0.7507692307692309,
+    "AR100": 0.7715384615384615,
+    "AR_small": 0.0,
+    "AR_medium": 0.711111111111111,
+    "AR_large": 0.7957627118644068
+  },
+  "units": "fraction_0_to_1",
+  "protocol": {
+    "iou_type": "bbox",
+    "iou_thresholds": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "max_dets": [
+      1,
+      10,
+      100
+    ],
+    "all_gt_images": true,
+    "score_filter": null,
+    "pycocotools": "2.0.11"
+  },
+  "images": 120,
+  "predictions": 12000,
+  "annotations_sha256": "db96be0dca4e0a4cebb308f096a9f67eaf5a6349a0fabfe01f5107dc43aed929",
+  "predictions_sha256": "9e894c237d57e993a14dad365e1ad61740a3ceb62bef29bcb7386fe48851bc7c",
+  "run_id": "mssl-mask-static-s42-20261018T114010Z",
+  "name": "mssl_mask_static_official50",
+  "seed": 42,
+  "split": "val",
+  "supervision": "bbox+mask",
+  "purpose": "prespecified_mechanism_attribution_no_parameter_search",
+  "checkpoint_sha256": "63170268153229b4876bfcdfe0f9949a5ce49e5ab96bacccca493477b0915ead",
+  "checkpoint_selection": "best_val_ap"
+}

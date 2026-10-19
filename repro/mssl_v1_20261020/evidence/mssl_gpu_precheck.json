@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "checks": {
+    "shared_mapper_and_original_multi_box_policy": {
+      "passed": true,
+      "images": 15
+    },
+    "native_forward_and_inference_inherited": true,
+    "native_loss_and_rng_parity": {
+      "passed": true,
+      "native_losses": 105
+    },
+    "direct_box_and_native_head_gradient": {
+      "passed": true,
+      "bbox_head_grad_norms": [
+        0.23910905420780182
+      ],
+      "loss_mssl": 0.0030934112146496773,
+      "eligible": 1
+    },
+    "full_amp_backward_optimizer_step": true,
+    "image_only_inference_unchanged": true
+  },
+  "gpu": "NVIDIA GeForce RTX 5070",
+  "scope": "real raw-mask mapper, native loss parity, MSSL gradient, full GPU backward and image-only inference",
+  "amp_scaling_attempts": [
+    {
+      "scale": 65536.0,
+      "nonfinite_parameters": 65,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 32768.0,
+      "nonfinite_parameters": 61,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 16384.0,
+      "nonfinite_parameters": 58,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 8192.0,
+      "nonfinite_parameters": 56,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 4096.0,
+      "nonfinite_parameters": 54,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 2048.0,
+      "nonfinite_parameters": 47,
+      "examples": [
+        "backbone.stem.conv1.weight",
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight"
+      ]
+    },
+    {
+      "scale": 1024.0,
+      "nonfinite_parameters": 26,
+      "examples": [
+        "backbone.res2.0.shortcut.weight",
+        "backbone.res2.0.conv1.weight",
+        "backbone.res2.0.conv2.weight"
+      ]
+    },
+    {
+      "scale": 512.0,
+      "nonfinite_parameters": 5,
+      "examples": [
+        "backbone.res2.0.conv1.weight",
+        "backbone.res2.0.conv2.weight",
+        "backbone.res2.0.conv3.weight"
+      ]
+    },
+    {
+      "scale": 256.0,
+      "nonfinite_parameters": 2,
+      "examples": [
+        "sem_seg_head.predictor.class_embed.weight",
+        "sem_seg_head.predictor.class_embed.bias"
+      ]
+    },
+    {
+      "scale": 128.0,
+      "nonfinite_parameters": 1,
+      "examples": [
+        "sem_seg_head.predictor.class_embed.weight"
+      ]
+    },
+    {
+      "scale": 64.0,
+      "nonfinite_parameters": 0,
+      "examples": []
+    }
+  ],
+  "peak_training_allocated_mib": 6143.78466796875
+}

@@ -1,0 +1,2442 @@
+{
+  "schema_version": 1,
+  "release": "MSSL V1 / Seed42 / existing five-model evidence",
+  "created_at_utc": "2026-10-19T17:26:12.401697+00:00",
+  "base_git_commit": "9f839f36fc059d251a9ac042f910cdd35a2b0410",
+  "scope": "Retrospective evidence freeze; no training, inference, tuning or new statistical claims.",
+  "units": "AP fractions in JSON; multiply by 100 for AP points.",
+  "source_bundles": {
+    "initial": {
+      "archive": "sources/initial.zip",
+      "source_root": "runs/mssl-implementation-20261018/campaign-r2/source",
+      "files": {
+        "configs/formal.yaml": "62211ccd7feffd523fc098f956719db52ad831605a3be9185d594d3b17aec960",
+        "configs/smoke.yaml": "d947f28ea31d6d209851e981ae65f09b43a9d670516045a6b48cd177ff37b30f",
+        "methods/__init__.py": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+        "methods/mssl/acceptance.py": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+        "methods/mssl/accumulation.py": "12cb79aa46b8e037480e8b5e0927cd3b258b601aadca87e0f297c5649db77ae1",
+        "methods/mssl/config.py": "eb69a5d285a80a35c350c4f0bf6257e73fabdbdeaad734203f1c0d645eec697a",
+        "methods/mssl/data.py": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+        "methods/mssl/launch.py": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+        "methods/mssl/loss.py": "c7558e18d6156c674699a735974b606ef4cad37412e7181f77a769de6a751159",
+        "methods/mssl/model.py": "3c3af7d761c0e816f75cd7610676df8239277d836976e97b63abad3ee60d1e81",
+        "methods/mssl/pipeline.py": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+        "methods/mssl/precheck.py": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+        "methods/mssl/README.md": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+        "methods/mssl/run.py": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+        "methods/mssl/worker.py": "90bfd99b8451a27f36ac6b4f582a3c070eb0dad012922fa10a669708114cc623",
+        "methods/mssl/wsl_entry.sh": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+        "methods/mssl/__init__.py": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+        "methods/mssl/__main__.py": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+        "methods/mssl/configs/kvasir_official50.yaml": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+        "methods/mssl/tests/test_acceptance.py": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+        "methods/mssl/tests/test_accumulation.py": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+        "methods/mssl/tests/test_loss.py": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+        "methods/mssl/tests/test_native_integration.py": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+        "methods/mssl/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "polypbench/cli.py": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+        "polypbench/config.py": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+        "polypbench/data.py": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+        "polypbench/evaluation.py": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+        "polypbench/io.py": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+        "polypbench/kvasir.py": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+        "polypbench/preview.py": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+        "polypbench/runner.py": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+        "polypbench/toy.py": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+        "polypbench/__init__.py": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+        "polypbench/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+        "polypbench/adapters/bitmask_mapper.py": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+        "polypbench/adapters/instance_lsj.py": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+        "polypbench/adapters/maskdino_worker.py": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+        "polypbench/adapters/__init__.py": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e"
+      }
+    },
+    "attribution": {
+      "archive": "sources/attribution.zip",
+      "source_root": "runs/mssl-attribution-20261018-r2/source",
+      "files": {
+        "configs/box_cdf.yaml": "eff69b11495390f139af5e8af62885c5ebc314575de2427a35a6ba218bfaafe1",
+        "configs/mask_static.yaml": "6bf814d6212383a54bb35ba9a48fcff5668a170171a9788cd367fe34df2df061",
+        "methods/__init__.py": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+        "methods/mssl/acceptance.py": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+        "methods/mssl/accumulation.py": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+        "methods/mssl/attribution_campaign.py": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+        "methods/mssl/attribution_report.py": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+        "methods/mssl/config.py": "412c451bc0b6bb94cf8a625b7e2030667b24f6bc341d2ab3d1161d27d57e1099",
+        "methods/mssl/curves.py": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+        "methods/mssl/data.py": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+        "methods/mssl/diagnostics.py": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+        "methods/mssl/gradient_probe.py": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+        "methods/mssl/launch.py": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+        "methods/mssl/loss.py": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+        "methods/mssl/model.py": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+        "methods/mssl/pipeline.py": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+        "methods/mssl/precheck.py": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+        "methods/mssl/README.md": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+        "methods/mssl/replay.py": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+        "methods/mssl/run.py": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+        "methods/mssl/worker.py": "3424df667f72dfce5e2a1f74d8d14356d441c05059aaa9d47ecfdd8b25b0134c",
+        "methods/mssl/wsl_entry.sh": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+        "methods/mssl/__init__.py": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+        "methods/mssl/__main__.py": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+        "methods/mssl/configs/kvasir_official50.yaml": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+        "methods/mssl/tests/test_acceptance.py": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+        "methods/mssl/tests/test_accumulation.py": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+        "methods/mssl/tests/test_attribution.py": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+        "methods/mssl/tests/test_diagnostics.py": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+        "methods/mssl/tests/test_loss.py": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+        "methods/mssl/tests/test_native_integration.py": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+        "methods/mssl/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "polypbench/cli.py": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+        "polypbench/config.py": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+        "polypbench/data.py": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+        "polypbench/evaluation.py": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+        "polypbench/io.py": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+        "polypbench/kvasir.py": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+        "polypbench/polypgen.py": "d96c29fa5717707094a747711a6f153b211192605f2e326acbf61ce20640e929",
+        "polypbench/preview.py": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+        "polypbench/runner.py": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+        "polypbench/toy.py": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+        "polypbench/zeroshot.py": "e6606e486b10e7feab2bee3398a75b30d65acfd1248069f60042602129708f3a",
+        "polypbench/__init__.py": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+        "polypbench/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+        "polypbench/adapters/bitmask_mapper.py": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+        "polypbench/adapters/instance_lsj.py": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+        "polypbench/adapters/maskdino_worker.py": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+        "polypbench/adapters/zeroshot_worker.py": "6bcfd441352962a4c77b8ae155af03212746e96a15dae106311274e88a8cd3cf",
+        "polypbench/adapters/__init__.py": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e"
+      }
+    },
+    "ciou": {
+      "archive": "sources/ciou.zip",
+      "source_root": "runs/ciou-competition-20261019/source",
+      "files": {
+        "configs/formal.yaml": "faf169ac389caffb0b0721e34f091ea0490412812a39704e567c9830e0ef4395",
+        "configs/smoke.yaml": "eb96214ff57d4a6229ac9fad4557054ebf3f77ab899b42a1c5f15d08f680d69f",
+        "methods/__init__.py": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+        "methods/ciou_replace/audit.py": "549067f6e7cc8fae0d095f5d4b03f4eb357f976c82a1b3e425688f61cff1c80f",
+        "methods/ciou_replace/campaign.py": "b15cdc214891b15d085100e92e95ab4e15bdf79f6dddf733e03ce4c81eb28061",
+        "methods/ciou_replace/comparison.py": "983e33382edfdd5c15e4230c89fff11dbfa64edff803ef466bbfbdbc9b328808",
+        "methods/ciou_replace/config.py": "cf1b8aee38ddd0248f0e54fd4e97f938e7c304d36f73aea9b229f95bd90d6f87",
+        "methods/ciou_replace/loss.py": "c307dd4189cc72a0a39a38dbf37283582ac02a03e492a21ba5c4197a42be23d6",
+        "methods/ciou_replace/model.py": "765f5724f3b3aeee0f8f9561089b173480474e42bd5ca57f09129e3eb5c50bef",
+        "methods/ciou_replace/precheck.py": "d787c4b56c32b6473d272e28f0eb4739232cad385db58460338e64c21210b629",
+        "methods/ciou_replace/README.md": "a4d2dfbe2c50dedf77dd1cd9fe79b8e649d7d0417283d815e25f870b3e24ae65",
+        "methods/ciou_replace/__init__.py": "0205926202ef9a166fac9ea1f3229da5b26b46653ae7df8a8acddaddee591138",
+        "methods/ciou_replace/__main__.py": "66ad1382f5cac5d8c07422db3048f009660b9f19362905459643649e8c7e8357",
+        "methods/ciou_replace/configs/kvasir_official50.yaml": "61aa130773f68f5ad63aa864779c0ae64568184f37dcc84a8e467dead4e37754",
+        "methods/ciou_replace/tests/test_ciou.py": "cd99173bbeb5776c764b7cc4dcefeb8170e83cfb335f70e69689d8e5269f51ba",
+        "methods/ciou_replace/tests/test_reused_bootstrap.py": "f92d69e35a53280dd14a8cc3c126f0663e7e5ce6708faf0826aecb73527f5b4a",
+        "methods/mssl/acceptance.py": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+        "methods/mssl/accumulation.py": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+        "methods/mssl/attribution_campaign.py": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+        "methods/mssl/attribution_report.py": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+        "methods/mssl/config.py": "9328b6d71c3f020736285652bdb30149931a2514c8c24fc87f017add0b4c039e",
+        "methods/mssl/curves.py": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+        "methods/mssl/data.py": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+        "methods/mssl/diagnostics.py": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+        "methods/mssl/gradient_probe.py": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+        "methods/mssl/launch.py": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+        "methods/mssl/loss.py": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+        "methods/mssl/model.py": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+        "methods/mssl/pipeline.py": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+        "methods/mssl/precheck.py": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+        "methods/mssl/README.md": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+        "methods/mssl/replay.py": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+        "methods/mssl/run.py": "d506b7b108350e4a7b655562b0d8071b17ecf36febec6f7977dccb540b37ade9",
+        "methods/mssl/worker.py": "b5658e9b295c6f71a7ed25ec9ae452b5d2a7ab43c18e0f6318d819436526b6ad",
+        "methods/mssl/wsl_entry.sh": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+        "methods/mssl/__init__.py": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+        "methods/mssl/__main__.py": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+        "methods/mssl/configs/kvasir_official50.yaml": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+        "methods/mssl/tests/test_acceptance.py": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+        "methods/mssl/tests/test_accumulation.py": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+        "methods/mssl/tests/test_attribution.py": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+        "methods/mssl/tests/test_diagnostics.py": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+        "methods/mssl/tests/test_loss.py": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+        "methods/mssl/tests/test_native_integration.py": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+        "methods/mssl/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "polypbench/cli.py": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+        "polypbench/config.py": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+        "polypbench/data.py": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+        "polypbench/evaluation.py": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+        "polypbench/io.py": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+        "polypbench/kvasir.py": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+        "polypbench/polypgen.py": "d96c29fa5717707094a747711a6f153b211192605f2e326acbf61ce20640e929",
+        "polypbench/preview.py": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+        "polypbench/runner.py": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+        "polypbench/toy.py": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+        "polypbench/zeroshot.py": "e6606e486b10e7feab2bee3398a75b30d65acfd1248069f60042602129708f3a",
+        "polypbench/__init__.py": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+        "polypbench/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+        "polypbench/adapters/bitmask_mapper.py": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+        "polypbench/adapters/instance_lsj.py": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+        "polypbench/adapters/maskdino_worker.py": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+        "polypbench/adapters/zeroshot_worker.py": "6bcfd441352962a4c77b8ae155af03212746e96a15dae106311274e88a8cd3cf",
+        "polypbench/adapters/__init__.py": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e",
+        "polypbench/analysis/behavior.py": "9eee61413c1d6bd70462b96b88ccce9303e86bd75e2211580350562cae74fede",
+        "polypbench/analysis/coco_cache.py": "28e2975e6d9d9021e34a57890d72ee7e42651ee2ffa65f5c83822705f21ced7e",
+        "polypbench/analysis/matching.py": "e044417d350b1f5a4d6338fda68d74db582e759ab5458b501581478f93d210e1",
+        "polypbench/analysis/report.py": "8dc711d490b841f2392741ae7840a8dc677662eaa4460aba830384693ade85f5",
+        "polypbench/analysis/score_effects.py": "c7fde0da23724c8cae0773b6b0ac89c4f88ef5ae18bfed339c7def2aad9c2b23",
+        "polypbench/analysis/score_replay.py": "7a904d9797c08740e47e7b898a27fc52c03a9d6facd31ab66202115293211b99",
+        "polypbench/analysis/study.py": "45b16d184879676e4aed7b6353af7be08de24aea7e438c71848e122a2361015c",
+        "polypbench/analysis/uncertainty.py": "8e9f836fa8dbb62e6cda8354bc8ca807ab01b978bc057ea18f534a7f95c09465",
+        "polypbench/analysis/verify_math.py": "e29c1209a91208d2040acc79f1eebc24d5d7fb45ccdfaac937352be3ce38e8a9",
+        "polypbench/analysis/__init__.py": "04e479f9a2f5588e1ccffd38d4bc0d47590681b83678b095293c5ffb7b61f5ef",
+        "tests/test_mssl_analysis.py": "b3fc0f2d9675ccd408e83f42ad00f96bc7f223bf55b91710d092dd31c6df0b15"
+      }
+    }
+  },
+  "models": {
+    "baseline": {
+      "run_id": "maskdino-mssl-control-s42-20261018T025946",
+      "source_bundle": "initial",
+      "checkpoint": "runs/maskdino-mssl-control-s42-20261018T025946/train/model_best.pth",
+      "checkpoint_sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+      "selected_iteration": 2750,
+      "selection_rule": "maximum validation AP50:95",
+      "source_predictions": "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/predictions.bbox.json",
+      "polypgen_predictions": "runs/polypgen-zeroshot-20261018/baseline/pooled/predictions.bbox.json",
+      "source_fraction": {
+        "AP": 0.6607165472284102,
+        "AP75": 0.7318361721594686,
+        "AP80": 0.6800331757183906,
+        "AP90": 0.3457942820481729,
+        "AP95": 0.12898303608620842,
+        "AP80_95_mean": 0.42476972966394755,
+        "AP50": 0.8612914401364397
+      },
+      "polypgen_fraction": {
+        "AP": 0.4881831810585239,
+        "AP75": 0.5300571457737249,
+        "AP80": 0.4779723395620552,
+        "AP90": 0.26994228547259896,
+        "AP95": 0.0705657327585656,
+        "AP80_95_mean": 0.3057063725407222,
+        "AP50": 0.672807834207443
+      },
+      "training_accounting": {
+        "amp/loss_scale": 128.0,
+        "amp/skipped_step": 0.0,
+        "iteration": 2749,
+        "optimizer/successful_updates": 2740.0
+      }
+    },
+    "mssl": {
+      "run_id": "mssl-official50-s42-20261018T025946",
+      "source_bundle": "initial",
+      "checkpoint": "runs/mssl-official50-s42-20261018T025946/train/model_best.pth",
+      "checkpoint_sha256": "c0ea44a7fdfd0e673d32729b128cbbf8916c313b206e5ab334335331c52a0ae0",
+      "selected_iteration": 2750,
+      "selection_rule": "maximum validation AP50:95",
+      "source_predictions": "runs/mssl-official50-s42-20261018T025946/predict_val/predictions.bbox.json",
+      "polypgen_predictions": "runs/polypgen-zeroshot-20261018/mssl/pooled/predictions.bbox.json",
+      "source_fraction": {
+        "AP": 0.6627293052070842,
+        "AP75": 0.7585975989181565,
+        "AP80": 0.6988703101690126,
+        "AP90": 0.37120613506018885,
+        "AP95": 0.0809058161917704,
+        "AP80_95_mean": 0.420064776936324,
+        "AP50": 0.8653125003175908
+      },
+      "polypgen_fraction": {
+        "AP": 0.49751293225246906,
+        "AP75": 0.5356594692891469,
+        "AP80": 0.4900486911471307,
+        "AP90": 0.2980527514578245,
+        "AP95": 0.09712494197651754,
+        "AP80_95_mean": 0.32565045328520764,
+        "AP50": 0.675251727307743
+      },
+      "training_accounting": {
+        "amp/loss_scale": 128.0,
+        "amp/skipped_step": 0.0,
+        "iteration": 2749,
+        "optimizer/successful_updates": 2740.0
+      }
+    },
+    "box_cdf": {
+      "run_id": "mssl-box-cdf-s42-20261018T114010Z",
+      "source_bundle": "attribution",
+      "checkpoint": "runs/mssl-box-cdf-s42-20261018T114010Z/train/model_best.pth",
+      "checkpoint_sha256": "fe9777df01ba670a8b27fa16b4a82234aa209d18cc69ac63a02c26188fac4a5e",
+      "selected_iteration": 2750,
+      "selection_rule": "maximum validation AP50:95",
+      "source_predictions": "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/predictions.bbox.json",
+      "polypgen_predictions": "runs/mssl-attribution-20261018-r2/external/box_cdf/pooled/predictions.bbox.json",
+      "source_fraction": {
+        "AP": 0.6572906038669013,
+        "AP75": 0.7349689661798544,
+        "AP80": 0.6768636778548182,
+        "AP90": 0.42638453036568535,
+        "AP95": 0.1326247022445599,
+        "AP80_95_mean": 0.447613472193569,
+        "AP50": 0.8342040322464997
+      },
+      "polypgen_fraction": {
+        "AP": 0.49111932174690176,
+        "AP75": 0.5375052998823038,
+        "AP80": 0.486019544288183,
+        "AP90": 0.2797466176925091,
+        "AP95": 0.07908656032250638,
+        "AP80_95_mean": 0.31392508377150774,
+        "AP50": 0.6708055657706105
+      },
+      "training_accounting": {
+        "amp/loss_scale": 128.0,
+        "amp/skipped_step": 0.0,
+        "iteration": 2749,
+        "optimizer/successful_updates": 2740.0
+      }
+    },
+    "mask_static": {
+      "run_id": "mssl-mask-static-s42-20261018T114010Z",
+      "source_bundle": "attribution",
+      "checkpoint": "runs/mssl-mask-static-s42-20261018T114010Z/train/model_best.pth",
+      "checkpoint_sha256": "63170268153229b4876bfcdfe0f9949a5ce49e5ab96bacccca493477b0915ead",
+      "selected_iteration": 2750,
+      "selection_rule": "maximum validation AP50:95",
+      "source_predictions": "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/predictions.bbox.json",
+      "polypgen_predictions": "runs/mssl-attribution-20261018-r2/external/mask_static/pooled/predictions.bbox.json",
+      "source_fraction": {
+        "AP": 0.6597771148891037,
+        "AP75": 0.7466696946132642,
+        "AP80": 0.6853817547166831,
+        "AP90": 0.3822017740980665,
+        "AP95": 0.06325252162642123,
+        "AP80_95_mean": 0.4213622602724145,
+        "AP50": 0.8548694102221626
+      },
+      "polypgen_fraction": {
+        "AP": 0.4871010175547747,
+        "AP75": 0.525212778893259,
+        "AP80": 0.47297899394796117,
+        "AP90": 0.2732196617972648,
+        "AP95": 0.08902897569450567,
+        "AP80_95_mean": 0.30675399134541137,
+        "AP50": 0.669691903042286
+      },
+      "training_accounting": {
+        "amp/loss_scale": 128.0,
+        "amp/skipped_step": 0.0,
+        "iteration": 2749,
+        "optimizer/successful_updates": 2740.0
+      }
+    },
+    "ciou_replace": {
+      "run_id": "ciou-replace-s42-20261019T073936Z",
+      "source_bundle": "ciou",
+      "checkpoint": "runs/ciou-replace-s42-20261019T073936Z/train/model_best.pth",
+      "checkpoint_sha256": "0e59311fd3c4d36b05c930ee027e9c80ccc52ddd08af7e83d4a69faab9562836",
+      "selected_iteration": 2750,
+      "selection_rule": "maximum validation AP50:95",
+      "source_predictions": "runs/ciou-replace-s42-20261019T073936Z/predict_val/predictions.bbox.json",
+      "polypgen_predictions": "runs/ciou-competition-20261019/external/pooled/predictions.bbox.json",
+      "source_fraction": {
+        "AP": 0.6558239332095039,
+        "AP75": 0.7275147039679969,
+        "AP80": 0.6983746729793394,
+        "AP90": 0.4485210306498713,
+        "AP95": 0.11607403838564902,
+        "AP80_95_mean": 0.45383112732088626,
+        "AP50": 0.8214521874063602
+      },
+      "polypgen_fraction": {
+        "AP": 0.4861485844591969,
+        "AP75": 0.5304390844309155,
+        "AP80": 0.48492372136732204,
+        "AP90": 0.27448701315686014,
+        "AP95": 0.08421171588138776,
+        "AP80_95_mean": 0.31228770731350625,
+        "AP50": 0.6613318808403154
+      },
+      "training_accounting": {
+        "amp/loss_scale": 128.0,
+        "amp/skipped_step": 0.0,
+        "iteration": 2749,
+        "optimizer/successful_updates": 2740.0
+      }
+    }
+  },
+  "copied_from": {
+    "protocols/initial.json": "runs/mssl-implementation-20261018/campaign-r2/campaign.json",
+    "protocols/attribution.json": "runs/mssl-attribution-20261018-r2/protocol.json",
+    "protocols/ciou.json": "runs/ciou-competition-20261019/protocol.json",
+    "models/baseline/experiment.json": "runs/maskdino-mssl-control-s42-20261018T025946/experiment.json",
+    "models/baseline/manifest.json": "runs/maskdino-mssl-control-s42-20261018T025946/manifest.json",
+    "models/baseline/adapter_sources.json": "runs/maskdino-mssl-control-s42-20261018T025946/adapter_sources.json",
+    "models/baseline/train/selected_checkpoint.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/selected_checkpoint.json",
+    "models/baseline/train/best_checkpoint.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/best_checkpoint.json",
+    "models/baseline/train/config.yaml": "runs/maskdino-mssl-control-s42-20261018T025946/train/config.yaml",
+    "models/baseline/train/environment.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/environment.json",
+    "models/baseline/train/initialization.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/initialization.json",
+    "models/baseline/train/method.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/method.json",
+    "models/baseline/train/state.json": "runs/maskdino-mssl-control-s42-20261018T025946/train/state.json",
+    "models/baseline/predict_val/config.yaml": "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/config.yaml",
+    "models/baseline/predict_val/metrics.json": "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/metrics.json",
+    "models/baseline/predict_val/checkpoint.json": "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/checkpoint.json",
+    "models/baseline/polypgen/pooled/metrics.json": "runs/polypgen-zeroshot-20261018/baseline/pooled/metrics.json",
+    "models/baseline/polypgen/config.yaml": "runs/polypgen-zeroshot-20261018/baseline/config.yaml",
+    "models/baseline/polypgen/resolved_inference.yaml": "runs/polypgen-zeroshot-20261018/baseline/resolved_inference.yaml",
+    "models/baseline/polypgen/source_prediction_parity.json": "runs/polypgen-zeroshot-20261018/baseline/source_prediction_parity.json",
+    "models/baseline/polypgen/job.json": "runs/polypgen-zeroshot-20261018/baseline/job.json",
+    "models/mssl/experiment.json": "runs/mssl-official50-s42-20261018T025946/experiment.json",
+    "models/mssl/manifest.json": "runs/mssl-official50-s42-20261018T025946/manifest.json",
+    "models/mssl/adapter_sources.json": "runs/mssl-official50-s42-20261018T025946/adapter_sources.json",
+    "models/mssl/train/selected_checkpoint.json": "runs/mssl-official50-s42-20261018T025946/train/selected_checkpoint.json",
+    "models/mssl/train/best_checkpoint.json": "runs/mssl-official50-s42-20261018T025946/train/best_checkpoint.json",
+    "models/mssl/train/config.yaml": "runs/mssl-official50-s42-20261018T025946/train/config.yaml",
+    "models/mssl/train/environment.json": "runs/mssl-official50-s42-20261018T025946/train/environment.json",
+    "models/mssl/train/initialization.json": "runs/mssl-official50-s42-20261018T025946/train/initialization.json",
+    "models/mssl/train/method.json": "runs/mssl-official50-s42-20261018T025946/train/method.json",
+    "models/mssl/train/state.json": "runs/mssl-official50-s42-20261018T025946/train/state.json",
+    "models/mssl/predict_val/config.yaml": "runs/mssl-official50-s42-20261018T025946/predict_val/config.yaml",
+    "models/mssl/predict_val/metrics.json": "runs/mssl-official50-s42-20261018T025946/predict_val/metrics.json",
+    "models/mssl/predict_val/checkpoint.json": "runs/mssl-official50-s42-20261018T025946/predict_val/checkpoint.json",
+    "models/mssl/polypgen/pooled/metrics.json": "runs/polypgen-zeroshot-20261018/mssl/pooled/metrics.json",
+    "models/mssl/polypgen/config.yaml": "runs/polypgen-zeroshot-20261018/mssl/config.yaml",
+    "models/mssl/polypgen/resolved_inference.yaml": "runs/polypgen-zeroshot-20261018/mssl/resolved_inference.yaml",
+    "models/mssl/polypgen/source_prediction_parity.json": "runs/polypgen-zeroshot-20261018/mssl/source_prediction_parity.json",
+    "models/mssl/polypgen/job.json": "runs/polypgen-zeroshot-20261018/mssl/job.json",
+    "models/box_cdf/experiment.json": "runs/mssl-box-cdf-s42-20261018T114010Z/experiment.json",
+    "models/box_cdf/manifest.json": "runs/mssl-box-cdf-s42-20261018T114010Z/manifest.json",
+    "models/box_cdf/adapter_sources.json": "runs/mssl-box-cdf-s42-20261018T114010Z/adapter_sources.json",
+    "models/box_cdf/train/selected_checkpoint.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/selected_checkpoint.json",
+    "models/box_cdf/train/best_checkpoint.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/best_checkpoint.json",
+    "models/box_cdf/train/config.yaml": "runs/mssl-box-cdf-s42-20261018T114010Z/train/config.yaml",
+    "models/box_cdf/train/environment.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/environment.json",
+    "models/box_cdf/train/initialization.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/initialization.json",
+    "models/box_cdf/train/method.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/method.json",
+    "models/box_cdf/train/state.json": "runs/mssl-box-cdf-s42-20261018T114010Z/train/state.json",
+    "models/box_cdf/predict_val/config.yaml": "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/config.yaml",
+    "models/box_cdf/predict_val/metrics.json": "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/metrics.json",
+    "models/box_cdf/predict_val/checkpoint.json": "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/checkpoint.json",
+    "models/box_cdf/polypgen/pooled/metrics.json": "runs/mssl-attribution-20261018-r2/external/box_cdf/pooled/metrics.json",
+    "models/box_cdf/polypgen/config.yaml": "runs/mssl-attribution-20261018-r2/external/box_cdf/config.yaml",
+    "models/box_cdf/polypgen/resolved_inference.yaml": "runs/mssl-attribution-20261018-r2/external/box_cdf/resolved_inference.yaml",
+    "models/box_cdf/polypgen/source_prediction_parity.json": "runs/mssl-attribution-20261018-r2/external/box_cdf/source_prediction_parity.json",
+    "models/box_cdf/polypgen/job.json": "runs/mssl-attribution-20261018-r2/external/box_cdf/job.json",
+    "models/mask_static/experiment.json": "runs/mssl-mask-static-s42-20261018T114010Z/experiment.json",
+    "models/mask_static/manifest.json": "runs/mssl-mask-static-s42-20261018T114010Z/manifest.json",
+    "models/mask_static/adapter_sources.json": "runs/mssl-mask-static-s42-20261018T114010Z/adapter_sources.json",
+    "models/mask_static/train/selected_checkpoint.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/selected_checkpoint.json",
+    "models/mask_static/train/best_checkpoint.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/best_checkpoint.json",
+    "models/mask_static/train/config.yaml": "runs/mssl-mask-static-s42-20261018T114010Z/train/config.yaml",
+    "models/mask_static/train/environment.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/environment.json",
+    "models/mask_static/train/initialization.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/initialization.json",
+    "models/mask_static/train/method.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/method.json",
+    "models/mask_static/train/state.json": "runs/mssl-mask-static-s42-20261018T114010Z/train/state.json",
+    "models/mask_static/predict_val/config.yaml": "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/config.yaml",
+    "models/mask_static/predict_val/metrics.json": "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/metrics.json",
+    "models/mask_static/predict_val/checkpoint.json": "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/checkpoint.json",
+    "models/mask_static/polypgen/pooled/metrics.json": "runs/mssl-attribution-20261018-r2/external/mask_static/pooled/metrics.json",
+    "models/mask_static/polypgen/config.yaml": "runs/mssl-attribution-20261018-r2/external/mask_static/config.yaml",
+    "models/mask_static/polypgen/resolved_inference.yaml": "runs/mssl-attribution-20261018-r2/external/mask_static/resolved_inference.yaml",
+    "models/mask_static/polypgen/source_prediction_parity.json": "runs/mssl-attribution-20261018-r2/external/mask_static/source_prediction_parity.json",
+    "models/mask_static/polypgen/job.json": "runs/mssl-attribution-20261018-r2/external/mask_static/job.json",
+    "models/ciou_replace/experiment.json": "runs/ciou-replace-s42-20261019T073936Z/experiment.json",
+    "models/ciou_replace/manifest.json": "runs/ciou-replace-s42-20261019T073936Z/manifest.json",
+    "models/ciou_replace/adapter_sources.json": "runs/ciou-replace-s42-20261019T073936Z/adapter_sources.json",
+    "models/ciou_replace/train/selected_checkpoint.json": "runs/ciou-replace-s42-20261019T073936Z/train/selected_checkpoint.json",
+    "models/ciou_replace/train/best_checkpoint.json": "runs/ciou-replace-s42-20261019T073936Z/train/best_checkpoint.json",
+    "models/ciou_replace/train/config.yaml": "runs/ciou-replace-s42-20261019T073936Z/train/config.yaml",
+    "models/ciou_replace/train/environment.json": "runs/ciou-replace-s42-20261019T073936Z/train/environment.json",
+    "models/ciou_replace/train/initialization.json": "runs/ciou-replace-s42-20261019T073936Z/train/initialization.json",
+    "models/ciou_replace/train/method.json": "runs/ciou-replace-s42-20261019T073936Z/train/method.json",
+    "models/ciou_replace/train/state.json": "runs/ciou-replace-s42-20261019T073936Z/train/state.json",
+    "models/ciou_replace/predict_val/config.yaml": "runs/ciou-replace-s42-20261019T073936Z/predict_val/config.yaml",
+    "models/ciou_replace/predict_val/metrics.json": "runs/ciou-replace-s42-20261019T073936Z/predict_val/metrics.json",
+    "models/ciou_replace/predict_val/checkpoint.json": "runs/ciou-replace-s42-20261019T073936Z/predict_val/checkpoint.json",
+    "models/ciou_replace/polypgen/pooled/metrics.json": "runs/ciou-competition-20261019/external/pooled/metrics.json",
+    "models/ciou_replace/polypgen/config.yaml": "runs/ciou-competition-20261019/external/config.yaml",
+    "models/ciou_replace/polypgen/resolved_inference.yaml": "runs/ciou-competition-20261019/external/resolved_inference.yaml",
+    "models/ciou_replace/polypgen/source_prediction_parity.json": "runs/ciou-competition-20261019/external/source_prediction_parity.json",
+    "models/ciou_replace/polypgen/job.json": "runs/ciou-competition-20261019/external/job.json",
+    "evidence/comparison.json": "runs/ciou-competition-20261019/five_group_comparison/comparison.json",
+    "evidence/uncertainty.json": "runs/ciou-competition-20261019/five_group_comparison/uncertainty/uncertainty.json",
+    "evidence/old_four_group_parity.json": "runs/ciou-competition-20261019/five_group_comparison/old_four_group_parity.json",
+    "evidence/dependencies.json": "runs/ciou-competition-20261019/dependencies.json",
+    "evidence/ciou_initial_precheck.json": "runs/ciou-competition-20261019/precheck/report.json",
+    "evidence/ciou_checkpoint_replay.json": "runs/ciou-competition-20261019/checkpoint_replay/report.json",
+    "evidence/ciou_config_parity.json": "runs/ciou-competition-20261019/resolved_config_parity.json",
+    "evidence/initialization_parity.json": "runs/ciou-competition-20261019/initialization_parity.json",
+    "evidence/ciou_state.json": "runs/ciou-competition-20261019/state.json",
+    "evidence/mssl_state.json": "runs/mssl-implementation-20261018/campaign-r2/state.json",
+    "evidence/attribution_state.json": "runs/mssl-attribution-20261018-r2/state.json",
+    "evidence/behavior_state.json": "runs/mssl-polypgen-analysis-20261019/state.json",
+    "evidence/mssl_v1_contract.json": "runs/mssl-polypgen-analysis-20261019/mssl_v1_contract.json",
+    "evidence/math_verification.json": "runs/mssl-polypgen-analysis-20261019/math_verification.json",
+    "evidence/group_audit.json": "runs/mssl-polypgen-analysis-20261019/group_audit.json",
+    "evidence/mssl_gpu_precheck.json": "runs/mssl-implementation-20261018/precheck-3/report.json",
+    "evidence/behavior.json": "runs/mssl-polypgen-analysis-20261019/behavior/behavior.json"
+  },
+  "external_files": {
+    "runs/mssl-implementation-20261018/campaign-r2/source/configs/formal.yaml": {
+      "sha256": "62211ccd7feffd523fc098f956719db52ad831605a3be9185d594d3b17aec960",
+      "bytes": 1824
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/configs/smoke.yaml": {
+      "sha256": "d947f28ea31d6d209851e981ae65f09b43a9d670516045a6b48cd177ff37b30f",
+      "bytes": 1721
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/accumulation.py": {
+      "sha256": "12cb79aa46b8e037480e8b5e0927cd3b258b601aadca87e0f297c5649db77ae1",
+      "bytes": 2918
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/config.py": {
+      "sha256": "eb69a5d285a80a35c350c4f0bf6257e73fabdbdeaad734203f1c0d645eec697a",
+      "bytes": 2975
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/loss.py": {
+      "sha256": "c7558e18d6156c674699a735974b606ef4cad37412e7181f77a769de6a751159",
+      "bytes": 3789
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/model.py": {
+      "sha256": "3c3af7d761c0e816f75cd7610676df8239277d836976e97b63abad3ee60d1e81",
+      "bytes": 2701
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/worker.py": {
+      "sha256": "90bfd99b8451a27f36ac6b4f582a3c070eb0dad012922fa10a669708114cc623",
+      "bytes": 9523
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/__init__.py": {
+      "sha256": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+      "bytes": 110
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/__main__.py": {
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "bytes": 48
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/adapters/__init__.py": {
+      "sha256": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e",
+      "bytes": 33
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/adapters/maskdino_worker.py": {
+      "sha256": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+      "bytes": 8323
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/cli.py": {
+      "sha256": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+      "bytes": 7230
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/kvasir.py": {
+      "sha256": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+      "bytes": 10316
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/preview.py": {
+      "sha256": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+      "bytes": 1868
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/runner.py": {
+      "sha256": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+      "bytes": 7796
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/source/polypbench/toy.py": {
+      "sha256": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+      "bytes": 1546
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/campaign.json": {
+      "sha256": "6c8b70dcbd2b5473b1bade74c3c33cdccdb06620ccaae1829fa2e1e335f5c380",
+      "bytes": 4839
+    },
+    "runs/mssl-attribution-20261018-r2/source/configs/box_cdf.yaml": {
+      "sha256": "eff69b11495390f139af5e8af62885c5ebc314575de2427a35a6ba218bfaafe1",
+      "bytes": 1863
+    },
+    "runs/mssl-attribution-20261018-r2/source/configs/mask_static.yaml": {
+      "sha256": "6bf814d6212383a54bb35ba9a48fcff5668a170171a9788cd367fe34df2df061",
+      "bytes": 1871
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/accumulation.py": {
+      "sha256": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+      "bytes": 3202
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/attribution_campaign.py": {
+      "sha256": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+      "bytes": 11167
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/attribution_report.py": {
+      "sha256": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+      "bytes": 6343
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/config.py": {
+      "sha256": "412c451bc0b6bb94cf8a625b7e2030667b24f6bc341d2ab3d1161d27d57e1099",
+      "bytes": 3118
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/curves.py": {
+      "sha256": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+      "bytes": 3858
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/diagnostics.py": {
+      "sha256": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+      "bytes": 12534
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/gradient_probe.py": {
+      "sha256": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+      "bytes": 3788
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/loss.py": {
+      "sha256": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+      "bytes": 4235
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/model.py": {
+      "sha256": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+      "bytes": 2865
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/replay.py": {
+      "sha256": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+      "bytes": 4896
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_attribution.py": {
+      "sha256": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+      "bytes": 4288
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_diagnostics.py": {
+      "sha256": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+      "bytes": 1042
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/worker.py": {
+      "sha256": "3424df667f72dfce5e2a1f74d8d14356d441c05059aaa9d47ecfdd8b25b0134c",
+      "bytes": 9847
+    },
+    "runs/mssl-attribution-20261018-r2/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/__init__.py": {
+      "sha256": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+      "bytes": 110
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/__main__.py": {
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "bytes": 48
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/adapters/__init__.py": {
+      "sha256": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e",
+      "bytes": 33
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/adapters/maskdino_worker.py": {
+      "sha256": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+      "bytes": 8323
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/adapters/zeroshot_worker.py": {
+      "sha256": "6bcfd441352962a4c77b8ae155af03212746e96a15dae106311274e88a8cd3cf",
+      "bytes": 3975
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/cli.py": {
+      "sha256": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+      "bytes": 7230
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/kvasir.py": {
+      "sha256": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+      "bytes": 10316
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/polypgen.py": {
+      "sha256": "d96c29fa5717707094a747711a6f153b211192605f2e326acbf61ce20640e929",
+      "bytes": 8911
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/preview.py": {
+      "sha256": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+      "bytes": 1868
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/runner.py": {
+      "sha256": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+      "bytes": 7796
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/toy.py": {
+      "sha256": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+      "bytes": 1546
+    },
+    "runs/mssl-attribution-20261018-r2/source/polypbench/zeroshot.py": {
+      "sha256": "e6606e486b10e7feab2bee3398a75b30d65acfd1248069f60042602129708f3a",
+      "bytes": 11094
+    },
+    "runs/mssl-attribution-20261018-r2/protocol.json": {
+      "sha256": "ffe7f6291080070e52c0dbf6c9bb8d6bea93699baa16b0b20ba0c79a2adf9b6d",
+      "bytes": 8590
+    },
+    "runs/ciou-competition-20261019/source/configs/formal.yaml": {
+      "sha256": "faf169ac389caffb0b0721e34f091ea0490412812a39704e567c9830e0ef4395",
+      "bytes": 2020
+    },
+    "runs/ciou-competition-20261019/source/configs/smoke.yaml": {
+      "sha256": "eb96214ff57d4a6229ac9fad4557054ebf3f77ab899b42a1c5f15d08f680d69f",
+      "bytes": 1899
+    },
+    "runs/ciou-competition-20261019/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/README.md": {
+      "sha256": "a4d2dfbe2c50dedf77dd1cd9fe79b8e649d7d0417283d815e25f870b3e24ae65",
+      "bytes": 2099
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/__init__.py": {
+      "sha256": "0205926202ef9a166fac9ea1f3229da5b26b46653ae7df8a8acddaddee591138",
+      "bytes": 83
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/__main__.py": {
+      "sha256": "66ad1382f5cac5d8c07422db3048f009660b9f19362905459643649e8c7e8357",
+      "bytes": 490
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/audit.py": {
+      "sha256": "549067f6e7cc8fae0d095f5d4b03f4eb357f976c82a1b3e425688f61cff1c80f",
+      "bytes": 4810
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/campaign.py": {
+      "sha256": "b15cdc214891b15d085100e92e95ab4e15bdf79f6dddf733e03ce4c81eb28061",
+      "bytes": 11512
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/comparison.py": {
+      "sha256": "983e33382edfdd5c15e4230c89fff11dbfa64edff803ef466bbfbdbc9b328808",
+      "bytes": 6347
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/config.py": {
+      "sha256": "cf1b8aee38ddd0248f0e54fd4e97f938e7c304d36f73aea9b229f95bd90d6f87",
+      "bytes": 617
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/configs/kvasir_official50.yaml": {
+      "sha256": "61aa130773f68f5ad63aa864779c0ae64568184f37dcc84a8e467dead4e37754",
+      "bytes": 1860
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/loss.py": {
+      "sha256": "c307dd4189cc72a0a39a38dbf37283582ac02a03e492a21ba5c4197a42be23d6",
+      "bytes": 1941
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/model.py": {
+      "sha256": "765f5724f3b3aeee0f8f9561089b173480474e42bd5ca57f09129e3eb5c50bef",
+      "bytes": 3496
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/precheck.py": {
+      "sha256": "d787c4b56c32b6473d272e28f0eb4739232cad385db58460338e64c21210b629",
+      "bytes": 8749
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/tests/test_ciou.py": {
+      "sha256": "cd99173bbeb5776c764b7cc4dcefeb8170e83cfb335f70e69689d8e5269f51ba",
+      "bytes": 6961
+    },
+    "runs/ciou-competition-20261019/source/methods/ciou_replace/tests/test_reused_bootstrap.py": {
+      "sha256": "f92d69e35a53280dd14a8cc3c126f0663e7e5ce6708faf0826aecb73527f5b4a",
+      "bytes": 1712
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/accumulation.py": {
+      "sha256": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+      "bytes": 3202
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/attribution_campaign.py": {
+      "sha256": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+      "bytes": 11167
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/attribution_report.py": {
+      "sha256": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+      "bytes": 6343
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/config.py": {
+      "sha256": "9328b6d71c3f020736285652bdb30149931a2514c8c24fc87f017add0b4c039e",
+      "bytes": 3370
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/curves.py": {
+      "sha256": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+      "bytes": 3858
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/diagnostics.py": {
+      "sha256": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+      "bytes": 12534
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/gradient_probe.py": {
+      "sha256": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+      "bytes": 3788
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/loss.py": {
+      "sha256": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+      "bytes": 4235
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/model.py": {
+      "sha256": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+      "bytes": 2865
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/replay.py": {
+      "sha256": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+      "bytes": 4896
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/run.py": {
+      "sha256": "d506b7b108350e4a7b655562b0d8071b17ecf36febec6f7977dccb540b37ade9",
+      "bytes": 8942
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_attribution.py": {
+      "sha256": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+      "bytes": 4288
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_diagnostics.py": {
+      "sha256": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+      "bytes": 1042
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/worker.py": {
+      "sha256": "b5658e9b295c6f71a7ed25ec9ae452b5d2a7ab43c18e0f6318d819436526b6ad",
+      "bytes": 10140
+    },
+    "runs/ciou-competition-20261019/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/ciou-competition-20261019/source/polypbench/__init__.py": {
+      "sha256": "f8ec39dd3159d50446ea103ca53497356c9b474a3ad31930cd53e9fa67d0192f",
+      "bytes": 110
+    },
+    "runs/ciou-competition-20261019/source/polypbench/__main__.py": {
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "bytes": 48
+    },
+    "runs/ciou-competition-20261019/source/polypbench/adapters/__init__.py": {
+      "sha256": "36ebd97042acbd7769b33ed710d814cf2431c0d8120524b9f71e420aa457da7e",
+      "bytes": 33
+    },
+    "runs/ciou-competition-20261019/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/ciou-competition-20261019/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/ciou-competition-20261019/source/polypbench/adapters/maskdino_worker.py": {
+      "sha256": "86aa7ab9e6a7e0488e68d93da006758358ce0575b5ad594529c1df94f71911be",
+      "bytes": 8323
+    },
+    "runs/ciou-competition-20261019/source/polypbench/adapters/zeroshot_worker.py": {
+      "sha256": "6bcfd441352962a4c77b8ae155af03212746e96a15dae106311274e88a8cd3cf",
+      "bytes": 3975
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/__init__.py": {
+      "sha256": "04e479f9a2f5588e1ccffd38d4bc0d47590681b83678b095293c5ffb7b61f5ef",
+      "bytes": 81
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/behavior.py": {
+      "sha256": "9eee61413c1d6bd70462b96b88ccce9303e86bd75e2211580350562cae74fede",
+      "bytes": 7116
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/coco_cache.py": {
+      "sha256": "28e2975e6d9d9021e34a57890d72ee7e42651ee2ffa65f5c83822705f21ced7e",
+      "bytes": 6396
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/matching.py": {
+      "sha256": "e044417d350b1f5a4d6338fda68d74db582e759ab5458b501581478f93d210e1",
+      "bytes": 973
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/report.py": {
+      "sha256": "8dc711d490b841f2392741ae7840a8dc677662eaa4460aba830384693ade85f5",
+      "bytes": 9687
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/score_effects.py": {
+      "sha256": "c7fde0da23724c8cae0773b6b0ac89c4f88ef5ae18bfed339c7def2aad9c2b23",
+      "bytes": 3177
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/score_replay.py": {
+      "sha256": "7a904d9797c08740e47e7b898a27fc52c03a9d6facd31ab66202115293211b99",
+      "bytes": 5870
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/study.py": {
+      "sha256": "45b16d184879676e4aed7b6353af7be08de24aea7e438c71848e122a2361015c",
+      "bytes": 11269
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/uncertainty.py": {
+      "sha256": "8e9f836fa8dbb62e6cda8354bc8ca807ab01b978bc057ea18f534a7f95c09465",
+      "bytes": 6488
+    },
+    "runs/ciou-competition-20261019/source/polypbench/analysis/verify_math.py": {
+      "sha256": "e29c1209a91208d2040acc79f1eebc24d5d7fb45ccdfaac937352be3ce38e8a9",
+      "bytes": 2651
+    },
+    "runs/ciou-competition-20261019/source/polypbench/cli.py": {
+      "sha256": "3a5b16531a707e024563b8b865e24ff8039164d9ec7f0e40d2f40008f6be7f52",
+      "bytes": 7230
+    },
+    "runs/ciou-competition-20261019/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/ciou-competition-20261019/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/ciou-competition-20261019/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/ciou-competition-20261019/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/ciou-competition-20261019/source/polypbench/kvasir.py": {
+      "sha256": "59a35c23835179e11efba5de3f906632b0c4a937047ec7e980871d9c6122b6b5",
+      "bytes": 10316
+    },
+    "runs/ciou-competition-20261019/source/polypbench/polypgen.py": {
+      "sha256": "d96c29fa5717707094a747711a6f153b211192605f2e326acbf61ce20640e929",
+      "bytes": 8911
+    },
+    "runs/ciou-competition-20261019/source/polypbench/preview.py": {
+      "sha256": "3c4f0ee666396025e6033cd5a69b9a4df335a4055ab183d0b04a9c338ecf6024",
+      "bytes": 1868
+    },
+    "runs/ciou-competition-20261019/source/polypbench/runner.py": {
+      "sha256": "5d499bcd788ac1f6ef3374a62776cdf39023dab7c1bce73909b3dc0bd95c8f4f",
+      "bytes": 7796
+    },
+    "runs/ciou-competition-20261019/source/polypbench/toy.py": {
+      "sha256": "be9bb08f5c2af763cd50b9ff49b1ea8ce795a01000cf4a0a294bac42ebeaba67",
+      "bytes": 1546
+    },
+    "runs/ciou-competition-20261019/source/polypbench/zeroshot.py": {
+      "sha256": "e6606e486b10e7feab2bee3398a75b30d65acfd1248069f60042602129708f3a",
+      "bytes": 11094
+    },
+    "runs/ciou-competition-20261019/source/tests/test_mssl_analysis.py": {
+      "sha256": "b3fc0f2d9675ccd408e83f42ad00f96bc7f223bf55b91710d092dd31c6df0b15",
+      "bytes": 2633
+    },
+    "runs/ciou-competition-20261019/protocol.json": {
+      "sha256": "b2e501a2479a11fd1937224c2a5f73ab23aa257e907d10cc1cabe4dfe17e3c4c",
+      "bytes": 106844
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/model_best.pth": {
+      "sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+      "bytes": 625285006
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/accumulation.py": {
+      "sha256": "12cb79aa46b8e037480e8b5e0927cd3b258b601aadca87e0f297c5649db77ae1",
+      "bytes": 2918
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/config.py": {
+      "sha256": "eb69a5d285a80a35c350c4f0bf6257e73fabdbdeaad734203f1c0d645eec697a",
+      "bytes": 2975
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/loss.py": {
+      "sha256": "c7558e18d6156c674699a735974b606ef4cad37412e7181f77a769de6a751159",
+      "bytes": 3789
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/model.py": {
+      "sha256": "3c3af7d761c0e816f75cd7610676df8239277d836976e97b63abad3ee60d1e81",
+      "bytes": 2701
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/worker.py": {
+      "sha256": "90bfd99b8451a27f36ac6b4f582a3c070eb0dad012922fa10a669708114cc623",
+      "bytes": 9523
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/predictions.bbox.json": {
+      "sha256": "6d5890d8176facd0e13a964ffa7d2bc618c4e6f9ad6ff1a7ae2603ccf6592b83",
+      "bytes": 2349704
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/pooled/predictions.bbox.json": {
+      "sha256": "38fc60b39df4f6d71c5616e339441ddc864532ea1af44ead225cbd0a0bac65f0",
+      "bytes": 28965094
+    },
+    "data/kvasir_official_bbox_coco/train.json": {
+      "sha256": "9b5d73d9b3206daa78ce57d15dbe9fe2dd75b432176419762475a4318ec727b6",
+      "bytes": 994482
+    },
+    "data/kvasir_official_bbox_coco/val.json": {
+      "sha256": "db96be0dca4e0a4cebb308f096a9f67eaf5a6349a0fabfe01f5107dc43aed929",
+      "bytes": 141204
+    },
+    "data/polypgen_zeroshot_stills_v2/provided_boxes.coco.json": {
+      "sha256": "8f07c197079a51b37186255c91e17bda1d074fe290556e2777607587ee17e779",
+      "bytes": 577118
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/experiment.json": {
+      "sha256": "c895c0ede7f25ffaf87ec9e79af8e053301960b2dd3d5dcacc31d755300d26f2",
+      "bytes": 2464
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/manifest.json": {
+      "sha256": "3dba56f6e8517ab69b977f068fa859ea6de1f21942942b090e7d66a79e61b6b8",
+      "bytes": 1334289
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/adapter_sources.json": {
+      "sha256": "d12cdb118c4d61f9318494419fd6f0c71de088ea32f742a62096127e82ecf206",
+      "bytes": 2812
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/selected_checkpoint.json": {
+      "sha256": "568b7ed8bcc06b933c190578d8a9f6beb472d744766156bc406ac41c07dacfc4",
+      "bytes": 455
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/best_checkpoint.json": {
+      "sha256": "3e2252f044a9ee6caf336aa2c32f9de9b3bfff06c6aca36d887331a5845b734d",
+      "bytes": 199
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/config.yaml": {
+      "sha256": "f023b48b0e11dde96e9c85bf982d9476dde3f5d4715f4b0669146ca859209327",
+      "bytes": 8591
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/environment.json": {
+      "sha256": "3d3a7cfdd917a707e53a8f7c2c90cfba0c9d1ce7c7dfc0584cbbe4e8c7d63f6a",
+      "bytes": 3142
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/initialization.json": {
+      "sha256": "a5fe11b8e3d7eb142a35e7434fabd574e6818eceb5b3872e505d546f923480f9",
+      "bytes": 151
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/method.json": {
+      "sha256": "f8ce4c58d069ea755dfa11fee939e221413dee6feb3578e747f5fd89252b8d47",
+      "bytes": 569
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/state.json": {
+      "sha256": "f17e64757b3922bec94714e81ff5aa611c95d18099f58f318ee34b2ef9c8008b",
+      "bytes": 152
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/config.yaml": {
+      "sha256": "b74353598bc9710a2d852c5af370ea3ccf44fe039555b219195f03a7566796fe",
+      "bytes": 8641
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/metrics.json": {
+      "sha256": "58256852a0fa29bfd9a1c896a5d44e0aac2911a292a7c567f06b1735ecd964a2",
+      "bytes": 1338
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/predict_val/checkpoint.json": {
+      "sha256": "f2fd5a5e2df36022b467b3cf5e648d34870b6e8305a811b66f1ab0c68447736c",
+      "bytes": 223
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/pooled/metrics.json": {
+      "sha256": "700f2f887dd4a686feda401ac0182a06a6156a081d7b1706333ec5206623bfe4",
+      "bytes": 1014
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/config.yaml": {
+      "sha256": "03a090950638452d6605c49b3b266bccc84cffb015d720501fa46ec17b79f218",
+      "bytes": 8623
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/resolved_inference.yaml": {
+      "sha256": "03a090950638452d6605c49b3b266bccc84cffb015d720501fa46ec17b79f218",
+      "bytes": 8623
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/source_prediction_parity.json": {
+      "sha256": "1c9c1cdc2bbdc2f1bbda09c1b6e1e82b5364c99eb98f8a9c38e417c18fb8019a",
+      "bytes": 145
+    },
+    "runs/polypgen-zeroshot-20261018/baseline/job.json": {
+      "sha256": "1c901ac0b53a834be044e8b85f851df48f6e13a476edde46cb94d62abc5bbb01",
+      "bytes": 756
+    },
+    "runs/maskdino-mssl-control-s42-20261018T025946/train/metrics.json": {
+      "sha256": "d71488e13334dae38f1a338788fedfda7f820986f4cbd99ffbf6e3db6b3c1dd9",
+      "bytes": 570282
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/model_best.pth": {
+      "sha256": "c0ea44a7fdfd0e673d32729b128cbbf8916c313b206e5ab334335331c52a0ae0",
+      "bytes": 625285006
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/accumulation.py": {
+      "sha256": "12cb79aa46b8e037480e8b5e0927cd3b258b601aadca87e0f297c5649db77ae1",
+      "bytes": 2918
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/config.py": {
+      "sha256": "eb69a5d285a80a35c350c4f0bf6257e73fabdbdeaad734203f1c0d645eec697a",
+      "bytes": 2975
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/loss.py": {
+      "sha256": "c7558e18d6156c674699a735974b606ef4cad37412e7181f77a769de6a751159",
+      "bytes": 3789
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/model.py": {
+      "sha256": "3c3af7d761c0e816f75cd7610676df8239277d836976e97b63abad3ee60d1e81",
+      "bytes": 2701
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/worker.py": {
+      "sha256": "90bfd99b8451a27f36ac6b4f582a3c070eb0dad012922fa10a669708114cc623",
+      "bytes": 9523
+    },
+    "runs/mssl-official50-s42-20261018T025946/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/mssl-official50-s42-20261018T025946/predict_val/predictions.bbox.json": {
+      "sha256": "91cc1c657d8cfdc778d51223ce1c5624f4af381909243562dd07ddc02403a470",
+      "bytes": 2432230
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/pooled/predictions.bbox.json": {
+      "sha256": "1738949aa50e0c3381f6275ced837d2f8942ce1ce027334dc8f733a1200084a6",
+      "bytes": 29616738
+    },
+    "runs/mssl-official50-s42-20261018T025946/experiment.json": {
+      "sha256": "cb917f86ac6905f62aa4b9a1f7a23d541250da921abbce280ece8ec0b1365c0d",
+      "bytes": 2455
+    },
+    "runs/mssl-official50-s42-20261018T025946/manifest.json": {
+      "sha256": "f489b95e70140036b1e8278e12dc554dd37083ec3f5ddca59c22b91ab0e79a71",
+      "bytes": 1334275
+    },
+    "runs/mssl-official50-s42-20261018T025946/adapter_sources.json": {
+      "sha256": "d12cdb118c4d61f9318494419fd6f0c71de088ea32f742a62096127e82ecf206",
+      "bytes": 2812
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/selected_checkpoint.json": {
+      "sha256": "0c866fbffecc08af120efc9a8c2701a773a847e44c164611dbe92bd83dc9414b",
+      "bytes": 449
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/best_checkpoint.json": {
+      "sha256": "570a617544c8b72bce1e4efe6876ebeadd4b1eccb5a82dc26476c0cf138af428",
+      "bytes": 199
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/config.yaml": {
+      "sha256": "d12aa7c5bac9269bc870b54d17c739b7a8c33c675511471f55672a318b2171ba",
+      "bytes": 8584
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/environment.json": {
+      "sha256": "3d3a7cfdd917a707e53a8f7c2c90cfba0c9d1ce7c7dfc0584cbbe4e8c7d63f6a",
+      "bytes": 3142
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/initialization.json": {
+      "sha256": "a5fe11b8e3d7eb142a35e7434fabd574e6818eceb5b3872e505d546f923480f9",
+      "bytes": 151
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/method.json": {
+      "sha256": "e22987b0063540a6d51ed1d333729c8fb769bd9b8b95ddf112a0642e5be1eea3",
+      "bytes": 568
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/state.json": {
+      "sha256": "40ef1cec17009330412145c7df5e337a43f13be27df04bb1bfef010d6e24561f",
+      "bytes": 152
+    },
+    "runs/mssl-official50-s42-20261018T025946/predict_val/config.yaml": {
+      "sha256": "f99f2e5613226ca04d010bf9094e5c284294087d04f23cc6d5df42f78ea4e487",
+      "bytes": 8628
+    },
+    "runs/mssl-official50-s42-20261018T025946/predict_val/metrics.json": {
+      "sha256": "6f5c581dfbff101e5874ed53e31625f91ade043097438057be8d3d605f88e38d",
+      "bytes": 1337
+    },
+    "runs/mssl-official50-s42-20261018T025946/predict_val/checkpoint.json": {
+      "sha256": "103bdd02d9427daee6cf088d5525859ae9e8849acbc4c4c262040c30f8b538c3",
+      "bytes": 217
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/pooled/metrics.json": {
+      "sha256": "6760a2d739bc0046f0a6c5bdac8746975fd5a5d65acbb777fec3b426ad85cfd9",
+      "bytes": 1010
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/config.yaml": {
+      "sha256": "4c8b22f2e50aa5780fced860cad112a21eb4d39b92ce94aa4ff4c2af240be496",
+      "bytes": 8612
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/resolved_inference.yaml": {
+      "sha256": "4c8b22f2e50aa5780fced860cad112a21eb4d39b92ce94aa4ff4c2af240be496",
+      "bytes": 8612
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/source_prediction_parity.json": {
+      "sha256": "1c9c1cdc2bbdc2f1bbda09c1b6e1e82b5364c99eb98f8a9c38e417c18fb8019a",
+      "bytes": 145
+    },
+    "runs/polypgen-zeroshot-20261018/mssl/job.json": {
+      "sha256": "c8a0748bd6217dd6efe0360477245a18c4966305e6d6640464eedddeabd592b0",
+      "bytes": 734
+    },
+    "runs/mssl-official50-s42-20261018T025946/train/metrics.json": {
+      "sha256": "8a9c133d1252c58377f5a83a701371e2bab4d91bdf73c79cae9022751b242f05",
+      "bytes": 606472
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/model_best.pth": {
+      "sha256": "fe9777df01ba670a8b27fa16b4a82234aa209d18cc69ac63a02c26188fac4a5e",
+      "bytes": 625285006
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/accumulation.py": {
+      "sha256": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+      "bytes": 3202
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/attribution_campaign.py": {
+      "sha256": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+      "bytes": 11167
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/attribution_report.py": {
+      "sha256": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+      "bytes": 6343
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/config.py": {
+      "sha256": "412c451bc0b6bb94cf8a625b7e2030667b24f6bc341d2ab3d1161d27d57e1099",
+      "bytes": 3118
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/curves.py": {
+      "sha256": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+      "bytes": 3858
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/diagnostics.py": {
+      "sha256": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+      "bytes": 12534
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/gradient_probe.py": {
+      "sha256": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+      "bytes": 3788
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/loss.py": {
+      "sha256": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+      "bytes": 4235
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/model.py": {
+      "sha256": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+      "bytes": 2865
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/replay.py": {
+      "sha256": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+      "bytes": 4896
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_attribution.py": {
+      "sha256": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+      "bytes": 4288
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_diagnostics.py": {
+      "sha256": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+      "bytes": 1042
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/worker.py": {
+      "sha256": "3424df667f72dfce5e2a1f74d8d14356d441c05059aaa9d47ecfdd8b25b0134c",
+      "bytes": 9847
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/predictions.bbox.json": {
+      "sha256": "8306d0ec4075fdddce55bc962a0ac9650dc4339abce25cd0800cb804db675613",
+      "bytes": 2454797
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/pooled/predictions.bbox.json": {
+      "sha256": "52c8cc289437a5b0f928e9d2ec0eda55acae14ecf015553642b21f45e69ce712",
+      "bytes": 29914047
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/experiment.json": {
+      "sha256": "9e38e4bd082670901d6a19cbcc86a2169bfc936b2dcdbf16ee4c2c8b324f99dc",
+      "bytes": 2483
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/manifest.json": {
+      "sha256": "263c7ece09979dffedbf366dabe6c161eae6822e74dad3de9ee5939facd1fc87",
+      "bytes": 1334269
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/adapter_sources.json": {
+      "sha256": "304d32915bba4842096cc1922dcc26f14db29bbe5cef33271cbf004aa2b1db8a",
+      "bytes": 3651
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/selected_checkpoint.json": {
+      "sha256": "3c8a30f5af295ca12f188aa2332ae92ad556abba2ea1de50b63a1516517496df",
+      "bytes": 447
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/best_checkpoint.json": {
+      "sha256": "b4415a746ee4f4d662983d3279ff7fd06c2d92740df1c36147ee87ad0ebf3c98",
+      "bytes": 199
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/config.yaml": {
+      "sha256": "79587de351ed40d976244f2133994ae4e8cb7c25f67e010931841bfa0b646648",
+      "bytes": 8600
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/environment.json": {
+      "sha256": "3d3a7cfdd917a707e53a8f7c2c90cfba0c9d1ce7c7dfc0584cbbe4e8c7d63f6a",
+      "bytes": 3142
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/initialization.json": {
+      "sha256": "a5fe11b8e3d7eb142a35e7434fabd574e6818eceb5b3872e505d546f923480f9",
+      "bytes": 151
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/method.json": {
+      "sha256": "26d06cb128dda34bb31d30b0726f8c27cc4744a31dba7ff5a8c840c0e6d638a2",
+      "bytes": 591
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/state.json": {
+      "sha256": "e72104c902e82d729b07cdfd3963bec7a5f89f7e80dcc139038d71ab0e57a8d1",
+      "bytes": 152
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/config.yaml": {
+      "sha256": "56c4939c1ddc71ba2c5c4d54d3a41e87ddc42b145727d0c813b20a3d18f9707a",
+      "bytes": 8642
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/metrics.json": {
+      "sha256": "5f93e304ec6dca5caf659da2568704694ef65b95b375a7206f9760589f98c7cd",
+      "bytes": 1330
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/checkpoint.json": {
+      "sha256": "9647ece694babc1af964ef67da51a49fef49dfe3924e6371ad488bdc78e4b24f",
+      "bytes": 215
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/pooled/metrics.json": {
+      "sha256": "25399d183177914f487158675ff7b871d15df0e0e9b3da7d6afbdf2dbb6d8e70",
+      "bytes": 1017
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/config.yaml": {
+      "sha256": "d2c77ccf1d3ba2fda7a54c2fbf42f09064138e05cad8daad8d64e65ab0b7a73d",
+      "bytes": 8642
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/resolved_inference.yaml": {
+      "sha256": "d2c77ccf1d3ba2fda7a54c2fbf42f09064138e05cad8daad8d64e65ab0b7a73d",
+      "bytes": 8642
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/source_prediction_parity.json": {
+      "sha256": "1c9c1cdc2bbdc2f1bbda09c1b6e1e82b5364c99eb98f8a9c38e417c18fb8019a",
+      "bytes": 145
+    },
+    "runs/mssl-attribution-20261018-r2/external/box_cdf/job.json": {
+      "sha256": "77a537e70811f801f52a60e416a5ba41b9a58bbb9c2f406720da8b8bc4e6ebd9",
+      "bytes": 738
+    },
+    "runs/mssl-box-cdf-s42-20261018T114010Z/train/metrics.json": {
+      "sha256": "77cbf3e059022c3e780fd2923d8e5fa02049c6b6bc8e83c6274f752c27d3f2e6",
+      "bytes": 605808
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/model_best.pth": {
+      "sha256": "63170268153229b4876bfcdfe0f9949a5ce49e5ab96bacccca493477b0915ead",
+      "bytes": 625285006
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/accumulation.py": {
+      "sha256": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+      "bytes": 3202
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/attribution_campaign.py": {
+      "sha256": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+      "bytes": 11167
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/attribution_report.py": {
+      "sha256": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+      "bytes": 6343
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/config.py": {
+      "sha256": "412c451bc0b6bb94cf8a625b7e2030667b24f6bc341d2ab3d1161d27d57e1099",
+      "bytes": 3118
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/curves.py": {
+      "sha256": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+      "bytes": 3858
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/diagnostics.py": {
+      "sha256": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+      "bytes": 12534
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/gradient_probe.py": {
+      "sha256": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+      "bytes": 3788
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/loss.py": {
+      "sha256": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+      "bytes": 4235
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/model.py": {
+      "sha256": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+      "bytes": 2865
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/replay.py": {
+      "sha256": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+      "bytes": 4896
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/run.py": {
+      "sha256": "853b5936076cbf5b72c623a1915725697d8a89c5764ccbcb3fcb7ddff8e49337",
+      "bytes": 8719
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_attribution.py": {
+      "sha256": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+      "bytes": 4288
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_diagnostics.py": {
+      "sha256": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+      "bytes": 1042
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/worker.py": {
+      "sha256": "3424df667f72dfce5e2a1f74d8d14356d441c05059aaa9d47ecfdd8b25b0134c",
+      "bytes": 9847
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/predictions.bbox.json": {
+      "sha256": "9e894c237d57e993a14dad365e1ad61740a3ceb62bef29bcb7386fe48851bc7c",
+      "bytes": 2391842
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/pooled/predictions.bbox.json": {
+      "sha256": "0cb21992a03df99487e05ada29a79c050ebd1d3fa347db6f3fa49f3d2c129f0f",
+      "bytes": 29359667
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/experiment.json": {
+      "sha256": "1011d180408d37cd9f19ae6adc61d9330e6d7bb74c956db8c718222e072f9f53",
+      "bytes": 2495
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/manifest.json": {
+      "sha256": "d3796f421c4a07129c283cbc43efd654dfaec087bb5025d74185bd4f236fa068",
+      "bytes": 1334277
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/adapter_sources.json": {
+      "sha256": "304d32915bba4842096cc1922dcc26f14db29bbe5cef33271cbf004aa2b1db8a",
+      "bytes": 3651
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/selected_checkpoint.json": {
+      "sha256": "f4c351202687a0590c0cfad93e99eb98c00ca4bcbea24601baa2d4f9b51d71ce",
+      "bytes": 451
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/best_checkpoint.json": {
+      "sha256": "19d97d513823510fd622d4fe9eea965101de6d549497a1bd2f62cfd278d46f54",
+      "bytes": 199
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/config.yaml": {
+      "sha256": "c2aeeefdb54a11b33b766bb3b5198c095e9dbffa01e193823e6adf3f6db48d9a",
+      "bytes": 8608
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/environment.json": {
+      "sha256": "3d3a7cfdd917a707e53a8f7c2c90cfba0c9d1ce7c7dfc0584cbbe4e8c7d63f6a",
+      "bytes": 3142
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/initialization.json": {
+      "sha256": "a5fe11b8e3d7eb142a35e7434fabd574e6818eceb5b3872e505d546f923480f9",
+      "bytes": 151
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/method.json": {
+      "sha256": "4b935bc3edfe94b9d5989c67738903dd481d1aa4bc58fe856510e1463484fa0e",
+      "bytes": 595
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/state.json": {
+      "sha256": "f39a5c18b429b415695d0da969ae2ff2a8612f4463eb91d9477e640abf7af332",
+      "bytes": 152
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/config.yaml": {
+      "sha256": "8b5e468ae71c2b45334fa0d6f3ce31f76fd9b25cb72748d5392a200ba338c1e9",
+      "bytes": 8654
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/metrics.json": {
+      "sha256": "2ef63ccc4c6808d8e7e0c37406eb9c983e309edd2e4fb6b1d92c85362337c0e8",
+      "bytes": 1338
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/predict_val/checkpoint.json": {
+      "sha256": "ff179fc9e5adce25727add2f41530ccea4173d3accec4f9fb2b18ddbec5e8fa4",
+      "bytes": 219
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/pooled/metrics.json": {
+      "sha256": "1b991fe0202b97ec6b466257a0ae6fdf5f305fc46c466c5d2a2a642c15ad740f",
+      "bytes": 1013
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/config.yaml": {
+      "sha256": "28806b31eeb08da6b555dbec8f34222020e108cde48a15256e33440f22750d37",
+      "bytes": 8654
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/resolved_inference.yaml": {
+      "sha256": "28806b31eeb08da6b555dbec8f34222020e108cde48a15256e33440f22750d37",
+      "bytes": 8654
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/source_prediction_parity.json": {
+      "sha256": "1c9c1cdc2bbdc2f1bbda09c1b6e1e82b5364c99eb98f8a9c38e417c18fb8019a",
+      "bytes": 145
+    },
+    "runs/mssl-attribution-20261018-r2/external/mask_static/job.json": {
+      "sha256": "44cad7f3d9fb2985b22d8869ddaf806d5d6536caec2941dba7e44ec150aa61e6",
+      "bytes": 754
+    },
+    "runs/mssl-mask-static-s42-20261018T114010Z/train/metrics.json": {
+      "sha256": "f1a4808f874d3d150aba3cb11f5276e43bb7da50d12dba4a32e4f45cd7c73168",
+      "bytes": 605975
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/model_best.pth": {
+      "sha256": "0e59311fd3c4d36b05c930ee027e9c80ccc52ddd08af7e83d4a69faab9562836",
+      "bytes": 625285006
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/config.py": {
+      "sha256": "1dac12ec8648d3b00577c4a6f0845f67642d4e96ea033ca5aa782f1310e78bb4",
+      "bytes": 4715
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/data.py": {
+      "sha256": "13a45a0a8b4639b5d8ae8cd849f282d090a31ba5a2c64d3bb1ff6d4f5ffa4110",
+      "bytes": 8908
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/evaluation.py": {
+      "sha256": "a573516ea768b2ddde58b56589bd7df71500c9e59c631db0ef2cb19d1202733c",
+      "bytes": 2663
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/io.py": {
+      "sha256": "462ecf36f4ab4ae6e238684ea7298145f715b925c03b550f2db01b55e2bff5fa",
+      "bytes": 665
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/adapters/bitmask_mapper.py": {
+      "sha256": "c725e650f9726f90a1e0b0e186d61cbf90d6f236448b7035f9fb74d761dd0e71",
+      "bytes": 2415
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/polypbench/adapters/instance_lsj.py": {
+      "sha256": "60c4dcc357f8a85548e7d072c02e7be2ded025b5b6d2292ce904260052a03de3",
+      "bytes": 773
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/__init__.py": {
+      "sha256": "5f825e6bd50d5a37c2f0dc35a5f2ddfa94caf7f702363b18d8d8c6ce72141ee3",
+      "bytes": 79
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/README.md": {
+      "sha256": "f4d8022dd405b84888e454198db10b895b36d19c22be5575e679e5fb97402ca8",
+      "bytes": 6274
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/__init__.py": {
+      "sha256": "b9b3d2399fae51e2e58410dfb622a02618089aa3d2edc391d67b9e49a314e9ba",
+      "bytes": 74
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/__main__.py": {
+      "sha256": "108ff6fdec796bf9a9699eafd9ef0f3aa3585fd7daada51d4c5222062ec8c146",
+      "bytes": 969
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/acceptance.py": {
+      "sha256": "b091fcdd964fba5e9fdf13fb342cdd7e33c3900b726c1d62ae78047fd5e643a3",
+      "bytes": 1531
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/accumulation.py": {
+      "sha256": "2fbe9378f9b2d5a4b3d1dddc7a449ea2dbf74bd61660efac5a780e5f79a249c7",
+      "bytes": 3202
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/attribution_campaign.py": {
+      "sha256": "41689d42b87a36f8ae7e03e4aa44a12fe18f844ec4ee41b762b6eb107294b31c",
+      "bytes": 11167
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/attribution_report.py": {
+      "sha256": "3101bd20de40a6fe8102db386eb6a92a0e47b877327ba67cdbe444776749c4fd",
+      "bytes": 6343
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/config.py": {
+      "sha256": "9328b6d71c3f020736285652bdb30149931a2514c8c24fc87f017add0b4c039e",
+      "bytes": 3370
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/configs/kvasir_official50.yaml": {
+      "sha256": "1e09265c04625a1e08c264778de8c58783c335b98877788fd3c16f770fc639b1",
+      "bytes": 1670
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/curves.py": {
+      "sha256": "62da79c91121119c57f4f1c388f4d63b3932f5440c66470060557bb0805c76c1",
+      "bytes": 3858
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/data.py": {
+      "sha256": "2f4e2011583654a75b4d4f8f2f03306c26355b0bde389a5b84f3341ab0a74762",
+      "bytes": 1591
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/diagnostics.py": {
+      "sha256": "4cad3148f0a19f99d1cab0c7fbce82cbc97bb3ec70474cf027cf626216ae74d8",
+      "bytes": 12534
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/gradient_probe.py": {
+      "sha256": "cede4206baa56aa2eb322b9c16605f7e5a96d550ed1e14d73e08b8b3ef8fd8c2",
+      "bytes": 3788
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/launch.py": {
+      "sha256": "54914e83f9b4027f4e8d4d8fdaf5e9d43d8bcc5ca928d7ba0c0d821ea65cc569",
+      "bytes": 4970
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/loss.py": {
+      "sha256": "c6e18248cd1d2da6be54f73dac20837542286ef211f05f040a46e946a808b87c",
+      "bytes": 4235
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/model.py": {
+      "sha256": "3664f589cc36e52a80b0941f7699a89494f02a62de0732e41be4741ffceee1ef",
+      "bytes": 2865
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/pipeline.py": {
+      "sha256": "98c8213e46d5b37917fd1ac53cd474f77698951598a699a47215e761cded4ede",
+      "bytes": 2604
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/precheck.py": {
+      "sha256": "a49110af280bbc8ad221c9f69324f2473c10d3ca91da02afece0603e018d0f55",
+      "bytes": 8804
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/replay.py": {
+      "sha256": "cf93803982a9e89d330ec1c058444da703317aa6f0b2d92cce514106bd50f6a6",
+      "bytes": 4896
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/run.py": {
+      "sha256": "d506b7b108350e4a7b655562b0d8071b17ecf36febec6f7977dccb540b37ade9",
+      "bytes": 8942
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_acceptance.py": {
+      "sha256": "bd405c448879cf20b9e117e28aa242963aeba29d0ea56f1a41676f18a250be13",
+      "bytes": 960
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_accumulation.py": {
+      "sha256": "18d69da0e389bec57b1e1bb2e955780605917d678756a66e704314c74f827dfe",
+      "bytes": 1398
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_attribution.py": {
+      "sha256": "c7f25ccec3d8c6af2d62fa1e1db2e5a22774c0130a7e5377d51d6565cee347a5",
+      "bytes": 4288
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_diagnostics.py": {
+      "sha256": "4b5999aa1f2d92543a458738dc79c997135d9debca096ecf169db63e53d73e51",
+      "bytes": 1042
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_loss.py": {
+      "sha256": "dba9096bacfba7bbcc1628c24122786ee715b58877a7dc512ce650c7ce6990c0",
+      "bytes": 3437
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/tests/test_native_integration.py": {
+      "sha256": "6c87696ec23966b3f9fd8ed36322656e0f93cfe0d40ae8a0885b380e5c84456a",
+      "bytes": 2164
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/worker.py": {
+      "sha256": "b5658e9b295c6f71a7ed25ec9ae452b5d2a7ab43c18e0f6318d819436526b6ad",
+      "bytes": 10140
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/mssl/wsl_entry.sh": {
+      "sha256": "de89be837f488ac39b9eb75de0c94115704efffcd6a539b2d97b671d9de30aa9",
+      "bytes": 423
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/README.md": {
+      "sha256": "a4d2dfbe2c50dedf77dd1cd9fe79b8e649d7d0417283d815e25f870b3e24ae65",
+      "bytes": 2099
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/__init__.py": {
+      "sha256": "0205926202ef9a166fac9ea1f3229da5b26b46653ae7df8a8acddaddee591138",
+      "bytes": 83
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/__main__.py": {
+      "sha256": "66ad1382f5cac5d8c07422db3048f009660b9f19362905459643649e8c7e8357",
+      "bytes": 490
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/audit.py": {
+      "sha256": "549067f6e7cc8fae0d095f5d4b03f4eb357f976c82a1b3e425688f61cff1c80f",
+      "bytes": 4810
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/campaign.py": {
+      "sha256": "b15cdc214891b15d085100e92e95ab4e15bdf79f6dddf733e03ce4c81eb28061",
+      "bytes": 11512
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/comparison.py": {
+      "sha256": "983e33382edfdd5c15e4230c89fff11dbfa64edff803ef466bbfbdbc9b328808",
+      "bytes": 6347
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/config.py": {
+      "sha256": "cf1b8aee38ddd0248f0e54fd4e97f938e7c304d36f73aea9b229f95bd90d6f87",
+      "bytes": 617
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/configs/kvasir_official50.yaml": {
+      "sha256": "61aa130773f68f5ad63aa864779c0ae64568184f37dcc84a8e467dead4e37754",
+      "bytes": 1860
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/loss.py": {
+      "sha256": "c307dd4189cc72a0a39a38dbf37283582ac02a03e492a21ba5c4197a42be23d6",
+      "bytes": 1941
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/model.py": {
+      "sha256": "765f5724f3b3aeee0f8f9561089b173480474e42bd5ca57f09129e3eb5c50bef",
+      "bytes": 3496
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/precheck.py": {
+      "sha256": "d787c4b56c32b6473d272e28f0eb4739232cad385db58460338e64c21210b629",
+      "bytes": 8749
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/tests/test_ciou.py": {
+      "sha256": "cd99173bbeb5776c764b7cc4dcefeb8170e83cfb335f70e69689d8e5269f51ba",
+      "bytes": 6961
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/source/methods/ciou_replace/tests/test_reused_bootstrap.py": {
+      "sha256": "f92d69e35a53280dd14a8cc3c126f0663e7e5ce6708faf0826aecb73527f5b4a",
+      "bytes": 1712
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/predict_val/predictions.bbox.json": {
+      "sha256": "0b739e6fd69dcd2ef05517e5ef53a52fc41c20ff379b2967b83acbc34374cc18",
+      "bytes": 2387696
+    },
+    "runs/ciou-competition-20261019/external/pooled/predictions.bbox.json": {
+      "sha256": "cb3793ac803ade8669b3016da61f35859ce3be472c527712583f5cc4593bfffa",
+      "bytes": 29423755
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/experiment.json": {
+      "sha256": "ee921575d70cc2c069f99ab1d1f8b42add9b983dc543becb1049e89928179b0e",
+      "bytes": 2672
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/manifest.json": {
+      "sha256": "91031e0bf6e1e445b6862c71e9db28d4c0815750aad3e9ec53d3bce0fdbd7dd6",
+      "bytes": 1334289
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/adapter_sources.json": {
+      "sha256": "922852ca3d516d6aac7b90a4f5de5a3de22610c77b8396d9fab6a5a00a15ec41",
+      "bytes": 5062
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/selected_checkpoint.json": {
+      "sha256": "2074f589df16a515c535fa452121b20f66f68a05b3d75f36c37d55a013f7b36f",
+      "bytes": 447
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/best_checkpoint.json": {
+      "sha256": "1c8e149d4888dc1608764d773f22aabc5dcb16ae861fab7d45851af9075fc4be",
+      "bytes": 199
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/config.yaml": {
+      "sha256": "250f98ed56ba40d1bb18f4f16e80ac425d32d2866f121b554cc2f72b63e85d3b",
+      "bytes": 8609
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/environment.json": {
+      "sha256": "3d3a7cfdd917a707e53a8f7c2c90cfba0c9d1ce7c7dfc0584cbbe4e8c7d63f6a",
+      "bytes": 3142
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/initialization.json": {
+      "sha256": "a5fe11b8e3d7eb142a35e7434fabd574e6818eceb5b3872e505d546f923480f9",
+      "bytes": 151
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/method.json": {
+      "sha256": "bc1cda952e2a2c3a3570f5b227302a0639f5be0013a4fb5f1eb3bac96ee31ebe",
+      "bytes": 689
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/state.json": {
+      "sha256": "ef3be36e895a055d46c1fd783bfb03cb6ab5bf510c9035061525a4f085ba8763",
+      "bytes": 152
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/predict_val/config.yaml": {
+      "sha256": "251e9c4966efdfeecf8cf05c35415ee1c064f5766ca7e13c300c18716371b260",
+      "bytes": 8651
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/predict_val/metrics.json": {
+      "sha256": "00cfe608fb23ff190d714c975bdeaf33b6dc2462d3ec625ce8da335f4035f1db",
+      "bytes": 1352
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/predict_val/checkpoint.json": {
+      "sha256": "bda76f6b7aace71360c73bfcba0481478a93a29a5d517abc33b369ed0c7d5cdc",
+      "bytes": 215
+    },
+    "runs/ciou-competition-20261019/external/pooled/metrics.json": {
+      "sha256": "52640e0b9dc3b5fa30f34985e08747e23a5a636ec182dcacf0493915e739448c",
+      "bytes": 1016
+    },
+    "runs/ciou-competition-20261019/external/config.yaml": {
+      "sha256": "8ebeb3a6ca0bc20c23439a7f572e9d1946f19fd5a7a774efbdb7efba7e0c9d5d",
+      "bytes": 8640
+    },
+    "runs/ciou-competition-20261019/external/resolved_inference.yaml": {
+      "sha256": "8ebeb3a6ca0bc20c23439a7f572e9d1946f19fd5a7a774efbdb7efba7e0c9d5d",
+      "bytes": 8640
+    },
+    "runs/ciou-competition-20261019/external/source_prediction_parity.json": {
+      "sha256": "1c9c1cdc2bbdc2f1bbda09c1b6e1e82b5364c99eb98f8a9c38e417c18fb8019a",
+      "bytes": 145
+    },
+    "runs/ciou-competition-20261019/external/job.json": {
+      "sha256": "0b87bf94e62fb8177a41b73f02e7447089a9be7c5fd97d2b07b9d409c7762c8e",
+      "bytes": 731
+    },
+    "runs/ciou-replace-s42-20261019T073936Z/train/metrics.json": {
+      "sha256": "9fd1c46d5b21d5034c1175558a06c300b879d359b4d869e1e9779527e0d65afc",
+      "bytes": 570660
+    },
+    "runs/ciou-competition-20261019/five_group_comparison/comparison.json": {
+      "sha256": "da839a11979eabd9275abd7b0bb8f0ad88109cf393e5c48f5e3a936107264457",
+      "bytes": 12434
+    },
+    "runs/ciou-competition-20261019/five_group_comparison/uncertainty/uncertainty.json": {
+      "sha256": "8680d9782105965886d18d26b543b2a302e84641229bdc1ada7464d611bd5f66",
+      "bytes": 81020
+    },
+    "runs/ciou-competition-20261019/five_group_comparison/old_four_group_parity.json": {
+      "sha256": "d0327668f6100d85e070313b62b92772c0022a82746259b44a1c1279c23d2df6",
+      "bytes": 226
+    },
+    "runs/ciou-competition-20261019/dependencies.json": {
+      "sha256": "f0c19a17fe1177d39d6e89ab5f69b5d7183e6f6702718746c6551f218e06dce3",
+      "bytes": 551
+    },
+    "runs/ciou-competition-20261019/precheck/report.json": {
+      "sha256": "695591560f928fa06c79e0f140662cdeeed294c84a0179bd9d7d8ab3392b9fa5",
+      "bytes": 62126
+    },
+    "runs/ciou-competition-20261019/checkpoint_replay/report.json": {
+      "sha256": "ee26e2f1f7930f37982c4407800ebf9794e798f027cff9669c527f534bff1402",
+      "bytes": 103357
+    },
+    "runs/ciou-competition-20261019/resolved_config_parity.json": {
+      "sha256": "164ada31b537178e8219c9208af1be7da208fc7f2799ef6d57d8c173a24eed41",
+      "bytes": 513
+    },
+    "runs/ciou-competition-20261019/initialization_parity.json": {
+      "sha256": "f15b7eb14899ad50a04302f2f5e5e25a7c2efea0fbb3ffc1db0196cd1fb09947",
+      "bytes": 1029
+    },
+    "runs/ciou-competition-20261019/state.json": {
+      "sha256": "0f49a6e7f393e60d5387c1ef5df0ffa91e4f57e1502f6f516aa1efdf5e48707f",
+      "bytes": 711
+    },
+    "runs/mssl-implementation-20261018/campaign-r2/state.json": {
+      "sha256": "e8ac911d45f592463ed7b5ae8b62e93148bbe5cbfeb3723c569182902b9921b9",
+      "bytes": 730
+    },
+    "runs/mssl-attribution-20261018-r2/state.json": {
+      "sha256": "e95fff855c3d648501dba6a79e13239714f3e78ae71f5a71df11cf0a5842b6e8",
+      "bytes": 960
+    },
+    "runs/mssl-polypgen-analysis-20261019/state.json": {
+      "sha256": "abf06db23b47b6fddf49b0bdccfa6584e822e0bce137de1cd8419a2060e2db24",
+      "bytes": 413
+    },
+    "runs/mssl-polypgen-analysis-20261019/mssl_v1_contract.json": {
+      "sha256": "576b65d1b169e2065e2acfd1a8d9eeae452395270c0d693988b3b70e980fec51",
+      "bytes": 938
+    },
+    "runs/mssl-polypgen-analysis-20261019/math_verification.json": {
+      "sha256": "bfec10068f9ce99190632054496c7f017f7239c7e034db79ee48a965caec4bfd",
+      "bytes": 2319
+    },
+    "runs/mssl-polypgen-analysis-20261019/group_audit.json": {
+      "sha256": "036449fe487848c914dd5dbf6626700a139861d240be2cc580f412f4eace785f",
+      "bytes": 2237
+    },
+    "runs/mssl-implementation-20261018/precheck-3/report.json": {
+      "sha256": "ec5bcca9442c1770629a80bdfc09e7f0682b660e6f25407032e7c85dd276aded",
+      "bytes": 2997
+    },
+    "runs/mssl-polypgen-analysis-20261019/behavior/behavior.json": {
+      "sha256": "8ce935c51abd08a21e154b5ec383a12043cc6d057a703c9d04a3500760bb0ddc",
+      "bytes": 69674
+    },
+    "runs/mssl-polypgen-analysis-20261019/protocol.json": {
+      "sha256": "d087599bae8dc8e06ac35e6394098c76cfecffc1570474e6b550074f086b2cd6",
+      "bytes": 8276
+    },
+    "runs/mssl-polypgen-analysis-20261019/uncertainty/image_multiplicities.npy": {
+      "sha256": "d3110055a4836462a7d886beb7672e8e4443f0c5282d44b9404386b373972e73",
+      "bytes": 5892128
+    },
+    "runs/mssl-polypgen-analysis-20261019/uncertainty/bootstrap_ap_vectors.npz": {
+      "sha256": "a7af3b892c24a404e702e95c3f54af72432a71cfa9d05f57391cacbed168c8c8",
+      "bytes": 4173963
+    },
+    "data/polypgen_zeroshot_stills_v2/all_stills.images.json": {
+      "sha256": "f018783f39315b379f2c693257d2b4925f804ed7aba8046d76d6eaf85cdbecd7",
+      "bytes": 255296
+    },
+    "data/polypgen_zeroshot_stills_v2/audit.json": {
+      "sha256": "02ee87a66d9fbdc12481c030333e8600d60e683c84fcb1d3b10acb2239a8abf2",
+      "bytes": 12522
+    },
+    "data/polypgen_zeroshot_stills_v2/C1.coco.json": {
+      "sha256": "0cc82f35b8ae6d4d919364e68e89553ed04cdeb3f82a191c7d6e10568d16cc2d",
+      "bytes": 101389
+    },
+    "data/polypgen_zeroshot_stills_v2/C2.coco.json": {
+      "sha256": "09046f4260cb4308a9b553be2e00a274af9dd760708f1c6d6f113210aeb6fb84",
+      "bytes": 113117
+    },
+    "data/polypgen_zeroshot_stills_v2/C3.coco.json": {
+      "sha256": "9715e9a564c8a0d184e09f6839a2e4d6555310cc53cf6612b628afee31829e66",
+      "bytes": 165313
+    },
+    "data/polypgen_zeroshot_stills_v2/C4.coco.json": {
+      "sha256": "dc98f86700779b999d3ecb569e4a182338f9abf2e03334589e40245814eedaea",
+      "bytes": 73427
+    },
+    "data/polypgen_zeroshot_stills_v2/C5.coco.json": {
+      "sha256": "e497d72cda9a33f687678b72c71b504d4883d74306d5c51c84c1e3c24d8f679e",
+      "bytes": 88541
+    },
+    "data/polypgen_zeroshot_stills_v2/C6.coco.json": {
+      "sha256": "c50ea4d06896c55438babc80a46f3bf6a0be44dfd1b0d1d253d0ab51e22d89ec",
+      "bytes": 36411
+    },
+    "data/polypgen_zeroshot_stills_v2/image_manifest.json": {
+      "sha256": "6548c6ced617775b641a34f37631a29c4f0715ad1deb308d29e09024478c3005",
+      "bytes": 1254834
+    },
+    "data/polypgen_zeroshot_stills_v2/source_image_manifest.json": {
+      "sha256": "a9efaeada0e6c5195d96a40ecf20613ba84833e5a9d4143cd20f4a9d340e0cc0",
+      "bytes": 417825
+    },
+    "data/polypgen_zeroshot_stills_v2/without_internal_duplicates.coco.json": {
+      "sha256": "2b42b6343e7137ac0807153236d50eca5068ece1cf18212bb5be82abbeb1c28c",
+      "bytes": 574937
+    },
+    "runs/ciou-competition-20261019/five_group_comparison/uncertainty/bootstrap_ap_vectors.npz": {
+      "sha256": "cb0ba3366b7c9cc71c3508f239fb82b7ef6f495f204a413494d05307412d6b55",
+      "bytes": 5218747
+    },
+    "runs/ciou-competition-20261019/five_group_comparison/uncertainty/image_multiplicities.npy": {
+      "sha256": "d3110055a4836462a7d886beb7672e8e4443f0c5282d44b9404386b373972e73",
+      "bytes": 5892128
+    }
+  },
+  "limitations": [
+    "single Seed42",
+    "source validation selects checkpoints",
+    "PolypGen already observed",
+    "image-level intervals; unknown patient correlation; no multiple-comparison correction",
+    "MSSL-minus-Box-CDF AP interval includes zero",
+    "independent external evaluation pending",
+    "checkpoint/prediction/data bytes remain local; this is not an off-machine backup"
+  ]
+}

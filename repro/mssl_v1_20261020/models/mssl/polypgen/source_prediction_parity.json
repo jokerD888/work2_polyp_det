@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "image_id": 881,
+  "predictions": 100,
+  "bbox_atol": 0.001,
+  "score_atol": 1e-06,
+  "strict_checkpoint_load": true
+}

@@ -1,0 +1,9 @@
+{
+  "experiment": "/mnt/d/code/work2_polypy_det/runs/mssl-box-cdf-s42-20261018T114010Z/experiment.json",
+  "checkpoint": "/mnt/d/code/work2_polypy_det/runs/mssl-box-cdf-s42-20261018T114010Z/train/model_best.pth",
+  "checkpoint_sha256": "fe9777df01ba670a8b27fa16b4a82234aa209d18cc69ac63a02c26188fac4a5e",
+  "output": "/mnt/d/code/work2_polypy_det/runs/mssl-attribution-20261018-r2/external/box_cdf",
+  "image_root": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3",
+  "all_images": "/mnt/d/code/work2_polypy_det/data/polypgen_zeroshot_stills_v2/all_stills.images.json",
+  "source_predictions": "/mnt/d/code/work2_polypy_det/runs/mssl-box-cdf-s42-20261018T114010Z/predict_val/predictions.bbox.json"
+}

@@ -7,3 +7,6 @@ weights/
 runs/
 .pytest_cache/
 runs_*.log
+
+# Local research notes and literature materials
+/research/

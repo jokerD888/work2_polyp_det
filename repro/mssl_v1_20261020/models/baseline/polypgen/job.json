@@ -1,0 +1,9 @@
+{
+  "experiment": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/experiment.json",
+  "checkpoint": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/train/model_best.pth",
+  "checkpoint_sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+  "output": "/mnt/d/code/work2_polypy_det/runs/polypgen-zeroshot-20261018/baseline",
+  "image_root": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3",
+  "all_images": "/mnt/d/code/work2_polypy_det/runs/polypgen-zeroshot-20261018/data/all_stills.images.json",
+  "source_predictions": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/predict_val/predictions.bbox.json"
+}

@@ -1,0 +1,62 @@
+{
+  "csv": [
+    {
+      "file": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3/dataDetails_PolypGen_SingleFrames/dataDetails_C1.csv",
+      "sha256": "01a34807dedbf56d56c7b6a1b19e544840c971f06c9d1df0d087a36f94adc2d3",
+      "fields": [
+        "fileList",
+        "sizeType",
+        "sizeVal",
+        "annotations"
+      ],
+      "rows": 256
+    },
+    {
+      "file": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3/dataDetails_PolypGen_SingleFrames/dataDetails_C2.csv",
+      "sha256": "c16d599ced9cc049e1979faee61d2248b86e8f63db92a4aa1460c09da16612fb",
+      "fields": [
+        "fileList",
+        "sizeType",
+        "sizeVal",
+        "annotations"
+      ],
+      "rows": 301
+    },
+    {
+      "file": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3/dataDetails_PolypGen_SingleFrames/dataDetails_C3.csv",
+      "sha256": "247e6c8dbbcc6ba5d356f73479c40d3d29201c1029050d2985c525906adfb8a2",
+      "fields": [
+        "fileList",
+        "sizeType",
+        "sizeVal",
+        "annotations"
+      ],
+      "rows": 457
+    },
+    {
+      "file": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3/dataDetails_PolypGen_SingleFrames/dataDetails_C4.csv",
+      "sha256": "bdaa2e17cf5230e8f2c9c1dfb2c546200914936206cea7599a696b7de0af0d6e",
+      "fields": [
+        "fileList",
+        "sizeType",
+        "sizeVal",
+        "annotations"
+      ],
+      "rows": 227
+    },
+    {
+      "file": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3/dataDetails_PolypGen_SingleFrames/dataDetails_C5.csv",
+      "sha256": "50a4bd6ddb17aba7533ad431f91d8c9e843d2fa904112be831696a499fa2f960",
+      "fields": [
+        "fileList",
+        "sizeType",
+        "sizeVal",
+        "annotations"
+      ],
+      "rows": 208
+    }
+  ],
+  "mapping_status": "unavailable",
+  "patient_id_inferred_from_filename": false,
+  "conclusion": "已审计附带单帧 CSV：没有可靠患者/视频分组字段，C6 未提供同类 CSV；不从文件名猜测患者。使用条件于现有六中心的图像级分层配对 Bootstrap，并明确患者内相关未知。"
+}

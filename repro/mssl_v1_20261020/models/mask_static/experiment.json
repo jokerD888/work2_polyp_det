@@ -1,0 +1,82 @@
+{
+  "name": "mssl_mask_static_official50",
+  "adapter": "maskdino",
+  "purpose": "prespecified_mechanism_attribution_no_parameter_search",
+  "seed": 42,
+  "checkpoint_selection": "best_val_ap",
+  "checkpoint_keep": 2,
+  "training_budget": {
+    "train_images": 880,
+    "iterations_per_epoch": 55,
+    "epochs": 50
+  },
+  "repo": {
+    "path": "/mnt/d/code/work2_polypy_det/third_party/MaskDINO",
+    "commit": "3831d8514a3728535ace8d4ecc7d28044c42dd14"
+  },
+  "runtime": {
+    "python": "python",
+    "num_gpus": 1,
+    "visible_gpus": "0",
+    "micro_batch": 1
+  },
+  "dataset": {
+    "supervision": "bbox+mask",
+    "mask_format": "bitmask",
+    "bbox_source": "provided",
+    "training_boxes": "annotations",
+    "train": {
+      "annotations": "/mnt/d/code/work2_polypy_det/data/kvasir_official_bbox_coco/train.json",
+      "image_root": "/mnt/d/code/work2_polypy_det/data/kvasir_official_bbox_coco/train"
+    },
+    "val": {
+      "annotations": "/mnt/d/code/work2_polypy_det/data/kvasir_official_bbox_coco/val.json",
+      "image_root": "/mnt/d/code/work2_polypy_det/data/kvasir_official_bbox_coco/val"
+    },
+    "raw_mask_root": "/mnt/d/dataset/kvasir-seg/Kvasir-SEG/masks"
+  },
+  "model": {
+    "config": "/mnt/d/code/work2_polypy_det/third_party/MaskDINO/configs/coco/instance-segmentation/maskdino_R50_bs16_50ep_3s_dowsample1_2048.yaml",
+    "num_classes": 1,
+    "weights": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+    "detections_per_image": 100
+  },
+  "overrides": {
+    "SOLVER.IMS_PER_BATCH": 16,
+    "SOLVER.BASE_LR": 0.0001,
+    "SOLVER.MAX_ITER": 2750,
+    "SOLVER.STEPS": [
+      2444,
+      2648
+    ],
+    "SOLVER.WARMUP_FACTOR": 1.0,
+    "SOLVER.WARMUP_ITERS": 10,
+    "SOLVER.REFERENCE_WORLD_SIZE": 0,
+    "SOLVER.CHECKPOINT_PERIOD": 275,
+    "INPUT.IMAGE_SIZE": 1024,
+    "INPUT.MIN_SCALE": 0.1,
+    "INPUT.MAX_SCALE": 2.0,
+    "DATALOADER.NUM_WORKERS": 2,
+    "TEST.EVAL_PERIOD": 275
+  },
+  "evaluation": {
+    "max_dets": [
+      1,
+      10,
+      100
+    ]
+  },
+  "output_root": "/mnt/d/code/work2_polypy_det/runs",
+  "mssl": {
+    "enabled": true,
+    "support": "mask",
+    "weight": 1.0,
+    "temperature": 0.05,
+    "direction_bandwidth": 0.15,
+    "min_scale_pixels": 4.0,
+    "loss_form": "static"
+  },
+  "gradient_probe_period": 275,
+  "project_root": "/mnt/d/code/work2_polypy_det/runs/mssl-attribution-20261018-r2/source",
+  "source_config": "/mnt/d/code/work2_polypy_det/runs/mssl-attribution-20261018-r2/source/configs/mask_static.yaml"
+}

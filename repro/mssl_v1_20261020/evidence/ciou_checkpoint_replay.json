@@ -1,0 +1,2612 @@
+{
+  "status": "passed",
+  "reference": {
+    "path": "/home/joker/.cache/polypbench/detectron2/detectron2/layers/losses.py",
+    "sha256": "6426d06f915f12f0eb5bf4f31f94092b23422d663337a22fc27a8b4ea8630ccb",
+    "epsilon": 1e-07,
+    "alpha_stop_gradient": true,
+    "iou_gate": false,
+    "input": "decoded normalized XYXY; no clipping/sigmoid/exp"
+  },
+  "checks": {
+    "no_new_parameters_native_forward_and_inference": true,
+    "all_active_weighted_regression_paths_and_head_gradients": true
+  },
+  "panels": [
+    {
+      "source_image_id": 1,
+      "source_single_box": true,
+      "augmented_objects": 1,
+      "replay_seed": 42000,
+      "keys_weights_gradients": [
+        {
+          "key": "loss_giou",
+          "weight": 2.0,
+          "branch": "final",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.26166602969169617,
+          "minimum_predicted_xyxy_size": 0.26799458265304565,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.28068971633911133,
+              "prediction_gradient_l2": 12.817030906677246,
+              "shared_bbox_parameter_gradient_l2": 5.1439051142827905,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.27909696102142334,
+              "prediction_gradient_l2": 12.807607650756836,
+              "shared_bbox_parameter_gradient_l2": 5.139696419456933,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0008188605865755,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn",
+          "weight": 2.0,
+          "branch": "_dn",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.30813202261924744,
+          "minimum_predicted_xyxy_size": 0.25747424364089966,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2936042249202728,
+              "prediction_gradient_l2": 1.4943026304244995,
+              "shared_bbox_parameter_gradient_l2": 3.73890568781189,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.29276925325393677,
+              "prediction_gradient_l2": 1.5480952262878418,
+              "shared_bbox_parameter_gradient_l2": 3.820301993028168,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9786937510788937,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_0",
+          "weight": 2.0,
+          "branch": "_0",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.19287124276161194,
+          "minimum_predicted_xyxy_size": 0.26171875,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.26316818594932556,
+              "prediction_gradient_l2": 13.24960708618164,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.26093757152557373,
+              "prediction_gradient_l2": 13.147870063781738,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_dn_0",
+          "weight": 2.0,
+          "branch": "_dn_0",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.8190996646881104,
+          "minimum_predicted_xyxy_size": 0.15624386072158813,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8276019096374512,
+              "prediction_gradient_l2": 1.032362937927246,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8652632236480713,
+              "prediction_gradient_l2": 1.1270955801010132,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_1",
+          "weight": 2.0,
+          "branch": "_1",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2646496295928955,
+          "minimum_predicted_xyxy_size": 0.2686343491077423,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2875225841999054,
+              "prediction_gradient_l2": 12.751282691955566,
+              "shared_bbox_parameter_gradient_l2": 4.04161359928594,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.28597307205200195,
+              "prediction_gradient_l2": 12.751347541809082,
+              "shared_bbox_parameter_gradient_l2": 4.040854216590044,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0001879262785027,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_1",
+          "weight": 2.0,
+          "branch": "_dn_1",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.26868173480033875,
+          "minimum_predicted_xyxy_size": 0.23392316699028015,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.3580917418003082,
+              "prediction_gradient_l2": 1.4658880233764648,
+              "shared_bbox_parameter_gradient_l2": 7.500877656223729,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.3614661991596222,
+              "prediction_gradient_l2": 1.503848671913147,
+              "shared_bbox_parameter_gradient_l2": 7.628187027979465,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9833106646061822,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_2",
+          "weight": 2.0,
+          "branch": "_2",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.26596784591674805,
+          "minimum_predicted_xyxy_size": 0.2687777280807495,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2874455749988556,
+              "prediction_gradient_l2": 12.746952056884766,
+              "shared_bbox_parameter_gradient_l2": 6.134525888375524,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.28591978549957275,
+              "prediction_gradient_l2": 12.750578880310059,
+              "shared_bbox_parameter_gradient_l2": 6.133890936724744,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.000103515314558,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_2",
+          "weight": 2.0,
+          "branch": "_dn_2",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3532624840736389,
+          "minimum_predicted_xyxy_size": 0.2610916495323181,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.35095131397247314,
+              "prediction_gradient_l2": 1.4600906372070312,
+              "shared_bbox_parameter_gradient_l2": 12.978763321349177,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.3494627773761749,
+              "prediction_gradient_l2": 1.4970060586929321,
+              "shared_bbox_parameter_gradient_l2": 13.030464642687202,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9960322733872705,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_3",
+          "weight": 2.0,
+          "branch": "_3",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2630050480365753,
+          "minimum_predicted_xyxy_size": 0.26834821701049805,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2829180061817169,
+              "prediction_gradient_l2": 12.790397644042969,
+              "shared_bbox_parameter_gradient_l2": 5.21299087299377,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2813633680343628,
+              "prediction_gradient_l2": 12.787501335144043,
+              "shared_bbox_parameter_gradient_l2": 5.212123698636026,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0001663763960496,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_3",
+          "weight": 2.0,
+          "branch": "_dn_3",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.31932905316352844,
+          "minimum_predicted_xyxy_size": 0.2558305859565735,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.31478938460350037,
+              "prediction_gradient_l2": 1.4743798971176147,
+              "shared_bbox_parameter_gradient_l2": 6.205460163815535,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.31429827213287354,
+              "prediction_gradient_l2": 1.518184781074524,
+              "shared_bbox_parameter_gradient_l2": 6.2970207198381924,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9854597022786998,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_4",
+          "weight": 2.0,
+          "branch": "_4",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2636977434158325,
+          "minimum_predicted_xyxy_size": 0.26825982332229614,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2820078432559967,
+              "prediction_gradient_l2": 12.796432495117188,
+              "shared_bbox_parameter_gradient_l2": 5.175677033794427,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.28041231632232666,
+              "prediction_gradient_l2": 12.790934562683105,
+              "shared_bbox_parameter_gradient_l2": 5.174115603323164,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0003017772678406,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_4",
+          "weight": 2.0,
+          "branch": "_dn_4",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3176141381263733,
+          "minimum_predicted_xyxy_size": 0.25505298376083374,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.30254507064819336,
+              "prediction_gradient_l2": 1.4591788053512573,
+              "shared_bbox_parameter_gradient_l2": 4.657697314265295,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.301890105009079,
+              "prediction_gradient_l2": 1.5146907567977905,
+              "shared_bbox_parameter_gradient_l2": 4.777910259095674,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9748398487387859,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_5",
+          "weight": 2.0,
+          "branch": "_5",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2632974088191986,
+          "minimum_predicted_xyxy_size": 0.2682063579559326,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2817766070365906,
+              "prediction_gradient_l2": 12.800410270690918,
+              "shared_bbox_parameter_gradient_l2": 5.150982745076579,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2801821231842041,
+              "prediction_gradient_l2": 12.794112205505371,
+              "shared_bbox_parameter_gradient_l2": 5.146844702547112,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.000803995995142,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_5",
+          "weight": 2.0,
+          "branch": "_dn_5",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3122316300868988,
+          "minimum_predicted_xyxy_size": 0.25787684321403503,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2955179214477539,
+              "prediction_gradient_l2": 1.472066879272461,
+              "shared_bbox_parameter_gradient_l2": 4.314841660794641,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2946080267429352,
+              "prediction_gradient_l2": 1.5269345045089722,
+              "shared_bbox_parameter_gradient_l2": 4.422828492244261,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9755842145721999,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_6",
+          "weight": 2.0,
+          "branch": "_6",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2629198133945465,
+          "minimum_predicted_xyxy_size": 0.2681547999382019,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.28153926134109497,
+              "prediction_gradient_l2": 12.80428695678711,
+              "shared_bbox_parameter_gradient_l2": 5.139841130098416,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.27994441986083984,
+              "prediction_gradient_l2": 12.797211647033691,
+              "shared_bbox_parameter_gradient_l2": 5.134707677259554,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0009997556161954,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_6",
+          "weight": 2.0,
+          "branch": "_dn_6",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3089083433151245,
+          "minimum_predicted_xyxy_size": 0.25760918855667114,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.29340624809265137,
+              "prediction_gradient_l2": 1.4844871759414673,
+              "shared_bbox_parameter_gradient_l2": 3.8752599700662596,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.29253092408180237,
+              "prediction_gradient_l2": 1.538922667503357,
+              "shared_bbox_parameter_gradient_l2": 3.965042335473929,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9773565178345276,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_7",
+          "weight": 2.0,
+          "branch": "_7",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2625423073768616,
+          "minimum_predicted_xyxy_size": 0.2681031823158264,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.28130120038986206,
+              "prediction_gradient_l2": 12.808175086975098,
+              "shared_bbox_parameter_gradient_l2": 5.139844841006781,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.27970683574676514,
+              "prediction_gradient_l2": 12.80031681060791,
+              "shared_bbox_parameter_gradient_l2": 5.134711020416202,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0009998265859879,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_7",
+          "weight": 2.0,
+          "branch": "_dn_7",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3086586892604828,
+          "minimum_predicted_xyxy_size": 0.25755825638771057,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2934427857398987,
+              "prediction_gradient_l2": 1.490926742553711,
+              "shared_bbox_parameter_gradient_l2": 3.7315942671148763,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2925792634487152,
+              "prediction_gradient_l2": 1.5449695587158203,
+              "shared_bbox_parameter_gradient_l2": 3.812845014096764,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9786902570960876,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_8",
+          "weight": 2.0,
+          "branch": "_8",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.2621647119522095,
+          "minimum_predicted_xyxy_size": 0.2680515646934509,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.281063050031662,
+              "prediction_gradient_l2": 12.812065124511719,
+              "shared_bbox_parameter_gradient_l2": 5.143269609380814,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2794688940048218,
+              "prediction_gradient_l2": 12.803425788879395,
+              "shared_bbox_parameter_gradient_l2": 5.1381109983482895,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0010039897995942,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_8",
+          "weight": 2.0,
+          "branch": "_dn_8",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3083174526691437,
+          "minimum_predicted_xyxy_size": 0.2575106620788574,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2937488555908203,
+              "prediction_gradient_l2": 1.4941641092300415,
+              "shared_bbox_parameter_gradient_l2": 3.73599592216002,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2929190397262573,
+              "prediction_gradient_l2": 1.5479521751403809,
+              "shared_bbox_parameter_gradient_l2": 3.8173503399855657,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9786882495498612,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_interm",
+          "weight": 2.0,
+          "branch": "_interm",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.16188569366931915,
+          "minimum_predicted_xyxy_size": 0.24908941984176636,
+          "minimum_target_xyxy_size": 0.255859375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.32199692726135254,
+              "prediction_gradient_l2": 17.081802368164062,
+              "shared_bbox_parameter_gradient_l2": 30.242949865794056,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.3231062889099121,
+              "prediction_gradient_l2": 17.557899475097656,
+              "shared_bbox_parameter_gradient_l2": 30.539174907474525,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9903001622480326,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        }
+      ],
+      "coverage": "all actual enabled regression loss keys, no duplicates",
+      "parameter_names": [
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.bias"
+      ],
+      "scope": "same outputs/matches, before clipping; diagnostic scales divided in FP32; no .grad writes or parameter updates"
+    },
+    {
+      "source_image_id": 4,
+      "source_single_box": false,
+      "augmented_objects": 3,
+      "replay_seed": 42001,
+      "keys_weights_gradients": [
+        {
+          "key": "loss_giou",
+          "weight": 2.0,
+          "branch": "final",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.6988381743431091,
+          "minimum_predicted_xyxy_size": 0.08301837742328644,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8772847056388855,
+              "prediction_gradient_l2": 19.67721176147461,
+              "shared_bbox_parameter_gradient_l2": 4.58592121804089,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8699536323547363,
+              "prediction_gradient_l2": 21.04178810119629,
+              "shared_bbox_parameter_gradient_l2": 5.700556085587998,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8044690990119536,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn",
+          "weight": 2.0,
+          "branch": "_dn",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.25002118945121765,
+          "minimum_predicted_xyxy_size": 0.002730846405029297,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.7585096955299377,
+              "prediction_gradient_l2": 19.12498664855957,
+              "shared_bbox_parameter_gradient_l2": 42.77471181950462,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8131871223449707,
+              "prediction_gradient_l2": 22.88005256652832,
+              "shared_bbox_parameter_gradient_l2": 53.19643177664213,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8040898682660449,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_0",
+          "weight": 2.0,
+          "branch": "_0",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.7185872793197632,
+          "minimum_predicted_xyxy_size": 0.078125,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8397529125213623,
+              "prediction_gradient_l2": 13.880949020385742,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8196460604667664,
+              "prediction_gradient_l2": 15.026978492736816,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_dn_0",
+          "weight": 2.0,
+          "branch": "_dn_0",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.41410577297210693,
+          "minimum_predicted_xyxy_size": 0.0023854970932006836,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8369058966636658,
+              "prediction_gradient_l2": 27.46068000793457,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8692256212234497,
+              "prediction_gradient_l2": 31.611936569213867,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_1",
+          "weight": 2.0,
+          "branch": "_1",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.7421630620956421,
+          "minimum_predicted_xyxy_size": 0.08222242444753647,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.832831621170044,
+              "prediction_gradient_l2": 19.8282413482666,
+              "shared_bbox_parameter_gradient_l2": 3.7508670591308406,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8075992465019226,
+              "prediction_gradient_l2": 20.114826202392578,
+              "shared_bbox_parameter_gradient_l2": 3.783510400190314,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9913722079212938,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_1",
+          "weight": 2.0,
+          "branch": "_dn_1",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.3274436295032501,
+          "minimum_predicted_xyxy_size": 0.002611517906188965,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.7600780725479126,
+              "prediction_gradient_l2": 25.032150268554688,
+              "shared_bbox_parameter_gradient_l2": 55.725809398371744,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.7883798480033875,
+              "prediction_gradient_l2": 29.280170440673828,
+              "shared_bbox_parameter_gradient_l2": 65.66239799463993,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8486715548055348,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_2",
+          "weight": 2.0,
+          "branch": "_2",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.5892294645309448,
+          "minimum_predicted_xyxy_size": 0.08234938979148865,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8412637710571289,
+              "prediction_gradient_l2": 19.857940673828125,
+              "shared_bbox_parameter_gradient_l2": 5.732820947044143,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8743218183517456,
+              "prediction_gradient_l2": 21.4505615234375,
+              "shared_bbox_parameter_gradient_l2": 6.716809820218574,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8535035382104559,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_2",
+          "weight": 2.0,
+          "branch": "_dn_2",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.27913469076156616,
+          "minimum_predicted_xyxy_size": 0.0026720762252807617,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.6560728549957275,
+              "prediction_gradient_l2": 24.361867904663086,
+              "shared_bbox_parameter_gradient_l2": 96.50906278371173,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.6922178864479065,
+              "prediction_gradient_l2": 28.488088607788086,
+              "shared_bbox_parameter_gradient_l2": 114.9143791238457,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8398345230556482,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_3",
+          "weight": 2.0,
+          "branch": "_3",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.6202941536903381,
+          "minimum_predicted_xyxy_size": 0.08236479759216309,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.859825611114502,
+              "prediction_gradient_l2": 19.591901779174805,
+              "shared_bbox_parameter_gradient_l2": 5.667412851506553,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8765527606010437,
+              "prediction_gradient_l2": 21.25517463684082,
+              "shared_bbox_parameter_gradient_l2": 5.7780250824774555,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9808563948074008,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_3",
+          "weight": 2.0,
+          "branch": "_dn_3",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.2777455449104309,
+          "minimum_predicted_xyxy_size": 0.0026726722717285156,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8758967518806458,
+              "prediction_gradient_l2": 15.270365715026855,
+              "shared_bbox_parameter_gradient_l2": 43.48937231922543,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.9561131596565247,
+              "prediction_gradient_l2": 18.979673385620117,
+              "shared_bbox_parameter_gradient_l2": 59.06654696198338,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.7362775472081596,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_4",
+          "weight": 2.0,
+          "branch": "_4",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.687017560005188,
+          "minimum_predicted_xyxy_size": 0.08264436572790146,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8827950358390808,
+              "prediction_gradient_l2": 19.364900588989258,
+              "shared_bbox_parameter_gradient_l2": 5.525588274417472,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8836585879325867,
+              "prediction_gradient_l2": 21.078256607055664,
+              "shared_bbox_parameter_gradient_l2": 6.034501545145903,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9156660633986062,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_4",
+          "weight": 2.0,
+          "branch": "_dn_4",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.2620893120765686,
+          "minimum_predicted_xyxy_size": 0.002723097801208496,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8580508828163147,
+              "prediction_gradient_l2": 14.181836128234863,
+              "shared_bbox_parameter_gradient_l2": 36.156500498135536,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.9395588636398315,
+              "prediction_gradient_l2": 18.328941345214844,
+              "shared_bbox_parameter_gradient_l2": 53.0820805785688,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.6811432427675521,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_5",
+          "weight": 2.0,
+          "branch": "_5",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.676469087600708,
+          "minimum_predicted_xyxy_size": 0.0830182135105133,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8743160963058472,
+              "prediction_gradient_l2": 19.794828414916992,
+              "shared_bbox_parameter_gradient_l2": 5.0554910929064665,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8702607154846191,
+              "prediction_gradient_l2": 21.166465759277344,
+              "shared_bbox_parameter_gradient_l2": 5.896909799512844,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8573119251922852,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_5",
+          "weight": 2.0,
+          "branch": "_dn_5",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.25337570905685425,
+          "minimum_predicted_xyxy_size": 0.002701997756958008,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8011314272880554,
+              "prediction_gradient_l2": 17.570711135864258,
+              "shared_bbox_parameter_gradient_l2": 47.8240578958825,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8668095469474792,
+              "prediction_gradient_l2": 21.21881866455078,
+              "shared_bbox_parameter_gradient_l2": 60.194039896113566,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.7944982257117031,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_6",
+          "weight": 2.0,
+          "branch": "_6",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.6899266839027405,
+          "minimum_predicted_xyxy_size": 0.0829814076423645,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8767837882041931,
+              "prediction_gradient_l2": 19.728679656982422,
+              "shared_bbox_parameter_gradient_l2": 4.767435340649544,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8705323934555054,
+              "prediction_gradient_l2": 21.095767974853516,
+              "shared_bbox_parameter_gradient_l2": 5.792386032045088,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8230520746155289,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_6",
+          "weight": 2.0,
+          "branch": "_dn_6",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.2502767741680145,
+          "minimum_predicted_xyxy_size": 0.002711176872253418,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.7598514556884766,
+              "prediction_gradient_l2": 19.199750900268555,
+              "shared_bbox_parameter_gradient_l2": 46.52506949423333,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8152444362640381,
+              "prediction_gradient_l2": 22.903833389282227,
+              "shared_bbox_parameter_gradient_l2": 57.63287208567493,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8072661974067515,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_7",
+          "weight": 2.0,
+          "branch": "_7",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.69633948802948,
+          "minimum_predicted_xyxy_size": 0.0829867422580719,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8755009174346924,
+              "prediction_gradient_l2": 19.710979461669922,
+              "shared_bbox_parameter_gradient_l2": 4.59481257071919,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8692361116409302,
+              "prediction_gradient_l2": 21.071704864501953,
+              "shared_bbox_parameter_gradient_l2": 5.694762870473077,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8068487969081463,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_7",
+          "weight": 2.0,
+          "branch": "_dn_7",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.2504979372024536,
+          "minimum_predicted_xyxy_size": 0.0027244091033935547,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.7697166800498962,
+              "prediction_gradient_l2": 18.659900665283203,
+              "shared_bbox_parameter_gradient_l2": 40.73754994303594,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.827094316482544,
+              "prediction_gradient_l2": 22.30016326904297,
+              "shared_bbox_parameter_gradient_l2": 50.6264115863789,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8046699077916796,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_8",
+          "weight": 2.0,
+          "branch": "_8",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.697552502155304,
+          "minimum_predicted_xyxy_size": 0.0830082893371582,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8771687746047974,
+              "prediction_gradient_l2": 19.693004608154297,
+              "shared_bbox_parameter_gradient_l2": 4.566280992951549,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8697633743286133,
+              "prediction_gradient_l2": 21.057674407958984,
+              "shared_bbox_parameter_gradient_l2": 5.7036034039006775,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8005958110320017,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_8",
+          "weight": 2.0,
+          "branch": "_dn_8",
+          "matched_pairs": 99,
+          "native_normalizer": 99.0,
+          "weighted_l1": 0.2502714693546295,
+          "minimum_predicted_xyxy_size": 0.0027273893356323242,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.758292555809021,
+              "prediction_gradient_l2": 19.185508728027344,
+              "shared_bbox_parameter_gradient_l2": 42.304924465543415,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8130658268928528,
+              "prediction_gradient_l2": 22.923446655273438,
+              "shared_bbox_parameter_gradient_l2": 52.61500665726626,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.804046737865426,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_interm",
+          "weight": 2.0,
+          "branch": "_interm",
+          "matched_pairs": 3,
+          "native_normalizer": 3.0,
+          "weighted_l1": 0.7636846303939819,
+          "minimum_predicted_xyxy_size": 0.09427914768457413,
+          "minimum_target_xyxy_size": 0.00390625,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 1.14030122756958,
+              "prediction_gradient_l2": 12.049052238464355,
+              "shared_bbox_parameter_gradient_l2": 19.822719031483963,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 1.1933255195617676,
+              "prediction_gradient_l2": 12.96538257598877,
+              "shared_bbox_parameter_gradient_l2": 20.276239369108993,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9776329165694825,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        }
+      ],
+      "coverage": "all actual enabled regression loss keys, no duplicates",
+      "parameter_names": [
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.bias"
+      ],
+      "scope": "same outputs/matches, before clipping; diagnostic scales divided in FP32; no .grad writes or parameter updates"
+    },
+    {
+      "source_image_id": 2,
+      "source_single_box": true,
+      "augmented_objects": 1,
+      "replay_seed": 42002,
+      "keys_weights_gradients": [
+        {
+          "key": "loss_giou",
+          "weight": 2.0,
+          "branch": "final",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.062178969383239746,
+          "minimum_predicted_xyxy_size": 0.6193937659263611,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029355883598327637,
+              "prediction_gradient_l2": 4.147671699523926,
+              "shared_bbox_parameter_gradient_l2": 1.8332306177195732,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.029384255409240723,
+              "prediction_gradient_l2": 4.1747589111328125,
+              "shared_bbox_parameter_gradient_l2": 1.8427158301274817,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.994852590804385,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn",
+          "weight": 2.0,
+          "branch": "_dn",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.37059682607650757,
+          "minimum_predicted_xyxy_size": 0.621437668800354,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.15388934314250946,
+              "prediction_gradient_l2": 0.5207126140594482,
+              "shared_bbox_parameter_gradient_l2": 1.455198157362906,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.15387286245822906,
+              "prediction_gradient_l2": 0.5266832709312439,
+              "shared_bbox_parameter_gradient_l2": 1.470544895048328,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.989563910807424,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_0",
+          "weight": 2.0,
+          "branch": "_0",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.0927734375,
+          "minimum_predicted_xyxy_size": 0.609375,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.05081532523036003,
+              "prediction_gradient_l2": 6.901051044464111,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.05089426040649414,
+              "prediction_gradient_l2": 6.940503120422363,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_dn_0",
+          "weight": 2.0,
+          "branch": "_dn_0",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 1.9887058734893799,
+          "minimum_predicted_xyxy_size": 0.37316417694091797,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8258823156356812,
+              "prediction_gradient_l2": 0.4306190311908722,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8581017255783081,
+              "prediction_gradient_l2": 0.4676181674003601,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_1",
+          "weight": 2.0,
+          "branch": "_1",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06284773349761963,
+          "minimum_predicted_xyxy_size": 0.6181788444519043,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029720166698098183,
+              "prediction_gradient_l2": 6.247350692749023,
+              "shared_bbox_parameter_gradient_l2": 2.2908144252091875,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.029790401458740234,
+              "prediction_gradient_l2": 6.273861408233643,
+              "shared_bbox_parameter_gradient_l2": 2.300454540740945,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9958094735792308,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_1",
+          "weight": 2.0,
+          "branch": "_dn_1",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.7580342888832092,
+          "minimum_predicted_xyxy_size": 0.5643360614776611,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.33685627579689026,
+              "prediction_gradient_l2": 0.5011703372001648,
+              "shared_bbox_parameter_gradient_l2": 3.5394176273794047,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.33870619535446167,
+              "prediction_gradient_l2": 0.5137962102890015,
+              "shared_bbox_parameter_gradient_l2": 3.528254625491351,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0031638878346247,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_2",
+          "weight": 2.0,
+          "branch": "_2",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06391286849975586,
+          "minimum_predicted_xyxy_size": 0.6183797121047974,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.030903887003660202,
+              "prediction_gradient_l2": 6.24172830581665,
+              "shared_bbox_parameter_gradient_l2": 3.3971897861614524,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.03097081184387207,
+              "prediction_gradient_l2": 6.2684197425842285,
+              "shared_bbox_parameter_gradient_l2": 3.4115833951522325,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9957809593597422,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_2",
+          "weight": 2.0,
+          "branch": "_dn_2",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.5048339366912842,
+          "minimum_predicted_xyxy_size": 0.6109365224838257,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.22338637709617615,
+              "prediction_gradient_l2": 0.5896415710449219,
+              "shared_bbox_parameter_gradient_l2": 8.45680720426755,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.22351683676242828,
+              "prediction_gradient_l2": 0.5981029272079468,
+              "shared_bbox_parameter_gradient_l2": 8.474494323600082,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9979128997367697,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_3",
+          "weight": 2.0,
+          "branch": "_3",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06378799676895142,
+          "minimum_predicted_xyxy_size": 0.6185881495475769,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.030121592804789543,
+              "prediction_gradient_l2": 6.241055011749268,
+              "shared_bbox_parameter_gradient_l2": 2.9542768256363354,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.030164718627929688,
+              "prediction_gradient_l2": 6.268224716186523,
+              "shared_bbox_parameter_gradient_l2": 2.9665616582698076,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9958588986005998,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_3",
+          "weight": 2.0,
+          "branch": "_dn_3",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.44859153032302856,
+          "minimum_predicted_xyxy_size": 0.6232208013534546,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.19250750541687012,
+              "prediction_gradient_l2": 0.5871684551239014,
+              "shared_bbox_parameter_gradient_l2": 3.8109858111963155,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.19231224060058594,
+              "prediction_gradient_l2": 0.5942524075508118,
+              "shared_bbox_parameter_gradient_l2": 3.802885824723134,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.002129957838734,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_4",
+          "weight": 2.0,
+          "branch": "_4",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06273150444030762,
+          "minimum_predicted_xyxy_size": 0.6193162202835083,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029083557426929474,
+              "prediction_gradient_l2": 4.148774147033691,
+              "shared_bbox_parameter_gradient_l2": 1.8854336038180308,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.029110312461853027,
+              "prediction_gradient_l2": 4.175610542297363,
+              "shared_bbox_parameter_gradient_l2": 1.896076297893356,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9943869906036248,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_4",
+          "weight": 2.0,
+          "branch": "_dn_4",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.4115946292877197,
+          "minimum_predicted_xyxy_size": 0.6244773864746094,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.17265990376472473,
+              "prediction_gradient_l2": 0.5584036707878113,
+              "shared_bbox_parameter_gradient_l2": 2.4127634072975748,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.1724291741847992,
+              "prediction_gradient_l2": 0.5641217827796936,
+              "shared_bbox_parameter_gradient_l2": 2.420885128917175,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.996645143743673,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_5",
+          "weight": 2.0,
+          "branch": "_5",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06099015474319458,
+          "minimum_predicted_xyxy_size": 0.6195191144943237,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029186539351940155,
+              "prediction_gradient_l2": 4.147382736206055,
+              "shared_bbox_parameter_gradient_l2": 1.8962408384753073,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.029208064079284668,
+              "prediction_gradient_l2": 4.174108982086182,
+              "shared_bbox_parameter_gradient_l2": 1.9059631208233072,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9948990186416644,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_5",
+          "weight": 2.0,
+          "branch": "_dn_5",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3710598051548004,
+          "minimum_predicted_xyxy_size": 0.621675968170166,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.1543852537870407,
+              "prediction_gradient_l2": 0.5171481370925903,
+              "shared_bbox_parameter_gradient_l2": 2.157677099260773,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.1543428748846054,
+              "prediction_gradient_l2": 0.5225548148155212,
+              "shared_bbox_parameter_gradient_l2": 2.180941628657216,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9893328051096186,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_6",
+          "weight": 2.0,
+          "branch": "_6",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06125837564468384,
+          "minimum_predicted_xyxy_size": 0.6194709539413452,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029188040643930435,
+              "prediction_gradient_l2": 4.147648811340332,
+              "shared_bbox_parameter_gradient_l2": 1.8469579315875986,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.02921164035797119,
+              "prediction_gradient_l2": 4.174434185028076,
+              "shared_bbox_parameter_gradient_l2": 1.8565161376659072,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9948515362267087,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_6",
+          "weight": 2.0,
+          "branch": "_dn_6",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3706008493900299,
+          "minimum_predicted_xyxy_size": 0.6216028928756714,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.15398183465003967,
+              "prediction_gradient_l2": 0.5188555717468262,
+              "shared_bbox_parameter_gradient_l2": 1.6437776825042787,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.15395385026931763,
+              "prediction_gradient_l2": 0.5247384905815125,
+              "shared_bbox_parameter_gradient_l2": 1.6615141779336209,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9893251013648345,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_7",
+          "weight": 2.0,
+          "branch": "_7",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06159663200378418,
+          "minimum_predicted_xyxy_size": 0.6194519996643066,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029214903712272644,
+              "prediction_gradient_l2": 4.147690296173096,
+              "shared_bbox_parameter_gradient_l2": 1.8314900111342387,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.029239177703857422,
+              "prediction_gradient_l2": 4.17453145980835,
+              "shared_bbox_parameter_gradient_l2": 1.8415349235194876,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9945453587341988,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_7",
+          "weight": 2.0,
+          "branch": "_dn_7",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3703562617301941,
+          "minimum_predicted_xyxy_size": 0.6215556859970093,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.15390920639038086,
+              "prediction_gradient_l2": 0.5188767910003662,
+              "shared_bbox_parameter_gradient_l2": 1.4613164471208118,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.1538875848054886,
+              "prediction_gradient_l2": 0.5247640013694763,
+              "shared_bbox_parameter_gradient_l2": 1.4775932601162187,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9889842398204254,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_8",
+          "weight": 2.0,
+          "branch": "_8",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.06214827299118042,
+          "minimum_predicted_xyxy_size": 0.6194688081741333,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.029429316520690918,
+              "prediction_gradient_l2": 4.147071838378906,
+              "shared_bbox_parameter_gradient_l2": 1.8321284376625495,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.02945578098297119,
+              "prediction_gradient_l2": 4.174162864685059,
+              "shared_bbox_parameter_gradient_l2": 1.8429769533305482,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9941135912473632,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_8",
+          "weight": 2.0,
+          "branch": "_dn_8",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.37099090218544006,
+          "minimum_predicted_xyxy_size": 0.6215208768844604,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.15410779416561127,
+              "prediction_gradient_l2": 0.5188236236572266,
+              "shared_bbox_parameter_gradient_l2": 1.4587246232285098,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.15408967435359955,
+              "prediction_gradient_l2": 0.5247271656990051,
+              "shared_bbox_parameter_gradient_l2": 1.4746957703723496,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9891698698364094,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_interm",
+          "weight": 2.0,
+          "branch": "_interm",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 1.4392600059509277,
+          "minimum_predicted_xyxy_size": 0.6311492919921875,
+          "minimum_target_xyxy_size": 0.611328125,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 1.075269103050232,
+              "prediction_gradient_l2": 4.492563247680664,
+              "shared_bbox_parameter_gradient_l2": 15.563977630191113,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 1.08551025390625,
+              "prediction_gradient_l2": 4.889333724975586,
+              "shared_bbox_parameter_gradient_l2": 19.018486347345032,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.8183604807415715,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        }
+      ],
+      "coverage": "all actual enabled regression loss keys, no duplicates",
+      "parameter_names": [
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.bias"
+      ],
+      "scope": "same outputs/matches, before clipping; diagnostic scales divided in FP32; no .grad writes or parameter updates"
+    },
+    {
+      "source_image_id": 3,
+      "source_single_box": true,
+      "augmented_objects": 1,
+      "replay_seed": 42003,
+      "keys_weights_gradients": [
+        {
+          "key": "loss_giou",
+          "weight": 2.0,
+          "branch": "final",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.0922054797410965,
+          "minimum_predicted_xyxy_size": 0.3038251996040344,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.10737954080104828,
+              "prediction_gradient_l2": 15.380513191223145,
+              "shared_bbox_parameter_gradient_l2": 5.284349591745772,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10747241973876953,
+              "prediction_gradient_l2": 15.46023178100586,
+              "shared_bbox_parameter_gradient_l2": 5.313089971637477,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9945906468653604,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn",
+          "weight": 2.0,
+          "branch": "_dn",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.2017599493265152,
+          "minimum_predicted_xyxy_size": 0.25073015689849854,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.25794920325279236,
+              "prediction_gradient_l2": 1.3453948497772217,
+              "shared_bbox_parameter_gradient_l2": 4.4572048025284685,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2565061151981354,
+              "prediction_gradient_l2": 1.3479366302490234,
+              "shared_bbox_parameter_gradient_l2": 4.4394876656851645,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0039908066372711,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_0",
+          "weight": 2.0,
+          "branch": "_0",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.068359375,
+          "minimum_predicted_xyxy_size": 0.296875,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.08934583514928818,
+              "prediction_gradient_l2": 13.625712394714355,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.08972322940826416,
+              "prediction_gradient_l2": 13.688899993896484,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_dn_0",
+          "weight": 2.0,
+          "branch": "_dn_0",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 1.133655309677124,
+          "minimum_predicted_xyxy_size": 0.18187132477760315,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.8328441977500916,
+              "prediction_gradient_l2": 0.7793936133384705,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.8753129243850708,
+              "prediction_gradient_l2": 0.8565820455551147,
+              "shared_bbox_parameter_gradient_l2": 0.0,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.0,
+          "head_gradient_status": "native detached initialization; BOTH CIoU/GIoU head gradients zero; not a learned regression output"
+        },
+        {
+          "key": "loss_giou_1",
+          "weight": 2.0,
+          "branch": "_1",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.08823342621326447,
+          "minimum_predicted_xyxy_size": 0.30340051651000977,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.09758554399013519,
+              "prediction_gradient_l2": 15.472589492797852,
+              "shared_bbox_parameter_gradient_l2": 4.261492931164858,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.0975656509399414,
+              "prediction_gradient_l2": 15.541037559509277,
+              "shared_bbox_parameter_gradient_l2": 4.281815502996449,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9952537488319232,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_1",
+          "weight": 2.0,
+          "branch": "_dn_1",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.3845885097980499,
+          "minimum_predicted_xyxy_size": 0.23528403043746948,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.42102453112602234,
+              "prediction_gradient_l2": 1.1918801069259644,
+              "shared_bbox_parameter_gradient_l2": 8.302155059111639,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.42422956228256226,
+              "prediction_gradient_l2": 1.2140543460845947,
+              "shared_bbox_parameter_gradient_l2": 8.319264577413348,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9979433857231613,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_2",
+          "weight": 2.0,
+          "branch": "_2",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09015463292598724,
+          "minimum_predicted_xyxy_size": 0.30362534523010254,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.09574698656797409,
+              "prediction_gradient_l2": 15.481795310974121,
+              "shared_bbox_parameter_gradient_l2": 6.366176774337355,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.09571242332458496,
+              "prediction_gradient_l2": 15.549755096435547,
+              "shared_bbox_parameter_gradient_l2": 6.396019529130372,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9953341676556654,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_2",
+          "weight": 2.0,
+          "branch": "_dn_2",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.2216918021440506,
+          "minimum_predicted_xyxy_size": 0.24958395957946777,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.28813454508781433,
+              "prediction_gradient_l2": 1.3543702363967896,
+              "shared_bbox_parameter_gradient_l2": 13.903566100138482,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2872183620929718,
+              "prediction_gradient_l2": 1.3638763427734375,
+              "shared_bbox_parameter_gradient_l2": 13.8158584412787,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0063483321888074,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_3",
+          "weight": 2.0,
+          "branch": "_3",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09186938405036926,
+          "minimum_predicted_xyxy_size": 0.30378955602645874,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.1032363548874855,
+              "prediction_gradient_l2": 15.414616584777832,
+              "shared_bbox_parameter_gradient_l2": 5.408152395688034,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10329580307006836,
+              "prediction_gradient_l2": 15.491312026977539,
+              "shared_bbox_parameter_gradient_l2": 5.437769842307597,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9945533835599063,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_3",
+          "weight": 2.0,
+          "branch": "_dn_3",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.2531043291091919,
+          "minimum_predicted_xyxy_size": 0.2489582598209381,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.33085522055625916,
+              "prediction_gradient_l2": 1.307039499282837,
+              "shared_bbox_parameter_gradient_l2": 7.965525951981898,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.32995596528053284,
+              "prediction_gradient_l2": 1.3156508207321167,
+              "shared_bbox_parameter_gradient_l2": 7.929730888304372,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.004514032592117,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_4",
+          "weight": 2.0,
+          "branch": "_4",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09155549108982086,
+          "minimum_predicted_xyxy_size": 0.30378687381744385,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.10415709018707275,
+              "prediction_gradient_l2": 15.40637493133545,
+              "shared_bbox_parameter_gradient_l2": 5.375618275713802,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10424792766571045,
+              "prediction_gradient_l2": 15.485139846801758,
+              "shared_bbox_parameter_gradient_l2": 5.40732020417078,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9941372200533788,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_4",
+          "weight": 2.0,
+          "branch": "_dn_4",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.21600043773651123,
+          "minimum_predicted_xyxy_size": 0.25173670053482056,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2708016037940979,
+              "prediction_gradient_l2": 1.330302119255066,
+              "shared_bbox_parameter_gradient_l2": 5.799388769821967,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.27021583914756775,
+              "prediction_gradient_l2": 1.3461978435516357,
+              "shared_bbox_parameter_gradient_l2": 5.856928062754378,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9901758580066388,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_5",
+          "weight": 2.0,
+          "branch": "_5",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09412966668605804,
+          "minimum_predicted_xyxy_size": 0.30402955412864685,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.1071513295173645,
+              "prediction_gradient_l2": 15.379464149475098,
+              "shared_bbox_parameter_gradient_l2": 5.339852373557725,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10719907283782959,
+              "prediction_gradient_l2": 15.457104682922363,
+              "shared_bbox_parameter_gradient_l2": 5.367136690281104,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9949164110588462,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_5",
+          "weight": 2.0,
+          "branch": "_dn_5",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.19842985272407532,
+          "minimum_predicted_xyxy_size": 0.2509543001651764,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2561973035335541,
+              "prediction_gradient_l2": 1.3568999767303467,
+              "shared_bbox_parameter_gradient_l2": 5.64368353784225,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.25457286834716797,
+              "prediction_gradient_l2": 1.3602511882781982,
+              "shared_bbox_parameter_gradient_l2": 5.632819155627616,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0019287646049808,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_6",
+          "weight": 2.0,
+          "branch": "_6",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09378284215927124,
+          "minimum_predicted_xyxy_size": 0.3039993643760681,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.1073794737458229,
+              "prediction_gradient_l2": 15.37802791595459,
+              "shared_bbox_parameter_gradient_l2": 5.307127526848411,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10743868350982666,
+              "prediction_gradient_l2": 15.456233978271484,
+              "shared_bbox_parameter_gradient_l2": 5.338424646161243,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9941373867033355,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_6",
+          "weight": 2.0,
+          "branch": "_dn_6",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.19979825615882874,
+          "minimum_predicted_xyxy_size": 0.2508547902107239,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2562880516052246,
+              "prediction_gradient_l2": 1.3483222723007202,
+              "shared_bbox_parameter_gradient_l2": 4.730016434278662,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.2547855079174042,
+              "prediction_gradient_l2": 1.3509303331375122,
+              "shared_bbox_parameter_gradient_l2": 4.714662594275979,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0032566148042747,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_7",
+          "weight": 2.0,
+          "branch": "_7",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09333714842796326,
+          "minimum_predicted_xyxy_size": 0.303983598947525,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.10717883706092834,
+              "prediction_gradient_l2": 15.379833221435547,
+              "shared_bbox_parameter_gradient_l2": 5.2764220634495915,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.10724961757659912,
+              "prediction_gradient_l2": 15.458473205566406,
+              "shared_bbox_parameter_gradient_l2": 5.306351497245678,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9943596963351155,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_7",
+          "weight": 2.0,
+          "branch": "_dn_7",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.19973425567150116,
+          "minimum_predicted_xyxy_size": 0.2508105933666229,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2561998665332794,
+              "prediction_gradient_l2": 1.3485065698623657,
+              "shared_bbox_parameter_gradient_l2": 4.455068109364593,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.25470057129859924,
+              "prediction_gradient_l2": 1.3511228561401367,
+              "shared_bbox_parameter_gradient_l2": 4.437565737974578,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0039441379401401,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_8",
+          "weight": 2.0,
+          "branch": "_8",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.09303875267505646,
+          "minimum_predicted_xyxy_size": 0.3039399981498718,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.10740632563829422,
+              "prediction_gradient_l2": 15.378742218017578,
+              "shared_bbox_parameter_gradient_l2": 5.276736887128311,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.1074824333190918,
+              "prediction_gradient_l2": 15.457669258117676,
+              "shared_bbox_parameter_gradient_l2": 5.306667327721127,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9943598422992415,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_dn_8",
+          "weight": 2.0,
+          "branch": "_dn_8",
+          "matched_pairs": 100,
+          "native_normalizer": 100.0,
+          "weighted_l1": 0.19966396689414978,
+          "minimum_predicted_xyxy_size": 0.2507665753364563,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.2561068534851074,
+              "prediction_gradient_l2": 1.3417415618896484,
+              "shared_bbox_parameter_gradient_l2": 4.43016645349484,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.25461238622665405,
+              "prediction_gradient_l2": 1.3435369729995728,
+              "shared_bbox_parameter_gradient_l2": 4.410726228271249,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 1.0044074885215002,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        },
+        {
+          "key": "loss_giou_interm",
+          "weight": 2.0,
+          "branch": "_interm",
+          "matched_pairs": 1,
+          "native_normalizer": 1.0,
+          "weighted_l1": 0.4367251694202423,
+          "minimum_predicted_xyxy_size": 0.2507369816303253,
+          "minimum_target_xyxy_size": 0.2958984375,
+          "variants": {
+            "ciou": {
+              "weighted_loss": 0.516594648361206,
+              "prediction_gradient_l2": 13.182159423828125,
+              "shared_bbox_parameter_gradient_l2": 31.930727514139814,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            },
+            "native_giou": {
+              "weighted_loss": 0.5098520517349243,
+              "prediction_gradient_l2": 13.367362022399902,
+              "shared_bbox_parameter_gradient_l2": 32.199868092114954,
+              "diagnostic_backward_scale": 64.0,
+              "parameters_used": 6,
+              "finite": true
+            }
+          },
+          "ciou_to_giou_head_gradient_ratio": 0.9916415627167727,
+          "head_gradient_status": "nonzero native bbox parameter gradient"
+        }
+      ],
+      "coverage": "all actual enabled regression loss keys, no duplicates",
+      "parameter_names": [
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.0.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.1.bias",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.weight",
+        "sem_seg_head.predictor.decoder.bbox_embed.0.layers.2.bias"
+      ],
+      "scope": "same outputs/matches, before clipping; diagnostic scales divided in FP32; no .grad writes or parameter updates"
+    }
+  ],
+  "no_parameter_updates": true,
+  "gpu": "NVIDIA GeForce RTX 5070",
+  "checkpoint_sha256": "0e59311fd3c4d36b05c930ee027e9c80ccc52ddd08af7e83d4a69faab9562836"
+}

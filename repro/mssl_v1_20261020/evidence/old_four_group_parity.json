@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "maximum_absolute_AP_vector_error": 0.0,
+  "draws_sha256": "d3110055a4836462a7d886beb7672e8e4443f0c5282d44b9404386b373972e73",
+  "scope": "all original 4 models, 2000 draws, pooled and six centers"
+}

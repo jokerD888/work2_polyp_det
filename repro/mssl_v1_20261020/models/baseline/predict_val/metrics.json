@@ -1,0 +1,52 @@
+{
+  "metrics": {
+    "AP": 0.6607165472284103,
+    "AP50": 0.8612914401364397,
+    "AP75": 0.7318361721594686,
+    "AP_small": 0.0,
+    "AP_medium": 0.46381766381766376,
+    "AP_large": 0.6921732827484768,
+    "AR1": 0.6799999999999999,
+    "AR10": 0.73,
+    "AR100": 0.7538461538461539,
+    "AR_small": 0.0,
+    "AR_medium": 0.5555555555555555,
+    "AR_large": 0.7881355932203389
+  },
+  "units": "fraction_0_to_1",
+  "protocol": {
+    "iou_type": "bbox",
+    "iou_thresholds": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "max_dets": [
+      1,
+      10,
+      100
+    ],
+    "all_gt_images": true,
+    "score_filter": null,
+    "pycocotools": "2.0.11"
+  },
+  "images": 120,
+  "predictions": 12000,
+  "annotations_sha256": "db96be0dca4e0a4cebb308f096a9f67eaf5a6349a0fabfe01f5107dc43aed929",
+  "predictions_sha256": "6d5890d8176facd0e13a964ffa7d2bc618c4e6f9ad6ff1a7ae2603ccf6592b83",
+  "run_id": "maskdino-mssl-control-s42-20261018T025946",
+  "name": "mssl_r50_kvasir_official50_control",
+  "seed": 42,
+  "split": "val",
+  "supervision": "bbox+mask",
+  "purpose": "official_hyperparameters_kvasir_50ep_microbatch_control",
+  "checkpoint_sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+  "checkpoint_selection": "best_val_ap"
+}

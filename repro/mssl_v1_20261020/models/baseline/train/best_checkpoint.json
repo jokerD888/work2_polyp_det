@@ -1,0 +1,9 @@
+{
+  "file": "model_best.pth",
+  "split": "val",
+  "metric": "bbox/AP",
+  "metric_percent": 66.07165472284103,
+  "iteration": 2750,
+  "tie_break": "earliest",
+  "rule": "maximum validation AP50:95"
+}

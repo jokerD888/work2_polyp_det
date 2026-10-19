@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "only_expected_differences": [
+    {
+      "field": "MODEL.META_ARCHITECTURE",
+      "baseline": "MSSLMaskDINO",
+      "ciou": "CIoUReplaceMaskDINO"
+    },
+    {
+      "field": "MODEL.MSSL.LOSS_FORM",
+      "baseline": null,
+      "ciou": "cdf"
+    },
+    {
+      "field": "OUTPUT_DIR",
+      "baseline": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/train",
+      "ciou": "/mnt/d/code/work2_polypy_det/runs/ciou-competition-20261019/precheck"
+    }
+  ]
+}

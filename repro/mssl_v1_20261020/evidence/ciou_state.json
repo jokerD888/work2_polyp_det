@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "pipeline_pid": 4182,
+  "completed": [
+    "ciou_unit_checks",
+    "existing_mssl_regression_checks",
+    "bootstrap_regression_checks",
+    "precheck",
+    "smoke_train",
+    "smoke_predict",
+    "smoke_gate",
+    "formal_train",
+    "formal_predict",
+    "checkpoint_replay",
+    "polypgen_inference",
+    "polypgen_scoring",
+    "five_group_comparison"
+  ],
+  "updated_at": "2026-10-19T17:14:24.183178+00:00",
+  "stage": "five_group_comparison",
+  "command": [
+    "/home/joker/.venvs/polypbench-maskdino/bin/python",
+    "-m",
+    "methods.ciou_replace.comparison",
+    "--output",
+    "/mnt/d/code/work2_polypy_det/runs/ciou-competition-20261019"
+  ],
+  "child_pid": 1262529
+}

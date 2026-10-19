@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "pipeline_pid": 3352,
+  "completed": [
+    "unit_checks",
+    "math_verification",
+    "baseline_score_replay",
+    "mssl_score_replay",
+    "box_cdf_score_replay",
+    "mask_static_score_replay",
+    "statistics",
+    "score_counterfactuals",
+    "report"
+  ],
+  "updated_at": "2026-10-19T06:38:12.344533+00:00",
+  "stage": "report",
+  "child_pid": 83818,
+  "statistics_pid": 3817
+}

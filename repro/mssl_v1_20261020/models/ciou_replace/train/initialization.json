@@ -1,0 +1,4 @@
+{
+  "source": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+  "sha256": "16fd03f0b0123e85b959cb9b64aaf9eeb4a7dc68bd9b0b134a9220d4b24c15c6"
+}

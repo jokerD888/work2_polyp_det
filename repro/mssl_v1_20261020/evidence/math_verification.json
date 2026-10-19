@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "actual_trained_loss_sha256": "c7558e18d6156c674699a735974b606ef4cad37412e7181f77a769de6a751159",
+  "checks": [
+    {
+      "target": [
+        12.0,
+        7.0,
+        51.0,
+        54.0
+      ],
+      "d": -0.5,
+      "max_loss_error": 7.2276772900004e-08,
+      "max_gradient_error": 7.970625048869806e-08
+    },
+    {
+      "target": [
+        12.0,
+        7.0,
+        51.0,
+        54.0
+      ],
+      "d": -0.01,
+      "max_loss_error": 1.3902615622043892e-09,
+      "max_gradient_error": 1.5357474107344227e-07
+    },
+    {
+      "target": [
+        12.0,
+        7.0,
+        51.0,
+        54.0
+      ],
+      "d": 0.0,
+      "max_loss_error": 0.0,
+      "max_gradient_error": 0.0
+    },
+    {
+      "target": [
+        12.0,
+        7.0,
+        51.0,
+        54.0
+      ],
+      "d": 0.01,
+      "max_loss_error": 1.209980569433439e-09,
+      "max_gradient_error": 1.1976901067786705e-07
+    },
+    {
+      "target": [
+        12.0,
+        7.0,
+        51.0,
+        54.0
+      ],
+      "d": 0.5,
+      "max_loss_error": 9.190376448753312e-08,
+      "max_gradient_error": 4.181285492288467e-07
+    },
+    {
+      "target": [
+        5.0,
+        2.0,
+        59.0,
+        61.0
+      ],
+      "d": -0.5,
+      "max_loss_error": 1.202973661795781e-07,
+      "max_gradient_error": 6.503128746615516e-08
+    },
+    {
+      "target": [
+        5.0,
+        2.0,
+        59.0,
+        61.0
+      ],
+      "d": -0.01,
+      "max_loss_error": 1.8028259685992285e-10,
+      "max_gradient_error": 1.943040911142873e-08
+    },
+    {
+      "target": [
+        5.0,
+        2.0,
+        59.0,
+        61.0
+      ],
+      "d": 0.0,
+      "max_loss_error": 0.0,
+      "max_gradient_error": 0.0
+    },
+    {
+      "target": [
+        5.0,
+        2.0,
+        59.0,
+        61.0
+      ],
+      "d": 0.01,
+      "max_loss_error": 1.4906890981155387e-10,
+      "max_gradient_error": 1.3632828795538676e-08
+    },
+    {
+      "target": [
+        5.0,
+        2.0,
+        59.0,
+        61.0
+      ],
+      "d": 0.5,
+      "max_loss_error": 5.7979065937185936e-08,
+      "max_gradient_error": 1.2657080417088906e-07
+    }
+  ],
+  "scope": "CPU FP32 trained code vs float64 analytic G and dL/dd; provided-box/mask margin included; elementary properties do not guarantee network convergence or AP"
+}

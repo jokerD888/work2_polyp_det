@@ -1,0 +1,19 @@
+{
+  "method": "CIoU-Replace",
+  "options": {
+    "kind": "ciou_replace",
+    "epsilon": 1e-07,
+    "alpha_stop_gradient": true,
+    "iou_gate": false,
+    "scope": "all_native_box_regression",
+    "compute_dtype": "float32"
+  },
+  "effective_batch": 16,
+  "micro_batch": 1,
+  "accumulation_steps": 16,
+  "normalization": "native per microbatch, including DN; same method/control; not exact physical-batch equivalence",
+  "mask_policy": "raw semantic for original single-box images in BOTH groups; multi-box native unchanged, no extra loss",
+  "final_decoder_only": false,
+  "regression_log_key_semantics": "CIoU replaces loss_giou*; matching remains GIoU",
+  "new_learned_parameters": 0
+}

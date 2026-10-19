@@ -1,0 +1,9 @@
+{
+  "experiment": "/mnt/d/code/work2_polypy_det/runs/ciou-replace-s42-20261019T073936Z/experiment.json",
+  "checkpoint": "/mnt/d/code/work2_polypy_det/runs/ciou-replace-s42-20261019T073936Z/train/model_best.pth",
+  "checkpoint_sha256": "0e59311fd3c4d36b05c930ee027e9c80ccc52ddd08af7e83d4a69faab9562836",
+  "output": "/mnt/d/code/work2_polypy_det/runs/ciou-competition-20261019/external",
+  "image_root": "/mnt/g/ChromeDownload/PolypGen2021_MultiCenterData_v3/PolypGen2021_MultiCenterData_v3",
+  "all_images": "/mnt/d/code/work2_polypy_det/runs/ciou-competition-20261019/external/primary.images.json",
+  "source_predictions": "/mnt/d/code/work2_polypy_det/runs/ciou-replace-s42-20261019T073936Z/predict_val/predictions.bbox.json"
+}

@@ -1,5 +1,7 @@
 # PolypBench
 
+**2026-10-20：MSSL V1及五组实验已完成并归档。** 当前统一入口为[方法冻结与五组证据索引](docs/mssl_v1_release_20261020.md)，包含实际训练源码包、配置、选定权重SHA256、全部指标和验收记录。CIoU链路13阶段全部通过；PolypsSet/PolypDB尚未评估，独立外测与多Seed尚未完成。
+
 跨仓库目标检测实验入口。目前已接入官方 MaskDINO，统一配置、运行记录、COCO bbox 评测和结果汇总。
 
 首轮使用 Kvasir-SEG 官方 **880/120 train/val** 划分，以及原始 `kavsir_bboxes.json` 的 **1,071 个框**（train 941，val 130）。框仅转换为 COCO xywh 格式，保留原始坐标与数量；训练时不从 mask 重算 bbox 标签。val 用于权重选择和 val AP 汇报。
@@ -13,9 +15,10 @@ configs/       正式实验配置，目前保留 maskdino_kvasir_official.yaml
 data/          官方划分和原始 bbox 转换后的 COCO 数据
 docs/          实验协议、验证摘要
 env/           本机依赖版本记录
-methods/       自研方法，目前包含 F-v1 MIPS-SCDA
+methods/       MSSL V1、CIoU-Replace及历史SCDA方法
 polypbench/    运行、数据校验、模型适配、评测与可视化代码
-runs/          正式实验输出及后台任务控制文件
+repro/         可随Git保存的冻结源码、配置和小型证据
+runs/          正式实验输出、权重和运行记录（本地保留）
 scripts/       Linux/WSL 安装、启动与预检工具
 tests/         在系统临时目录生成测试数据的测试
 third_party/   固定版本的 MaskDINO 官方源码和许可证
@@ -26,9 +29,19 @@ third_party/   固定版本的 MaskDINO 官方源码和许可证
 
 F-v1 MIPS-SCDA 的实现和独立入口见 [方法说明](methods/scda_proposal/README.md)。2026-10-15 已通过 CPU/Gloo、A/F参数对齐、真实GPU和50iter健康检查；发现回归阈值放宽没有改变当前样本的选点，正式长训等待方法定义决策。沿用 Kvasir 配置，SCDA 仅使用原始单框图片，详见 [预检记录](methods/scda_proposal/F_PRECHECK.md)。
 
+2026-10-18 新增独立 [MSSL V1](methods/mssl/README.md)：仅训练期增加 Mask 支持的最终框边定位损失。使用官方 1024／LSJ／低学习率设置及 Kvasir 50 epoch 预算，本机以梯度累积适配有效 batch 16；另跑相同新数据协议的原生对照。实现、验收范围及后台状态入口见 [启动记录](docs/mssl_implementation_20261018.md)。历史默认配置不受影响。
+
+PolypGen 跨数据集零样本评估的范围、原始框缺失与重复标注处理、模型冻结条件和结果入口见 [评估协议](docs/polypgen_zeroshot_20261018.md)。
+
+MSSL 的 Box-CDF、Mask-static 两组机制归因、损失与梯度曲线、配对预测及形态诊断见 [固定协议与运行索引](docs/mssl_attribution_20261018.md)。
+
+2026-10-19 只读补充：PolypGen 严格高 IoU 覆盖、分数路径与2000次配对 Bootstrap 见 [跨域分析协议](docs/mssl_polypgen_analysis_20261019.md)；冻结公式、证明与复现细节见 [MSSL V1 方法章节](docs/mssl_v1_method_20261019.md)。
+
 Git 仓库保存源码、配置、文档和依赖记录；`data/`、`weights/`、`runs/`、虚拟环境及 `third_party/` 均不提交。克隆后按下文重新准备数据和模型环境，安装脚本会获取固定版本的 MaskDINO 源码并应用兼容补丁。
 
-## 本机 Windows 运行
+## 历史默认协议的本机 Windows 运行
+
+下列512输入/batch4/100 epoch示例是项目早期默认协议。当前MSSL五组采用另一套冻结协议（1024 LSJ、50等效epoch、累积16），复现应以[发布索引](docs/mssl_v1_release_20261020.md)中的实际源码和配置为准；两套结果不能混作配对对照。
 
 训练通过已有 Ubuntu-22.04 WSL2 使用本机 RTX 5070。模型环境为 `~/.venvs/polypbench-maskdino`，Python 3.10、PyTorch 2.7.1/cu128、torchvision 0.22.1，CUDA Toolkit 12.8。
 

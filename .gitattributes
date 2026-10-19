@@ -5,3 +5,6 @@
 *.md text eol=lf
 *.toml text eol=lf
 *.ps1 text eol=crlf
+
+# Preserve byte-exact historical evidence and its SHA256 across checkouts.
+/repro/mssl_v1_20261020/** -text

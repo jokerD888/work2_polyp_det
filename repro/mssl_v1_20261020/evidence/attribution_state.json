@@ -1,0 +1,35 @@
+{
+  "status": "completed",
+  "pipeline_pid": 14142,
+  "completed": [
+    "unit_checks",
+    "loss_curves",
+    "box_cdf_precheck",
+    "existing_source_diagnostics",
+    "existing_polypgen_diagnostics",
+    "box_cdf_train",
+    "box_cdf_predict",
+    "baseline_replay",
+    "mssl_replay",
+    "box_cdf_replay",
+    "mask_static_precheck",
+    "mask_static_train",
+    "mask_static_predict",
+    "mask_static_replay",
+    "box_cdf_external_inference",
+    "mask_static_external_inference",
+    "four_group_source_diagnostics",
+    "four_group_polypgen_diagnostics",
+    "attribution_report"
+  ],
+  "updated_at": "2026-10-19T04:58:52.025553+00:00",
+  "stage": "four_group_polypgen_diagnostics",
+  "command": [
+    "/home/joker/.venvs/polypbench-maskdino/bin/python",
+    "-m",
+    "polypbench.adapters.zeroshot_worker",
+    "--job",
+    "/mnt/d/code/work2_polypy_det/runs/mssl-attribution-20261018-r2/external/mask_static/job.json"
+  ],
+  "child_pid": 2290365
+}

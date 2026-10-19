@@ -1,0 +1,19 @@
+{
+  "method": "MSSL V1",
+  "options": {
+    "enabled": true,
+    "support": "box",
+    "weight": 1.0,
+    "temperature": 0.05,
+    "direction_bandwidth": 0.15,
+    "min_scale_pixels": 4.0,
+    "loss_form": "cdf"
+  },
+  "effective_batch": 16,
+  "micro_batch": 1,
+  "accumulation_steps": 16,
+  "normalization": "native per microbatch, including DN; same method/control; not exact physical-batch equivalence",
+  "mask_policy": "raw semantic for original single-box images in BOTH groups; multi-box native unchanged, no extra loss",
+  "final_decoder_only": true,
+  "new_learned_parameters": 0
+}

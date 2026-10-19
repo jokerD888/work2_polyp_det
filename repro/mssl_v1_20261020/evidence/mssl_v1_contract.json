@@ -1,0 +1,18 @@
+{
+  "version": "MSSL V1, frozen actual trained definition",
+  "mask_support": "raw thresholded GT semantic masks, original single-box eligibility",
+  "loss": "mean eligible GT / mean four sides of 0.5*(G(d)-G(0))^2",
+  "d": "(predicted side-provided GT side)/max(provided GT axis size,4px)",
+  "pi": "normalize axial GT foreground mass * exp(-abs(relative support position)/0.15)",
+  "G": "sum pi*sigmoid((d-relative support position)/0.05)",
+  "lambda": 1.0,
+  "tau": 0.05,
+  "bandwidth": 0.15,
+  "min_axis_pixels": 4.0,
+  "application": "final native decoder matched boxes only; original assignment, L1/GIoU and mask losses retained",
+  "inference": "original MaskDINO graph, predicted masks and class*mask-quality scoring retained; no GT masks",
+  "trained_source_root": "/mnt/d/code/work2_polypy_det/runs/mssl-implementation-20261018/campaign-r2/source",
+  "new_training": false,
+  "new_parameters": false,
+  "target_tuning": false
+}

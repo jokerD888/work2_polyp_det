@@ -1,0 +1,15 @@
+{
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "torch": "2.7.1+cu128",
+  "torchvision": "0.22.1+cu128",
+  "detectron2_version": "0.6",
+  "detectron2_commit": "1e3e13bbf607b54f62205c4c33922521822fb298",
+  "ciou": {
+    "path": "/home/joker/.cache/polypbench/detectron2/detectron2/layers/losses.py",
+    "sha256": "6426d06f915f12f0eb5bf4f31f94092b23422d663337a22fc27a8b4ea8630ccb",
+    "epsilon": 1e-07,
+    "alpha_stop_gradient": true,
+    "iou_gate": false,
+    "input": "decoded normalized XYXY; no clipping/sigmoid/exp"
+  }
+}
