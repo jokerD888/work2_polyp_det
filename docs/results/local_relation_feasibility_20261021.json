@@ -1,0 +1,368 @@
+{
+  "images": 120,
+  "gt": 130,
+  "negative_images": 0,
+  "geometry_counts": {
+    "baseline": {
+      "0.5": {
+        "all300": 118,
+        "selected100": 118,
+        "top10": 117
+      },
+      "0.75": {
+        "all300": 110,
+        "selected100": 109,
+        "top10": 105
+      },
+      "0.9": {
+        "all300": 64,
+        "selected100": 62,
+        "top10": 60
+      }
+    },
+    "mssl": {
+      "0.5": {
+        "all300": 119,
+        "selected100": 119,
+        "top10": 117
+      },
+      "0.75": {
+        "all300": 113,
+        "selected100": 113,
+        "top10": 107
+      },
+      "0.9": {
+        "all300": 71,
+        "selected100": 71,
+        "top10": 67
+      }
+    }
+  },
+  "eligible_region_audit": 110,
+  "ineligible_multi_gt": 20,
+  "quartiles": {
+    "lab_contrast": 14.27229356765747,
+    "area_ratio": 0.07363417730959711
+  },
+  "groups": {
+    "missing": {
+      "n": 3,
+      "mssl_missing": 3,
+      "baseline_missing": 1,
+      "mssl_below075": 3,
+      "median_area_ratio": 0.4340151515151515,
+      "median_lab_contrast": 20.18302345275879
+    },
+    "coarse": {
+      "n": 5,
+      "mssl_missing": 0,
+      "baseline_missing": 0,
+      "mssl_below075": 5,
+      "median_area_ratio": 0.13187829885336408,
+      "median_lab_contrast": 18.616926193237305
+    },
+    "ranking": {
+      "n": 3,
+      "mssl_missing": 0,
+      "baseline_missing": 0,
+      "mssl_below075": 0,
+      "median_area_ratio": 0.1617462873501521,
+      "median_lab_contrast": 24.20288848876953
+    },
+    "covered": {
+      "n": 99,
+      "mssl_missing": 0,
+      "baseline_missing": 1,
+      "mssl_below075": 0,
+      "median_area_ratio": 0.16473765432098766,
+      "median_lab_contrast": 19.3740177154541
+    }
+  },
+  "contrast_bins": {
+    "True": {
+      "n": 28,
+      "mssl_missing": 1,
+      "baseline_missing": 0,
+      "mssl_below075": 3,
+      "median_area_ratio": 0.07975192488452523,
+      "median_lab_contrast": 8.391306400299072
+    },
+    "False": {
+      "n": 82,
+      "mssl_missing": 2,
+      "baseline_missing": 2,
+      "mssl_below075": 5,
+      "median_area_ratio": 0.19186847699785836,
+      "median_lab_contrast": 23.97438144683838
+    }
+  },
+  "size_contrast_cells": {
+    "low_contrast=True,small=True": {
+      "n": 13,
+      "mssl_missing": 0,
+      "baseline_missing": 0,
+      "mssl_below075": 0,
+      "median_area_ratio": 0.03924862040427423,
+      "median_lab_contrast": 8.499649047851562
+    },
+    "low_contrast=True,small=False": {
+      "n": 15,
+      "mssl_missing": 1,
+      "baseline_missing": 0,
+      "mssl_below075": 3,
+      "median_area_ratio": 0.15250604029284065,
+      "median_lab_contrast": 7.934114456176758
+    },
+    "low_contrast=False,small=True": {
+      "n": 15,
+      "mssl_missing": 0,
+      "baseline_missing": 1,
+      "mssl_below075": 1,
+      "median_area_ratio": 0.0578163868159204,
+      "median_lab_contrast": 21.83353042602539
+    },
+    "low_contrast=False,small=False": {
+      "n": 67,
+      "mssl_missing": 2,
+      "baseline_missing": 1,
+      "mssl_below075": 4,
+      "median_area_ratio": 0.23625265682053517,
+      "median_lab_contrast": 24.681245803833008
+    }
+  },
+  "all_missing_gt": [
+    {
+      "annotation_id": 944,
+      "image_id": 882,
+      "file_name": "cju0sr5ghl0nd08789uzf1raf.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.1299785136767157,
+      "baseline_best300": 0.4575110301498484,
+      "baseline_best100": 0.4575110301498484,
+      "baseline_top1_iou": 0.41735608964584003,
+      "baseline_best300_query": 36,
+      "mssl_best300": 0.4816616505326849,
+      "mssl_best100": 0.4816616505326849,
+      "mssl_top1_iou": 0.0,
+      "mssl_best300_query": 36,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 960,
+      "image_id": 897,
+      "file_name": "cju15jr8jz8sb0855ukmkswkz.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.0004113100704009795,
+      "baseline_best300": 0.0,
+      "baseline_best100": 0.0,
+      "baseline_top1_iou": 0.0,
+      "baseline_best300_query": 0,
+      "mssl_best300": 0.0,
+      "mssl_best100": 0.0,
+      "mssl_top1_iou": 0.0,
+      "mssl_best300_query": 0,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 971,
+      "image_id": 908,
+      "file_name": "cju16whaj0e7n0855q7b6cjkm.jpg",
+      "image_gt_count": 1,
+      "box_area_ratio": 0.5073856235872695,
+      "baseline_best300": 0.13826453239658645,
+      "baseline_best100": 0.13826453239658645,
+      "baseline_top1_iou": 0.13826453239658645,
+      "baseline_best300_query": 16,
+      "mssl_best300": 0.15369897760065032,
+      "mssl_best100": 0.13877364454469832,
+      "mssl_top1_iou": 0.12370555061039475,
+      "mssl_best300_query": 13,
+      "group": "missing",
+      "core_pixels": 64715,
+      "ring_pixels": 72012,
+      "mask_pixels": 89053,
+      "lab_contrast": 20.18302345275879,
+      "core_highlight_like_fraction": 0.0049756625202812335,
+      "core_dark_like_fraction": 0.0,
+      "ring_highlight_like_fraction": 0.005582402932844526,
+      "ring_dark_like_fraction": 0.12939510081653058,
+      "artifact_filtered_contrast": 10.779962539672852,
+      "low_contrast": false,
+      "small": false
+    },
+    {
+      "annotation_id": 972,
+      "image_id": 909,
+      "file_name": "cju32qr9tbvsj08013pkpjenq.jpg",
+      "image_gt_count": 1,
+      "box_area_ratio": 0.099812382739212,
+      "baseline_best300": 0.5033592070160542,
+      "baseline_best100": 0.5033592070160542,
+      "baseline_top1_iou": 0.3585070475104144,
+      "baseline_best300_query": 155,
+      "mssl_best300": 0.42606923619220705,
+      "mssl_best100": 0.42606923619220705,
+      "mssl_top1_iou": 0.35663490700834016,
+      "mssl_best300_query": 2,
+      "group": "missing",
+      "core_pixels": 18257,
+      "ring_pixels": 14832,
+      "mask_pixels": 22392,
+      "lab_contrast": 7.204384803771973,
+      "core_highlight_like_fraction": 0.012104946048091142,
+      "core_dark_like_fraction": 0.0,
+      "ring_highlight_like_fraction": 0.0084277238403452,
+      "ring_dark_like_fraction": 0.0,
+      "artifact_filtered_contrast": 7.1032867431640625,
+      "low_contrast": true,
+      "small": false
+    },
+    {
+      "annotation_id": 1009,
+      "image_id": 944,
+      "file_name": "cjyzjzssvd8pq0838f4nolj5l.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 1.9290123456790123E-05,
+      "baseline_best300": 0.0010001933366271163,
+      "baseline_best100": 0.0010001933366271163,
+      "baseline_top1_iou": 0.00027853538766821426,
+      "baseline_best300_query": 18,
+      "mssl_best300": 0.0003815975365156405,
+      "mssl_best100": 0.0003815975365156405,
+      "mssl_top1_iou": 0.0002805711955101269,
+      "mssl_best300_query": 3,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 1024,
+      "image_id": 959,
+      "file_name": "ck2bxiswtxuw80838qkisqjwz.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.8400191998018085,
+      "baseline_best300": 0.22863028057747445,
+      "baseline_best100": 0.22863028057747445,
+      "baseline_top1_iou": 0.22863028057747445,
+      "baseline_best300_query": 12,
+      "mssl_best300": 0.2324654278654003,
+      "mssl_best100": 0.2324654278654003,
+      "mssl_top1_iou": 0.2324654278654003,
+      "mssl_best300_query": 0,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 1025,
+      "image_id": 959,
+      "file_name": "ck2bxiswtxuw80838qkisqjwz.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.00010219249349684132,
+      "baseline_best300": 0.0006897332365624945,
+      "baseline_best100": 0.0006897332365624945,
+      "baseline_top1_iou": 0.0005175612184144812,
+      "baseline_best300_query": 10,
+      "mssl_best300": 0.0006433531704600763,
+      "mssl_best100": 0.0006433531704600763,
+      "mssl_top1_iou": 0.0005128346173542378,
+      "mssl_best300_query": 3,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 1027,
+      "image_id": 960,
+      "file_name": "ck2bxknhjvs1x0794iogrq49k.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.00756319413035831,
+      "baseline_best300": 0.02116466732346014,
+      "baseline_best100": 0.02116466732346014,
+      "baseline_top1_iou": 0.0,
+      "baseline_best300_query": 76,
+      "mssl_best300": 0.02500480320233808,
+      "mssl_best100": 0.019232483879865408,
+      "mssl_top1_iou": 0.0,
+      "mssl_best300_query": 57,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 1033,
+      "image_id": 965,
+      "file_name": "ck2bxw18mmz1k0725litqq2mc.jpg",
+      "image_gt_count": 1,
+      "box_area_ratio": 0.4340151515151515,
+      "baseline_best300": 0.6658163546691986,
+      "baseline_best100": 0.6658163546691986,
+      "baseline_top1_iou": 0.13741867246294912,
+      "baseline_best300_query": 80,
+      "mssl_best300": 0.4193213541559459,
+      "mssl_best100": 0.4147094767970225,
+      "mssl_top1_iou": 0.12009102300531672,
+      "mssl_best300_query": 58,
+      "group": "missing",
+      "core_pixels": 76276,
+      "ring_pixels": 65122,
+      "mask_pixels": 96844,
+      "lab_contrast": 30.5322208404541,
+      "core_highlight_like_fraction": 0.10459384341077141,
+      "core_dark_like_fraction": 0.0,
+      "ring_highlight_like_fraction": 0.009428457356960782,
+      "ring_dark_like_fraction": 0.05174902490709745,
+      "artifact_filtered_contrast": 28.80561065673828,
+      "low_contrast": false,
+      "small": false
+    },
+    {
+      "annotation_id": 1041,
+      "image_id": 972,
+      "file_name": "cju87kbcen2av0987usezo8kn.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.08888037544296523,
+      "baseline_best300": 0.372301839058646,
+      "baseline_best100": 0.372301839058646,
+      "baseline_top1_iou": 0.2062306872542346,
+      "baseline_best300_query": 95,
+      "mssl_best300": 0.29028673043461944,
+      "mssl_best100": 0.29028673043461944,
+      "mssl_top1_iou": 0.20149541895481668,
+      "mssl_best300_query": 34,
+      "group": "missing"
+    },
+    {
+      "annotation_id": 1071,
+      "image_id": 1000,
+      "file_name": "cju7eea9b2m0z0801ynqv1fqu.jpg",
+      "image_gt_count": 2,
+      "box_area_ratio": 0.07224579555142215,
+      "baseline_best300": 0.11304879468195661,
+      "baseline_best100": 0.09889446818125708,
+      "baseline_top1_iou": 0.0,
+      "baseline_best300_query": 130,
+      "mssl_best300": 0.12029599997221345,
+      "mssl_best100": 0.12029599997221345,
+      "mssl_top1_iou": 0.0,
+      "mssl_best300_query": 25,
+      "group": "missing"
+    }
+  ],
+  "interpretation": "Handcrafted image contrast and geometry are descriptive, not neural separability or causal evidence for contrastive training.",
+  "artifact_filtered_contrast_sensitivity": {
+    "low": {
+      "n": 28,
+      "below075": 3,
+      "missing": 1
+    },
+    "q25": 10.309223413467407,
+    "interpretation": "Descriptive proxy exclusion; no clinical artifact or reliability labels",
+    "other": {
+      "n": 82,
+      "below075": 5,
+      "missing": 2
+    }
+  },
+  "source_identity": {
+    "cpu_only": true,
+    "audit_protocol_sha256": "e910a28695515ee300ef2e5b36899249b0059f02b26f1f769686149ea8bbe40b",
+    "inputs_unchanged": true,
+    "checkpoint_sha256": {
+      "baseline": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+      "mssl": "c0ea44a7fdfd0e673d32729b128cbbf8916c313b206e5ab334335331c52a0ae0"
+    }
+  }
+}
