@@ -2,6 +2,8 @@
 
 日期：2026-10-20。依据 `mssl_quality_alignment_next_stage_20261020.md` 及用户批准实施。
 
+最终状态：全部任务于2026-10-20 21:38（北京时间）完成，结果与决策见[实验结果](results/ia_bce_final_20261020.md)。保留MSSL V1，不采用本轮MSSL+Q组合；没有自动追加训练。
+
 ## 固定研究协议
 
 - A/B复用冻结的 Baseline、MSSL V1；只新增 C=Baseline+Q、D=MSSL+Q。
