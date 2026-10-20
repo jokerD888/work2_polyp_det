@@ -8,3 +8,4 @@
 
 # Preserve byte-exact historical evidence and its SHA256 across checkouts.
 /repro/mssl_v1_20261020/** -text
+/docs/protocols/candidate_stage_20261021/bundle/** -text

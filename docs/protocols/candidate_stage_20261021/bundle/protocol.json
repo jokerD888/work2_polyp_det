@@ -1,0 +1,70 @@
+{
+  "created_at": "2026-10-20T16:37:22.709051+00:00",
+  "status": "prepared_not_gpu_executed",
+  "sample_size": 72,
+  "images_per_center": 12,
+  "seed": 20261021,
+  "selection_uses_model_outputs": false,
+  "selection": "Per center: 1 negative, 3 multi, 2 per single low/nonlow contrast x small/nonsmall cell; shortage filled uniformly from remaining same-center images",
+  "sampling_shortfalls": [],
+  "sample_population_claim": false,
+  "cohort_role": "PolypGen is the primary performance benchmark and already observed for method development; not blind-test evidence",
+  "models": [
+    "frozen_baseline",
+    "frozen_mssl_v1"
+  ],
+  "training_updates": false,
+  "runtime_location": "A6000 training machine; do not add GPU jobs to local E/F machine",
+  "stages": [
+    "legal_dense_encoder_boxes",
+    "native_top300_encoder_boxes",
+    "actual_mask2box_decoder_init",
+    "ordinary_decoder_aux_predictions_in_order",
+    "final_decoder300",
+    "native_final_top100"
+  ],
+  "thresholds": [
+    0.5,
+    0.75,
+    0.9
+  ],
+  "coverage": "one-to-one maximum cardinality at each stage, shared original-image coordinates",
+  "tracking": "same query identity within each model through init/decoder; align models by GT, not equal numeric query IDs",
+  "extra_diagnostics": [
+    "invalid/padding proposal exclusion",
+    "empty/degenerate predicted-mask initialization",
+    "GT support tokens and feature margins where legal",
+    "stage gain/loss transitions; no unique causal loss decomposition"
+  ],
+  "parity_gate": "Final boxes, scores and query IDs must agree with frozen native image-only inference; no GT to model; eval/no_grad; no matcher/TopK replacements",
+  "source_label_audit_required": [
+    "original small/multi distribution",
+    "raw semantic-mask provenance and unique-box spatial support",
+    "fixed LSJ replay, valid/padding/retained GT regions",
+    "coverage per prospective feature level, legitimate shortages"
+  ],
+  "source_label_counts": {
+    "images": 880,
+    "gt": 941,
+    "images_by_gt_count": {
+      "1": 835,
+      "2": 37,
+      "3": 6,
+      "4": 1,
+      "10": 1
+    },
+    "single_gt": 835,
+    "multi_gt": 106,
+    "relative_area_q25": 0.07546202201093626,
+    "gt_under_polypgen_area_q25": 82,
+    "polypgen_area_q25_reference": 0.03455088874936203,
+    "limits": "Original boxes only; counts do not establish instance masks or survival under LSJ. Area threshold is a descriptive target benchmark reference, not a training hyperparameter."
+  },
+  "inputs_sha256": {
+    "/mnt/d/code/work2_polypy_det/polypbench/analysis/prepare_candidate_stage_study.py": "69d4e9e001849363d7f9824e66f29af6fd651736204f36e48b829d90464805d3",
+    "/mnt/d/code/work2_polypy_det/data/polypgen_zeroshot_stills_v2/provided_boxes.coco.json": "8f07c197079a51b37186255c91e17bda1d074fe290556e2777607587ee17e779",
+    "/mnt/d/code/work2_polypy_det/runs/polypgen-local-relation-primary-20261021/per_gt.csv": "7c690ae2fe791f18bca99b6ece8ce9cabcf15700dced960390d531f411439924",
+    "/mnt/d/code/work2_polypy_det/data/kvasir_official_bbox_coco/train.json": "9b5d73d9b3206daa78ce57d15dbe9fe2dd75b432176419762475a4318ec727b6"
+  },
+  "decision": "First localize stage-specific failure and training-supervision limits. Do not freeze an encoder contrast objective or start full new training from final300 coverage alone."
+}
