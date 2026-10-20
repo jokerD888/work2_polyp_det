@@ -119,6 +119,9 @@ def worker_main(args):
             if experiment.get("quality_alignment", {}).get("enabled", False):
                 from methods.quality_alignment.probe import QualityGradientProbe
                 probe = QualityGradientProbe(self.model, Path(args.output) / "quality_gradient_probes.jsonl", 275)
+            if "mssl_scope" in experiment:
+                from methods.mssl_scope.probe import ScopeGradientProbe
+                probe = ScopeGradientProbe(self.model, Path(args.output) / "scope_gradient_probes.jsonl", 275)
             self._trainer = AccumulatingAMPTrainer(self.model, self.data_loader, self.optimizer, steps, probe)
 
         @classmethod
@@ -138,15 +141,16 @@ def worker_main(args):
 
     if comm.is_main_process():
         write_json(Path(args.output) / "method.json", {
-            "method": ("MSSL V1 + IA-BCE-Final" if experiment["mssl"]["enabled"] else "IA-BCE-Final") if "quality_alignment" in experiment else ("CIoU-Replace" if "box_regression" in experiment else "MSSL V1"),
-            "options": experiment.get("quality_alignment", experiment.get("box_regression", experiment["mssl"])),
+            "method": ("MSSL scope " + experiment["mssl_scope"]["variant"]) if "mssl_scope" in experiment else (("MSSL V1 + IA-BCE-Final" if experiment["mssl"]["enabled"] else "IA-BCE-Final") if "quality_alignment" in experiment else ("CIoU-Replace" if "box_regression" in experiment else "MSSL V1")),
+            "options": experiment.get("mssl_scope", experiment.get("quality_alignment", experiment.get("box_regression", experiment["mssl"]))),
+            "mssl_scope": experiment.get("mssl_scope"),
             "mssl_options": experiment["mssl"],
             "effective_batch": cfg.SOLVER.IMS_PER_BATCH,
             "micro_batch": experiment["runtime"]["micro_batch"],
             "accumulation_steps": cfg.SOLVER.IMS_PER_BATCH // experiment["runtime"]["micro_batch"],
             "normalization": "native per microbatch, including DN; same method/control; not exact physical-batch equivalence",
             "mask_policy": "raw semantic for original single-box images in BOTH groups; multi-box native unchanged, no extra loss",
-            "final_decoder_only": "box_regression" not in experiment,
+            "final_decoder_only": "box_regression" not in experiment and experiment.get("mssl_scope", {}).get("aux_weight", 0) == 0,
             "regression_log_key_semantics": "CIoU replaces loss_giou*; matching remains GIoU" if "box_regression" in experiment else "native GIoU",
             "new_learned_parameters": 0})
     if args.mode == "train":

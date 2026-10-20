@@ -77,6 +77,13 @@ def build_cfg(experiment, output, device=None):
         validate(experiment)
         cfg.MODEL.META_ARCHITECTURE = "QualityAlignMaskDINO"
         cfg.MODEL.QUALITY_ALIGNMENT_ENABLED = experiment["quality_alignment"]["enabled"]
+    if "mssl_scope" in experiment:
+        from methods.mssl_scope.config import validate
+        from methods.mssl_scope.model import ScopeMaskDINO
+        validate(experiment)
+        cfg.MODEL.META_ARCHITECTURE = "ScopeMaskDINO"
+        cfg.MODEL.MSSL_SCOPE_FINAL_WEIGHT = experiment["mssl_scope"]["final_weight"]
+        cfg.MODEL.MSSL_SCOPE_AUX_WEIGHT = experiment["mssl_scope"]["aux_weight"]
     cfg.DATASETS.TRAIN, cfg.DATASETS.TEST = ("bench_train",), ("bench_val",)
     cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = experiment["model"]["num_classes"]
     cfg.MODEL.WEIGHTS = experiment["model"]["weights"]
