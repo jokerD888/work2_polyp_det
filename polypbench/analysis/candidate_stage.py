@@ -262,8 +262,12 @@ def run(job_path):
     import torch
     job_path = Path(job_path).resolve()
     job = read_json(job_path)
-    if job.get("runtime_location") != "training_machine" or job.get("device") != "cuda":
-        raise ValueError("Stage forward is explicitly restricted to the training machine GPU")
+    location = job.get("runtime_location")
+    if location not in ("training_machine", "local_after_queue") or job.get("device") != "cuda":
+        raise ValueError("Stage forward requires an explicit GPU execution location")
+    if location == "local_after_queue":
+        from .candidate_stage_local import authorize_child
+        authorize_child(job["local_controller_config"])
     root = Path(job["workspace"]).resolve()
     expected = job["expected_sha256"]
     for key, digest in expected.items():

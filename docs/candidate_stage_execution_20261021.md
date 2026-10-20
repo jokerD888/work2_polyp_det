@@ -1,4 +1,14 @@
-# 候选阶段诊断：实现、验收与训练机入口
+# 候选阶段诊断：本机后置队列与备用训练机入口
+
+## 当前实际安排：本机等待E/F全部完成后执行
+
+按用户最新授权，取消这轮诊断的训练机搬运安排，改为本机依赖队列。已启动独立控制器PID248074，输出`runs/candidate-stage-local-after-ef-20261021/`，状态`waiting_predecessor`；关联前序`runs/mssl-strength-scope-20261020-r2/`，不修改其26项任务、源码快照或正在运行的训练进程。
+
+顺序为：**E/F训练及原有全部评估/比较完成 → 原控制器退出 → 显存释放 → Baseline阶段诊断 → MSSL V1阶段诊断 → 对照报告**。显存释放门槛为使用量≤2048MiB且GPU利用率≤20%，相隔30秒连续两次满足。前序失败、暂停、异常退出、PID复用或完成证据不全时停止后置队列，不自动转入诊断。
+
+入口`polypbench.analysis.candidate_stage_local`已通过4项依赖门槛测试及7项既有阶段CPU检查。后置控制器使用自身冻结的`source/`，两份job均设置为`local_after_queue`；GPU子进程须验证前序完整成功且退出，并确认由该控制器直接启动。当前仅后台等待，没有新增GPU作业。Windows隐藏防休眠守护PID30956，允许屏幕熄灭，任务完成/失败后释放。
+
+可查看该目录的`state.json`、`launcher.json`、`controller.log`；具体诊断任务在`diagnostics/queue.json`，报告将写入`diagnostics/report/`。若需取消尚在等待的后置任务，可在该目录创建`cancel.request`，控制器会停止并保留记录。此安排不需要复制权重或训练机操作；下文训练机入口仅保留为备用。
 
 这次只做Baseline/MSSL V1只读阶段追踪和训练标签资格审计。E/F继续使用既有冻结队列，未加入本机GPU任务；未实现或训练局部对比模块。
 
