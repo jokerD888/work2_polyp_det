@@ -13,6 +13,7 @@ from methods.mssl_scope.model import ScopeCriterion
 from methods.mssl_scope.config import validate
 from methods.mssl.loss import matched_loss
 from methods.mssl_scope.probe import ScopeGradientProbe
+from methods.mssl_scope.campaign import smoke_gate
 
 
 class ScopeTests(unittest.TestCase):
@@ -87,6 +88,23 @@ class ScopeTests(unittest.TestCase):
         self.assertTrue(all(p.grad is None for p in model.parameters()))
         (lf+la+native).backward()
         for p,g in zip(model.parameters(),expected):torch.testing.assert_close(p.grad,g,rtol=0,atol=0)
+
+    def test_smoke_gate_accepts_finite_zero_diagnostic_gradients(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for name in ('train','predict_val'):
+                (root/name).mkdir();(root/name/'state.json').write_text(json.dumps({'status':'completed'}))
+            row={'iteration':49,'optimizer/successful_updates':40,'amp/skipped_step':0,'amp/loss_scale':64.,
+                 'total_loss':100.,'loss_mssl':.01,'mssl_scope/weighted_total':.01}
+            (root/'train/metrics.json').write_text(json.dumps(row)+'\n')
+            probes=[{'iteration':i,'norms':{'total':0.,'native_all':10.}} for i in (0,10)]
+            path=root/'train/scope_gradient_probes.jsonl'
+            path.write_text(''.join(json.dumps(p)+'\n' for p in probes))
+            result=smoke_gate(root,True)
+            self.assertEqual(result['zero_norm_probe_iterations'],[0,10])
+            probes[0]['norms']['total']=float('nan')
+            path.write_text(''.join(json.dumps(p)+'\n' for p in probes))
+            with self.assertRaises(RuntimeError):smoke_gate(root,True)
 
 
 if __name__=='__main__':unittest.main()

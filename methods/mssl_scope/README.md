@@ -17,6 +17,9 @@ overflow without changing GradScaler, RNG, parameters, or `.grad`. Zero-norm cos
 are null. Floating point head-linearity residuals are diagnostic; exact coefficient
 and coordinate-gradient algebra is checked separately. Bigger gradients are not a
 success criterion. Equal nominal weights do not equal actual gradient strengths.
+Smoke requires finite gradient measurements; finite zero norms are recorded and
+accepted. A nonzero fixed eligible-panel gradient is separately checked in GPU
+prechecks, rather than imposing a positivity condition on sparse warmup samples.
 
 Run `python -m methods.mssl_scope.campaign launch --output ABSOLUTE_NEW_DIRECTORY`.
 The detached finite queue stores protocol/source hashes, queue/state JSON, stage logs,
