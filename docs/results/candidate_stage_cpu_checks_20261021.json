@@ -1,0 +1,40 @@
+{
+  "tests_run": 16,
+  "success": true,
+  "failures": 0,
+  "errors": 0,
+  "cpu_only": true,
+  "real_checkpoint_gpu_trace": false,
+  "source_sha256": {
+    "polypbench/analysis/candidate_stage.py": "bab4d0ddaf765927a760ea441fe29fe7699ef527b1bd834aa36654eec0cc292e",
+    "polypbench/analysis/candidate_stage_jobs.py": "c9cdab259369f4c0cce5e412ce22e83dad0ae2573d94e7db6312745b71526916",
+    "polypbench/analysis/candidate_stage_report.py": "8eff59976f9f1cab5dab785f98a90eb17ece1daf0acb85f5d6eca2d17c83c54e",
+    "polypbench/analysis/supervision_eligibility.py": "d892b0751c3f725e957f12c788c5b881ff801aa512411017d22d9c7282ff32df",
+    "tests/test_candidate_stage.py": "3d176ecaf72747468975c58dcffc532e5e435eda887e5198c80f6a68e1c6d462"
+  },
+  "real_checkpoint_cpu_construction_and_strict_load": [
+    {
+      "model": "baseline",
+      "strict_load": true,
+      "device": "cpu",
+      "model_forward": false,
+      "checkpoint_sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+      "decoder_layers": 9,
+      "candidate_feature_levels": 4,
+      "initialize_box_type": "mask2box"
+    },
+    {
+      "model": "mssl",
+      "strict_load": true,
+      "device": "cpu",
+      "model_forward": false,
+      "checkpoint_sha256": "c0ea44a7fdfd0e673d32729b128cbbf8916c313b206e5ab334335331c52a0ae0",
+      "decoder_layers": 9,
+      "candidate_feature_levels": 4,
+      "initialize_box_type": "mask2box"
+    }
+  ],
+  "checkpoint_check_script_sha256": "8ed584431de94ccb1aee9cc5c200fa71cdfd18a258156e94656319be3453475e",
+  "bundle_manifest_sha256": "785198cafc87e023d4d69f65914290d907ecc863348055278453b1ee72a6a437",
+  "local_gpu_inference_started": false
+}

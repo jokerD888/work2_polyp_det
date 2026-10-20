@@ -21,6 +21,8 @@ GT只在前向返回后参与统计，不送入模型；没有优化器或训练
 
 本机已通过完整资源预检：两份固定checkpoint、72张原图、历史预测、标注和原生Python/YAML源码匹配。预检只生成job，**没有调用本机GPU前向**。真正的72张×两模型GPU诊断尚须在训练机运行。
 
+两份真实checkpoint还已在CPU上完成当前代码的模型构造与`strict=True`完整加载：均为9层Decoder、4个候选特征尺度、mask2box初始化，没有做真实权重前向。检查入口为`scripts/check_candidate_stage_checkpoints.py --queue-root <已准备job的目录>`，汇总证据在`docs/results/candidate_stage_cpu_checks_20261021.json`。
+
 ## Git内容与额外资源
 
 Git包含观察器、审计程序、队列入口、72张清单、两份精确实验JSON和对应的历史预测NPZ（两份共约480 KB）。bundle按字节保留，跨平台不转换换行。
@@ -39,6 +41,8 @@ Git包含观察器、审计程序、队列入口、72张清单、两份精确实
 ## 训练机启动
 
 同步本次Git分支后，在项目根目录、已激活模型环境的终端运行。设置实际数据目录；其中应直接包含`data_C1`至`data_C6`。
+
+分支为`codex/candidate-stage-diagnostics`，已推送GitHub与Gitee。首次同步可用`git fetch origin codex/candidate-stage-diagnostics`后`git switch --track origin/codex/candidate-stage-diagnostics`；若已存在本地同名分支则切换它并更新。代码不会复制被忽略的checkpoint和数据，须按前述资源路径另行准备。
 
 ```bash
 export POLYPGEN_ROOT=/实际路径/PolypGen2021_MultiCenterData_v3
