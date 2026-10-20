@@ -1,0 +1,17 @@
+{
+  "images": 880,
+  "gt": 941,
+  "images_by_gt_count": {
+    "1": 835,
+    "2": 37,
+    "3": 6,
+    "4": 1,
+    "10": 1
+  },
+  "single_gt": 835,
+  "multi_gt": 106,
+  "relative_area_q25": 0.07546202201093626,
+  "gt_under_polypgen_area_q25": 82,
+  "polypgen_area_q25_reference": 0.03455088874936203,
+  "limits": "Original boxes only; counts do not establish instance masks or survival under LSJ. Area threshold is a descriptive target benchmark reference, not a training hyperparameter."
+}

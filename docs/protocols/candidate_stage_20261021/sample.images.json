@@ -1,0 +1,652 @@
+{
+  "images": [
+    {
+      "id": 203,
+      "file_name": "data_C1/images_C1/564OLCV1_100H0002.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 11,
+      "file_name": "data_C1/images_C1/125OLCV1_100H0003.jpg",
+      "width": 1232,
+      "height": 1048,
+      "center": "C1",
+      "sampling_stratum": "multi",
+      "gt_count": 3
+    },
+    {
+      "id": 29,
+      "file_name": "data_C1/images_C1/169OLCV1_100H0007.jpg",
+      "width": 1232,
+      "height": 1048,
+      "center": "C1",
+      "sampling_stratum": "multi",
+      "gt_count": 8
+    },
+    {
+      "id": 177,
+      "file_name": "data_C1/images_C1/491OLCV1_100H0004.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 193,
+      "file_name": "data_C1/images_C1/535OLCV1_100H0010.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 19,
+      "file_name": "data_C1/images_C1/144OLCV1_100H0022.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 253,
+      "file_name": "data_C1/images_C1/962OLCV1_100H0004.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 7,
+      "file_name": "data_C1/images_C1/106OLCV1_100H0014.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 148,
+      "file_name": "data_C1/images_C1/420OLCV1_100H0002.jpg",
+      "width": 1232,
+      "height": 1048,
+      "center": "C1",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 197,
+      "file_name": "data_C1/images_C1/554OLCV1_100H0002.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 218,
+      "file_name": "data_C1/images_C1/651OLCV1_100H0010.jpg",
+      "width": 1232,
+      "height": 1048,
+      "center": "C1",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 225,
+      "file_name": "data_C1/images_C1/680OLCV1_100H0002.jpg",
+      "width": 1350,
+      "height": 1080,
+      "center": "C1",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 365,
+      "file_name": "data_C2/images_C2/EndoCV2021_001165.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 319,
+      "file_name": "data_C2/images_C2/EndoCV2021_001098.jpg",
+      "width": 1359,
+      "height": 1063,
+      "center": "C2",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 504,
+      "file_name": "data_C2/images_C2/EndoCV2021_001362.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 436,
+      "file_name": "data_C2/images_C2/EndoCV2021_001281.jpg",
+      "width": 1360,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 286,
+      "file_name": "data_C2/images_C2/EndoCV2021_001041.jpg",
+      "width": 1439,
+      "height": 1063,
+      "center": "C2",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 445,
+      "file_name": "data_C2/images_C2/EndoCV2021_001299.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 488,
+      "file_name": "data_C2/images_C2/EndoCV2021_001345.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 260,
+      "file_name": "data_C2/images_C2/EndoCV2021_001003.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 393,
+      "file_name": "data_C2/images_C2/EndoCV2021_001216.jpg",
+      "width": 1280,
+      "height": 1024,
+      "center": "C2",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 426,
+      "file_name": "data_C2/images_C2/EndoCV2021_001267.jpg",
+      "width": 1440,
+      "height": 1064,
+      "center": "C2",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 301,
+      "file_name": "data_C2/images_C2/EndoCV2021_001061.jpg",
+      "width": 1359,
+      "height": 1063,
+      "center": "C2",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 528,
+      "file_name": "data_C2/images_C2/EndoCV2021_001393.jpg",
+      "width": 1728,
+      "height": 1072,
+      "center": "C2",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 918,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00453.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 913,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00449.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "multi",
+      "gt_count": 3
+    },
+    {
+      "id": 604,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00142.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 818,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00349.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 559,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_0010.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 693,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00231.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 572,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00111.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 783,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00314.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 866,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00401.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 638,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00178.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 619,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_00156.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 722,
+      "file_name": "data_C3/images_C3/C3_EndoCV2021_0026.jpg",
+      "width": 1440,
+      "height": 1080,
+      "center": "C3",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1163,
+      "file_name": "data_C4/images_C4/26_endocv2021_positive_588.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 1238,
+      "file_name": "data_C4/images_C4/9_endocv2021_positive_586.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "multi",
+      "gt_count": 3
+    },
+    {
+      "id": 1241,
+      "file_name": "data_C4/images_C4/9_endocv2021_positive_864.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1142,
+      "file_name": "data_C4/images_C4/23_endocv2021_positive_440.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1040,
+      "file_name": "data_C4/images_C4/12_endocv2021_positive_768.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1183,
+      "file_name": "data_C4/images_C4/29_endocv2021_positive_606.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1209,
+      "file_name": "data_C4/images_C4/35_endocv2021_negative_1005.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1213,
+      "file_name": "data_C4/images_C4/4_endocv2021_positive_1382.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1107,
+      "file_name": "data_C4/images_C4/20_endocv2021_positive_782.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1094,
+      "file_name": "data_C4/images_C4/19_endocv2021_positive_1496.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1147,
+      "file_name": "data_C4/images_C4/24_endocv2021_positive_1139.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1072,
+      "file_name": "data_C4/images_C4/16_endocv2021_positive_557.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C4",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1243,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000005.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 1246,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000008.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1434,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000352.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1432,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000348.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1385,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000271.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1359,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000232.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1259,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000048.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1373,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000257.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1379,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000264.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1302,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000127.jpg",
+      "width": 384,
+      "height": 288,
+      "center": "C5",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1269,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000074.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1423,
+      "file_name": "data_C5/images_C5/EndoCV2021_C5_50000336.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C5",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1496,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100056.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "negative",
+      "gt_count": 0
+    },
+    {
+      "id": 1512,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100076.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1492,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100049.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1513,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100077.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "multi",
+      "gt_count": 2
+    },
+    {
+      "id": 1527,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100103.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1520,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100090.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=True_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1482,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100038.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1504,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100067.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=True_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1491,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100047.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1523,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100093.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=False_small=True",
+      "gt_count": 1
+    },
+    {
+      "id": 1516,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100085.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    },
+    {
+      "id": 1503,
+      "file_name": "data_C6/images_C6/EndoCV2021_C6_0100066.jpg",
+      "width": 1920,
+      "height": 1080,
+      "center": "C6",
+      "sampling_stratum": "single_low=False_small=False",
+      "gt_count": 1
+    }
+  ]
+}

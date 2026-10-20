@@ -1,0 +1,14 @@
+{
+  "mssl": {
+    "experiment": "/mnt/d/code/work2_polypy_det/runs/mssl-official50-s42-20261018T025946/experiment.json",
+    "checkpoint": "/mnt/d/code/work2_polypy_det/runs/mssl-official50-s42-20261018T025946/train/model_best.pth",
+    "checkpoint_sha256": "c0ea44a7fdfd0e673d32729b128cbbf8916c313b206e5ab334335331c52a0ae0",
+    "experiment_sha256": "cb917f86ac6905f62aa4b9a1f7a23d541250da921abbce280ece8ec0b1365c0d"
+  },
+  "baseline": {
+    "experiment": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/experiment.json",
+    "checkpoint": "/mnt/d/code/work2_polypy_det/runs/maskdino-mssl-control-s42-20261018T025946/train/model_best.pth",
+    "checkpoint_sha256": "9489d529cac7d6c73fe746b00f630d1773547758588669b54e1e02b0926ea775",
+    "experiment_sha256": "c895c0ede7f25ffaf87ec9e79af8e053301960b2dd3d5dcacc31d755300d26f2"
+  }
+}
