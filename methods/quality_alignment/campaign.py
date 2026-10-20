@@ -129,10 +129,18 @@ def smoke_gate(training, mssl):
         'gate':'runtime/numerics only; AP ignored','checkpoint_reload_and_full_val':True}
 
 
-def execute(output):
+def execute(output, resume_training_args=None):
     out=Path(output);p=read_json(out/'protocol.json');workspace=Path(p['workspace']);source=Path(p['source_root'])
-    state={'status':'running','pipeline_pid':os.getpid(),'completed':[]}
-    queue={'status':'running','tasks':[{'name':name,'status':'pending'} for name in p['order']]}
+    if resume_training_args is None:
+        state={'status':'running','pipeline_pid':os.getpid(),'completed':[]}
+        queue={'status':'running','tasks':[{'name':name,'status':'pending'} for name in p['order']]}
+    else:
+        state=read_json(out/'state.json');queue=read_json(out/'queue.json')
+        if state['status']!='paused' or state['stage']!='mssl_q_formal_train':
+            raise RuntimeError('Continuation requires the explicitly paused MSSL+Q training stage')
+        if state['completed']!=p['order'][:p['order'].index('mssl_q_formal_train')]:
+            raise RuntimeError('Unexpected completed-task prefix')
+        state.update(status='running',pipeline_pid=os.getpid(),resumed_at=now())
     def save():
         state['updated_at']=now();write_json(out/'state.json',state)
         queue.update(status=state['status'],updated_at=state['updated_at']);write_json(out/'queue.json',queue)
@@ -142,12 +150,17 @@ def execute(output):
         for path,digest in p['reference_input_sha256'].items():
             if sha256(path)!=digest: raise RuntimeError(f'Reference input changed: {path}')
     def begin(label):
+        if label in state['completed']: return
         verify();state.update(stage=label,command=None,child_pid=None)
         task=next(t for t in queue['tasks'] if t['name']==label);task.update(status='running',started_at=now());save()
     def done(label):
+        if label in state['completed']: return
         state['completed'].append(label)
         next(t for t in queue['tasks'] if t['name']==label).update(status='completed',ended_at=now());save()
     def command(label,args):
+        if label in state['completed']: return
+        if label=='mssl_q_formal_train' and resume_training_args is not None:
+            args=list(resume_training_args)
         begin(label);state['command']=[sys.executable,*args]
         with (out/f'{label}.log').open('w',encoding='utf-8') as log:
             child=subprocess.Popen(state['command'],cwd=source,stdout=log,stderr=subprocess.STDOUT)
@@ -168,6 +181,8 @@ def execute(output):
                 '--output',str(out/f'{label}_precheck')])
             if read_json(out/f'{label}_precheck/report.json')['status']!='passed': raise RuntimeError('GPU acceptance did not pass')
         for label in LABELS:
+            if all(f'{label}_smoke_{stage}' in state['completed'] for stage in ('train','predict','gate')):
+                continue
             smoke=p['smokes'][label]
             for action in ('train','predict'):
                 command(f'{label}_smoke_{action}',['-m','methods.quality_alignment',action,'--config',smoke['config'],'--run-id',smoke['run_id']])

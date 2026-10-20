@@ -23,7 +23,7 @@ try {
     while ($true) {
         try {
             $queueStatus = (Get-Content -LiteralPath $queueState -Raw | ConvertFrom-Json).status
-            if ($queueStatus -in @('completed', 'failed')) { break }
+            if ($queueStatus -in @('completed', 'failed', 'paused')) { break }
         } catch {
             # State is replaced by the running queue; retry a transient read.
         }

@@ -35,3 +35,13 @@ do not write parameter gradients or consume RNG, and do not tune the loss.
 copyright. Tests AST-load its two functions with the equivalent torchvision
 box-IoU interface, checking values and gradients separately from numerical
 stabilization at saturated logits.
+
+For the explicitly paused MSSL+Q campaign, `python -m
+methods.quality_alignment.resume launch --output QUEUE_ROOT` continues the
+existing finite queue using the saved iteration549 checkpoint. It validates
+the original inputs and freezes a separate recovery controller/checkpoint
+archive; the original training/loss source snapshot stays unchanged. Model,
+optimizer, scheduler, AMP scale, update count and historical best selection
+are restored, and the native data cursor is advanced to iteration550. Completed
+experiments are skipped. Original RNG/worker state was not checkpointed, so
+this continuation does not claim bitwise uninterrupted-training equivalence.
