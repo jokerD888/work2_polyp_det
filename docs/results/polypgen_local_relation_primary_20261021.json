@@ -1,0 +1,324 @@
+{
+  "cohort_role": "PolypGen primary test benchmark",
+  "images": 1473,
+  "gt": 1533,
+  "negative_images": 126,
+  "geometry_counts": {
+    "baseline": {
+      "0.5": {
+        "all300": 1143,
+        "selected100": 1136,
+        "top10": 1116
+      },
+      "0.75": {
+        "all300": 974,
+        "selected100": 956,
+        "top10": 922
+      },
+      "0.9": {
+        "all300": 596,
+        "selected100": 569,
+        "top10": 545
+      }
+    },
+    "mssl": {
+      "0.5": {
+        "all300": 1155,
+        "selected100": 1145,
+        "top10": 1128
+      },
+      "0.75": {
+        "all300": 971,
+        "selected100": 954,
+        "top10": 920
+      },
+      "0.9": {
+        "all300": 634,
+        "selected100": 622,
+        "top10": 590
+      }
+    }
+  },
+  "negative_score05": {
+    "baseline": {
+      "images": 31,
+      "detections": 31
+    },
+    "mssl": {
+      "images": 19,
+      "detections": 19
+    }
+  },
+  "single_gt": {
+    "n": 1224,
+    "baseline_missing": 196,
+    "mssl_missing": 184,
+    "mssl_below075": 329,
+    "median_area_ratio": 0.08165326961325312
+  },
+  "multi_gt": {
+    "n": 309,
+    "baseline_missing": 194,
+    "mssl_missing": 194,
+    "mssl_below075": 233,
+    "median_area_ratio": 0.016251904520060943
+  },
+  "eligible_region_audit": 1224,
+  "region_skips": {},
+  "low_contrast_cutoff": 10.827234029769897,
+  "small_cutoff": 0.03455088874936203,
+  "contrast_bins": {
+    "True": {
+      "n": 306,
+      "baseline_missing": 86,
+      "mssl_missing": 79,
+      "mssl_below075": 123,
+      "median_area_ratio": 0.033921682098765435
+    },
+    "False": {
+      "n": 918,
+      "baseline_missing": 110,
+      "mssl_missing": 105,
+      "mssl_below075": 206,
+      "median_area_ratio": 0.10398670286828182
+    }
+  },
+  "artifact_filtered_contrast": {
+    "cutoff": 10.597283124923706,
+    "bins": {
+      "True": {
+        "n": 306,
+        "baseline_missing": 86,
+        "mssl_missing": 82,
+        "mssl_below075": 125,
+        "median_area_ratio": 0.03436926721065822
+      },
+      "False": {
+        "n": 918,
+        "baseline_missing": 110,
+        "mssl_missing": 102,
+        "mssl_below075": 204,
+        "median_area_ratio": 0.10299001658951518
+      }
+    }
+  },
+  "size_contrast_cells": {
+    "low=True,small=True": {
+      "n": 157,
+      "baseline_missing": 46,
+      "mssl_missing": 46,
+      "mssl_below075": 63,
+      "median_area_ratio": 0.01728395061728395
+    },
+    "low=True,small=False": {
+      "n": 149,
+      "baseline_missing": 40,
+      "mssl_missing": 33,
+      "mssl_below075": 60,
+      "median_area_ratio": 0.061102880658436214
+    },
+    "low=False,small=True": {
+      "n": 149,
+      "baseline_missing": 38,
+      "mssl_missing": 41,
+      "mssl_below075": 62,
+      "median_area_ratio": 0.020370370370370372
+    },
+    "low=False,small=False": {
+      "n": 769,
+      "baseline_missing": 72,
+      "mssl_missing": 64,
+      "mssl_below075": 144,
+      "median_area_ratio": 0.13012345679012347
+    }
+  },
+  "per_center": {
+    "C1": {
+      "all_gt": {
+        "n": 277,
+        "baseline_missing": 45,
+        "mssl_missing": 44,
+        "mssl_below075": 76,
+        "median_area_ratio": 0.09402469135802469
+      },
+      "single_with_regions": {
+        "n": 236,
+        "baseline_missing": 21,
+        "mssl_missing": 18,
+        "mssl_below075": 46,
+        "median_area_ratio": 0.09862605150009729
+      },
+      "global_low_contrast": {
+        "n": 61,
+        "baseline_missing": 9,
+        "mssl_missing": 9,
+        "mssl_below075": 16,
+        "median_area_ratio": 0.03634567901234568
+      },
+      "within_center_low_contrast": {
+        "n": 59,
+        "baseline_missing": 9,
+        "mssl_missing": 9,
+        "mssl_below075": 16,
+        "median_area_ratio": 0.035643347050754455
+      },
+      "within_center_cutoff": 10.743442058563232
+    },
+    "C2": {
+      "all_gt": {
+        "n": 295,
+        "baseline_missing": 50,
+        "mssl_missing": 55,
+        "mssl_below075": 83,
+        "median_area_ratio": 0.07956661587946504
+      },
+      "single_with_regions": {
+        "n": 245,
+        "baseline_missing": 24,
+        "mssl_missing": 31,
+        "mssl_below075": 49,
+        "median_area_ratio": 0.0866617616144629
+      },
+      "global_low_contrast": {
+        "n": 21,
+        "baseline_missing": 6,
+        "mssl_missing": 5,
+        "mssl_below075": 8,
+        "median_area_ratio": 0.05339411727971023
+      },
+      "within_center_low_contrast": {
+        "n": 62,
+        "baseline_missing": 10,
+        "mssl_missing": 13,
+        "mssl_below075": 20,
+        "median_area_ratio": 0.061027568922305764
+      },
+      "within_center_cutoff": 17.419057846069336
+    },
+    "C3": {
+      "all_gt": {
+        "n": 464,
+        "baseline_missing": 89,
+        "mssl_missing": 87,
+        "mssl_below075": 134,
+        "median_area_ratio": 0.06366255144032922
+      },
+      "single_with_regions": {
+        "n": 359,
+        "baseline_missing": 18,
+        "mssl_missing": 18,
+        "mssl_below075": 54,
+        "median_area_ratio": 0.08666666666666667
+      },
+      "global_low_contrast": {
+        "n": 98,
+        "baseline_missing": 9,
+        "mssl_missing": 8,
+        "mssl_below075": 21,
+        "median_area_ratio": 0.03646090534979424
+      },
+      "within_center_low_contrast": {
+        "n": 90,
+        "baseline_missing": 9,
+        "mssl_missing": 6,
+        "mssl_below075": 19,
+        "median_area_ratio": 0.03646090534979424
+      },
+      "within_center_cutoff": 10.07682752609253
+    },
+    "C4": {
+      "all_gt": {
+        "n": 155,
+        "baseline_missing": 50,
+        "mssl_missing": 42,
+        "mssl_below075": 71,
+        "median_area_ratio": 0.058888888888888886
+      },
+      "single_with_regions": {
+        "n": 139,
+        "baseline_missing": 43,
+        "mssl_missing": 35,
+        "mssl_below075": 62,
+        "median_area_ratio": 0.05401234567901234
+      },
+      "global_low_contrast": {
+        "n": 60,
+        "baseline_missing": 26,
+        "mssl_missing": 23,
+        "mssl_below075": 35,
+        "median_area_ratio": 0.03296296296296296
+      },
+      "within_center_low_contrast": {
+        "n": 35,
+        "baseline_missing": 15,
+        "mssl_missing": 14,
+        "mssl_below075": 23,
+        "median_area_ratio": 0.027746913580246915
+      },
+      "within_center_cutoff": 7.643199682235718
+    },
+    "C5": {
+      "all_gt": {
+        "n": 244,
+        "baseline_missing": 126,
+        "mssl_missing": 122,
+        "mssl_below075": 158,
+        "median_area_ratio": 0.03982638888888888
+      },
+      "single_with_regions": {
+        "n": 173,
+        "baseline_missing": 77,
+        "mssl_missing": 69,
+        "mssl_below075": 97,
+        "median_area_ratio": 0.05246913580246913
+      },
+      "global_low_contrast": {
+        "n": 51,
+        "baseline_missing": 29,
+        "mssl_missing": 27,
+        "mssl_below075": 35,
+        "median_area_ratio": 0.017083333333333332
+      },
+      "within_center_low_contrast": {
+        "n": 44,
+        "baseline_missing": 24,
+        "mssl_missing": 23,
+        "mssl_below075": 29,
+        "median_area_ratio": 0.01720679012345679
+      },
+      "within_center_cutoff": 9.448127746582031
+    },
+    "C6": {
+      "all_gt": {
+        "n": 98,
+        "baseline_missing": 30,
+        "mssl_missing": 28,
+        "mssl_below075": 40,
+        "median_area_ratio": 0.0579320987654321
+      },
+      "single_with_regions": {
+        "n": 72,
+        "baseline_missing": 13,
+        "mssl_missing": 13,
+        "mssl_below075": 21,
+        "median_area_ratio": 0.07762345679012346
+      },
+      "global_low_contrast": {
+        "n": 15,
+        "baseline_missing": 7,
+        "mssl_missing": 7,
+        "mssl_below075": 8,
+        "median_area_ratio": 0.016296296296296295
+      },
+      "within_center_low_contrast": {
+        "n": 18,
+        "baseline_missing": 8,
+        "mssl_missing": 7,
+        "mssl_below075": 9,
+        "median_area_ratio": 0.025925925925925925
+      },
+      "within_center_cutoff": 12.469589710235596
+    }
+  },
+  "limits": "Handcrafted image contrast, correlated frames and observed test set; no causal or learned-feature separability conclusion. Per-GT maxima are not one-to-one recall."
+}
