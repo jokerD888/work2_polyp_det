@@ -1,5 +1,7 @@
 # 全量初始化干预后的研究决策
 
+**后续更新：CPU可识别性审计已完成，结论Go，仅进入机制设计而非完整训练。可用候选信号主要是Mask空间占用支持；类别基数、实际GT见证稀少和源域学习证据缺额仍保留。详见`initialization_identifiability_decision_20261021.md`。以下是审计前的阶段决策。**
+
 2026-10-21，固定权重三条件队列于北京时间18:15完成。两组1473张PolypGen/1533 GT、两组120张Kvasir Val/130 GT均通过验收，原生PolypGen阶段数组逐位一致，上游身份逐图一致。未新增训练。依据`runs/initialization-intervention-full-20261021-r2/summary.md`及各任务`result.json`。
 
 ## 已得到的证据

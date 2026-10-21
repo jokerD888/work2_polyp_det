@@ -1,0 +1,15 @@
+{
+  "decision": "GO_MECHANISM_DESIGN_ONLY",
+  "new_training_released": false,
+  "deployable_gate_validated": false,
+  "novelty_confirmed": false,
+  "main_signal": "low foreground occupancy inside predicted Mask bounding rectangle",
+  "main_signal_is_not": "proof of fragmented Mask or automatically wrong Mask",
+  "polypgen_mssl_early_top10": {
+    "encoder": {"recovered_queries": 751, "damaged_queries": 2486, "both_good_queries": 4928, "both_bad_queries": 6565, "unique_actual_GT_recovery_witness_queries": 321, "witness_images": 91},
+    "blend05": {"recovered_queries": 285, "damaged_queries": 1722, "both_good_queries": 5692, "both_bad_queries": 7031, "unique_actual_GT_recovery_witness_queries": 85, "witness_images": 28}
+  },
+  "positive_evidence": ["Mask occupancy association has consistent direction across both models, six centers and source query contrasts", "GT-recovery witnesses can differ from original high-IoU controls using pre-decoder features"],
+  "limitations": ["class imbalance and normal-candidate overlap remain", "source actual-GT witnesses occupy only 1-3 images", "train-query feature examples and learnability not audited", "whole-query interventions are not independent per-query counterfactuals", "no inference operating point or full training verified"],
+  "next_scope": "mechanism specification, source-only supervision and gradient path, nearest-work distinction; no automatic model training"
+}

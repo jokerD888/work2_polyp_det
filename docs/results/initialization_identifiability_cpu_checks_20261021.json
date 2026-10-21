@@ -1,0 +1,13 @@
+{
+  "model_or_gpu_inference": false,
+  "errors": 0,
+  "status": "passed",
+  "cpu_only": true,
+  "source_sha256": {
+    "tests/test_initialization_identifiability.py": "0fecba8c952bec1ab8d6c35dbee18e46ac874f8be0c89175b854c978e5393713",
+    "polypbench/analysis/initialization_identifiability.py": "066e9c91e1c427382c900109524212961fb0bdb11268519e16a475a126a6c495",
+    "polypbench/analysis/initialization_identifiability_report.py": "0afbbafdb87056e5e34a3cf03baee5b6a58f9bbede87c67c5549e0b97078b050"
+  },
+  "tests_run": 8,
+  "failures": 0
+}

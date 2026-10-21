@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-10-21T14:01:34.848786+00:00",
+  "cpu_only": true,
+  "model_inference": false,
+  "fitting": false,
+  "gate_or_coefficient_search": false,
+  "features": [
+    "box_mask_disagreement",
+    "log_mask_encoder_area_ratio",
+    "normalized_center_shift",
+    "mask_bbox_unfilled_fraction",
+    "mask_foreground_fraction",
+    "mask_padding_foreground_fraction",
+    "mask_empty",
+    "mask_degenerate",
+    "encoder_boundary",
+    "encoder_area",
+    "mask_area",
+    "encoder_selection_rank",
+    "encoder_low_selection_score",
+    "encoder_not_native_legal"
+  ],
+  "feature_orientation": "higher predicts recovery; never flip based on AUC",
+  "cohorts": [
+    "polypgen1473/1533",
+    "kvasir_val120/130"
+  ],
+  "conditions": [
+    "encoder",
+    "blend05"
+  ],
+  "thresholds": [
+    0.5,
+    0.75,
+    0.9
+  ],
+  "subsets": "all300; native Encoder top10/top1 (TopK order before decoder, no GT); nonboundary encoder; native-legal encoder where available",
+  "GT_conditioning": "unique/ambiguous/unassigned ownership and GT size are diagnosis-only; all-query census remains primary",
+  "uncertainty": "100 seed42 image-block resamples stratified by center, ranking AP for first three fixed features on early-top10 .5; no patient/seed inference",
+  "normal_controls": "both_good + damaged are native-covered controls; large both_bad/unassigned background base retained",
+  "missing": "No full mask/connected components/spatial covariance; Kvasir selection score and native-legal flags absent, NaN not fabricated",
+  "limits": "Full-query interventions alter self-attention jointly; do not combine cached query branches into a purported real gated model. Ranking AP is not bbox AP. Associations do not validate a deployable gate.",
+  "source_sha256": {
+    "polypbench/analysis/initialization_identifiability.py": "066e9c91e1c427382c900109524212961fb0bdb11268519e16a475a126a6c495"
+  }
+}
