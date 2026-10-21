@@ -1,0 +1,7 @@
+{
+  "image_id": 1,
+  "selected_encoder_boxes_at_0_or_1": 928,
+  "encoder_boxes_finite": true,
+  "mask_boxes_finite": true,
+  "error": "RuntimeError('Non-finite actual reference; do not invent a fallback')"
+}

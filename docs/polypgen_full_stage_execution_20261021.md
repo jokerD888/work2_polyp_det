@@ -1,5 +1,7 @@
 # PolypGen全量阶段追踪（2026-10-21）
 
+**完成：2026-10-21 14:37（北京时间），两组1473张/1533GT均通过原生与历史一致性验收，原72张两模型共144次子集复核通过。报告`runs/polypgen-candidate-stages-full-20261021/summary.md`；以下启动信息保留为执行记录。后续固定权重干预另见`initialization_intervention_execution_20261021.md`。**
+
 按用户要求，逐阶段追踪从72张机制面板扩展到**全部1473张、1533个GT**，保留126张负图及六中心原始比例。不是增加新的训练数据或追加训练；不使用PolypsSet、PolypDB。
 
 输出目录：`runs/polypgen-candidate-stages-full-20261021/`。后台控制器PID3418，独立源码快照`source/`；Windows隐藏防休眠守护PID4516，允许屏幕熄灭，完成/失败后释放。2026-10-21 13:51已开始Baseline全量前向，随后串行MSSL V1。先前E/F与72张诊断均已完成，不再修改它们。

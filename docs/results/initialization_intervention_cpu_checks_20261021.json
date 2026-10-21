@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "tests_run": 24,
+  "failures": 0,
+  "errors": 0,
+  "training": false,
+  "gpu_forward": false,
+  "source_sha256": {
+    "polypbench/analysis/initialization_intervention.py": "6a51d83f2d7b4341e82fd118aa4d46716386cd1eadeb0a73deac932e2db034ef",
+    "polypbench/analysis/initialization_queue.py": "c8ffc17e01c0ceb6a307f2847d0ed8a0838d41bb6920c97be6e9cfe3d5f6e16b",
+    "tests/test_candidate_stage.py": "32d4de071540de59bf5f20a50bdae8a09b0078e8c9e2958fc0a55392591747c7",
+    "tests/test_initialization_intervention.py": "3e29f27ade68c9f3603d2fb1be50eb163574b5373f169bf89e428c840752cba2"
+  }
+}

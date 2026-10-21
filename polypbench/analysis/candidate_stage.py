@@ -112,11 +112,15 @@ class NativeCapture:
         }
 
     def mask2box_return(self, loc, result):
+        if result is None:
+            return
         if "raw_mask2box_xyxy" in self.data:
             raise AssertionError("Unexpected repeated native mask2box")
         self.data["raw_mask2box_xyxy"] = cpu(result)
 
     def decoder_return(self, loc, result):
+        if result is None:  # profiler also emits return(None) during exception unwinding
+            return
         if loc["self"] is not self.decoder or "dense_boxes" in self.data:
             raise AssertionError("Unexpected decoder return")
         out, mask_dict = result
@@ -150,6 +154,8 @@ class NativeCapture:
         data["init_binary_masks"] = cpu(loc["flaten_mask"] > 0)
 
     def instance_return(self, loc, result):
+        if result is None:
+            return
         assert loc["self"] is self.model
         self.data["final_top100_query_ids"] = cpu(loc["topk_indices"])
         # Native locals have already sliced mask_box_result to Top100.
@@ -159,6 +165,8 @@ class NativeCapture:
         self.data["native_top100_mask_scores"] = cpu(loc["mask_scores_per_image"])
 
     def model_return(self, loc, result):
+        if result is None:
+            return  # preserve the original inference exception
         assert loc["self"] is self.model
         images = loc["images"]
         self.data["padded_hw"] = tuple(images.tensor.shape[-2:])

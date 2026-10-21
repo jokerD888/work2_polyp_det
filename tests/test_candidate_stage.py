@@ -165,6 +165,52 @@ class NativeDecoderCPUTests(unittest.TestCase):
         data = capture.data
         self.assertEqual(data["padded_hw"], (128,128))
         self.assertEqual(data["mapped_hw"], (120,128))
+        # Real native TopK/mask2box/INITIAL_PRED, with only attention stubbed.
+        from polypbench.analysis.initialization_intervention import (
+            InitializationIntervention, assert_same_upstream, compare_capture)
+        original_forward = decoder.forward.__func__
+        with torch.no_grad(), InitializationIntervention(decoder) as intervention:
+            native_upstream = None
+            for condition in ("native", "encoder", "blend05"):
+                intervention.condition = condition
+                changed = NativeCapture(model)
+                with ReturnObserver(changed.handlers):
+                    altered = model(inputs)[0]["instances"]
+                if condition == "native":
+                    compare_capture(capture.data, changed.data)
+                    native_upstream = intervention.data
+                else:
+                    assert_same_upstream(native_upstream, intervention.data)
+                np.testing.assert_array_equal(changed.data["decoder_init"], intervention.data["actual"])
+                if condition == "encoder":
+                    np.testing.assert_array_equal(changed.data["decoder_init"], changed.data["encoder_top300"])
+                    encoder_output = altered
+                if condition == "blend05":
+                    from maskdino.utils.utils import inverse_sigmoid
+                    e = torch.from_numpy(native_upstream["encoder"])
+                    m = torch.from_numpy(native_upstream["mask"])
+                    np.testing.assert_array_equal(changed.data["decoder_init"], inverse_sigmoid(.5*e+.5*m).sigmoid().numpy())
+            self.assertEqual(intervention.calls, 3)
+        self.assertIs(decoder.forward.__func__, original_forward)
+        with torch.no_grad(), InitializationIntervention(decoder) as intervention:
+            intervention.condition = "invalid_condition"
+            unwinding = NativeCapture(model)
+            with self.assertRaisesRegex(ValueError, "invalid_condition"):
+                with ReturnObserver(unwinding.handlers):
+                    model(inputs)
+        self.assertNotIn("forward", decoder.__dict__)
+        decoder.initialize_box_type = "no"
+        with torch.no_grad():
+            native_encoder_output = model(inputs)[0]["instances"]
+        decoder.initialize_box_type = "mask2box"
+        for field in ("pred_boxes", "scores", "pred_masks"):
+            a, b = encoder_output.get(field), native_encoder_output.get(field)
+            torch.testing.assert_close(a.tensor if field == "pred_boxes" else a,
+                b.tensor if field == "pred_boxes" else b, rtol=0, atol=0)
+        with self.assertRaisesRegex(RuntimeError, "fixture"):
+            with InitializationIntervention(decoder):
+                raise RuntimeError("fixture")
+        self.assertIs(decoder.forward.__func__, original_forward)
         np.testing.assert_allclose(data["native_top100_class_scores"] * data["native_top100_mask_scores"], data["native_top100_scores"], rtol=1e-6)
         image = {"id": 1, "height": 120, "width": 128, "file_name": "fake.jpg", "center": "C1", "sampling_stratum": "test"}
         with tempfile.TemporaryDirectory() as tmp:
