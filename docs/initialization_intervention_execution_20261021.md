@@ -1,5 +1,7 @@
 # 冻结权重的 Box–Mask 初始化干预
 
+**已完成：2026-10-21 18:15（北京时间），两组全量PolypGen、两组Kvasir Val和汇总全部完成且验收通过，防休眠已释放。结果`runs/initialization-intervention-full-20261021-r2/summary.md`；后续决策见`initialization_intervention_decision_20261021.md`。以下启动和修复细节保留为执行记录。**
+
 用户批准执行：已有 Baseline、MSSL V1，三条件，PolypGen 全量为主要开发诊断，Kvasir Val 辅助复核；不新增训练，不开发自适应头，不搜索系数/阈值，PolypsSet/PolypDB 保留。
 
 ## 固定实现
