@@ -1,0 +1,129 @@
+{
+  "status": "passed",
+  "full_protocol_sha256": "f32d26b49840b98a61685e7afe037b0aa9875e3b7cdb0339439717cb39f3850a",
+  "workspace_git_commit": "dce63cbd3ac9f20362ba9a297b80b4aec2a54e0b",
+  "queue_root": "runs/support-reference-full-20261021",
+  "runs": {
+    "blend05": "reference-blend05-s42-20261021T154208Z",
+    "geometry": "reference-geometry-s42-20261021T154208Z",
+    "support": "reference-support-s42-20261021T154208Z"
+  },
+  "budget": "Seed42;2750 planned iterations;micro1 accumulation16;50 equivalent epochs; fresh original pretrained asset",
+  "selection": "best Kvasir Val bbox AP, earliest tie;period275;PolypGen development evaluation after all trains",
+  "order": [
+    "formal_unit_checks",
+    "existing_mssl_regression_checks",
+    "blend05_startup_precheck",
+    "geometry_startup_precheck",
+    "support_startup_precheck",
+    "blend05_train",
+    "blend05_source_predict",
+    "blend05_formal_gate",
+    "geometry_train",
+    "geometry_source_predict",
+    "geometry_formal_gate",
+    "support_train",
+    "support_source_predict",
+    "support_formal_gate",
+    "target_image_hashes",
+    "blend05_polypgen_inference",
+    "blend05_polypgen_scoring",
+    "geometry_polypgen_inference",
+    "geometry_polypgen_scoring",
+    "support_polypgen_inference",
+    "support_polypgen_scoring",
+    "final_comparison"
+  ],
+  "startup": {
+    "geometry": {
+      "status": "passed",
+      "native_initialization_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "optimizer": {
+        "status": "passed",
+        "variant": "geometry",
+        "all_parameters_discovered_once": true,
+        "new_parameter_count": 5444,
+        "new_parameter_groups": [
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.0.weight",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 5120
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.0.bias",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 64
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.2.weight",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 256
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.2.bias",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 4
+          }
+        ]
+      },
+      "successful_updates": 0,
+      "ap_evaluation": false
+    },
+    "support": {
+      "status": "passed",
+      "native_initialization_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "optimizer": {
+        "status": "passed",
+        "variant": "support",
+        "all_parameters_discovered_once": true,
+        "new_parameter_count": 5444,
+        "new_parameter_groups": [
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.0.weight",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 5120
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.0.bias",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 64
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.2.weight",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 256
+          },
+          {
+            "name": "sem_seg_head.predictor.support_reference.head.2.bias",
+            "lr": 0.0001,
+            "weight_decay": 0.05,
+            "elements": 4
+          }
+        ]
+      },
+      "successful_updates": 0,
+      "ap_evaluation": false
+    },
+    "blend05": {
+      "status": "passed",
+      "native_initialization_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "optimizer": {
+        "status": "passed",
+        "variant": "blend05",
+        "all_parameters_discovered_once": true,
+        "new_parameter_count": 0,
+        "new_parameter_groups": []
+      },
+      "successful_updates": 0,
+      "ap_evaluation": false
+    }
+  },
+  "long_training_completed": false
+}

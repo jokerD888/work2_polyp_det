@@ -1,5 +1,7 @@
 # E/F与阶段追踪之后：第二机制的决策
 
+**训练更新：四条件原始预训练起点Smoke均通过，每组20次成功优化（各30次尝试、10次AMP跳过），共同原生参数SHA及480个图像/Box增强microbatch前缀相同。collector源域预检、19项CPU＋15项V1回归、三个正式Trainer起点/optimizer门禁均通过。三组Baseline独立完整训练已加入`runs/support-reference-full-20261021/`冻结队列，当前blend05开始，随后geometry、support；各50等效epoch，再按固定协议评估PolypGen。详见[support_reference_training_execution_20261021.md](support_reference_training_execution_20261021.md)。没有新AP结论，不自动组合MSSL。以下为历史决策记录。**
+
 **工程更新：空间支持参考框校准已通过真实Detector接入验收：16项CPU检查、8张源域FP32推理一致、34个AMP训练视图一致、2组batch2与2组固定非零参考扰动。Baseline有效匹配35/36，MSSL15/15；0次optimizer更新，无PolypGen输入。详见[support_reference_engineering_execution_20261021.md](support_reference_engineering_execution_20261021.md)。下一步为原始起点优化smoke与受控训练准备，不把工程通过当涨点或第二创新成立；当前没有完整训练队列。**
 
 **规格更新：空间支持条件参考框校准的v0规格及独立CPU原型已完成，见[support_reference_mechanism_spec_20261021.md](support_reference_mechanism_spec_20261021.md)。采用原生参考起点＋坐标残差，拟复用aux0原生框监督；不是现成可靠性门控。尚未接入Detector、未训练，后续先验收真实路由与源域有效监督。普通MLP本身不作为第二创新，空间profile的独立价值待对照。以下保留既有审计和实验结论。**

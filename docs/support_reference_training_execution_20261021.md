@@ -47,4 +47,14 @@ PolypGen是主要外部开发基准；Kvasir Val负责选checkpoint和辅助检�
 
 四组冷启动Smoke及共同起点门禁已完成；collector预检也已通过：每个新条件使用Kvasir Train图像1与4，观察前后预测逐位相同，四阶段300框与Top100映射验收通过，无AP评价。预检目录为`runs/support-reference-external-preflight-20261021/`。
 
-完整实验代码和固定协议已准备，下一步由冻结控制器完成19项CPU、15项V1回归及三个正式DefaultTrainer启动门禁，然后顺序运行三组训练。最终队列位置和启动回执将在任务执行后补充。
+完整冻结队列已启动：`runs/support-reference-full-20261021/`，控制器PID3297，正式源码基于commit `dce63cb`并逐文件记录SHA。其19项CPU、15项V1回归及三个DefaultTrainer启动门禁均已通过；正式入口起点SHA与Cold Smoke一致，新增参数optimizer发现正确。已进入第一组blend05长训练。
+
+| 顺序 | 完整训练run_id |
+|---|---|
+| 1 | reference-blend05-s42-20261021T154208Z |
+| 2 | reference-geometry-s42-20261021T154208Z |
+| 3 | reference-support-s42-20261021T154208Z |
+
+队列共22项任务：回归2项、正式启动3项、各组训练/源域预测/验收9项、目标图像哈希1项、三组PolypGen推理/评分6项、最终对比1项。完成三组训练后再做固定PolypGen评估，不自动运行MSSL组合。`state.json`、`queue.json`和分任务日志是实时进度来源；本文件不表示长训练已完成。
+
+Windows保活仅阻止队列期间的自动系统睡眠，允许屏幕休眠，完成/失败/暂停后自动释放；不修改系统电源配置。Smoke保活已释放，正式队列保活处于active。
