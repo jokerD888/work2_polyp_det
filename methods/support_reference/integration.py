@@ -2,7 +2,7 @@
 
 The installed third-party source is never edited. Disabled calls use the
 original bound method. The extra module is registered for normal state_dict
-and parameter discovery, but is NOT enabled by an existing experiment config.
+and parameter discovery. Only explicit support_reference configs enable it.
 """
 import ast
 import hashlib
@@ -64,10 +64,13 @@ def compile_forward(original, replace):
 
 
 class SupportReferenceAttachment:
-    def __init__(self, model, enabled=False, capture=False):
+    def __init__(self, model, enabled=False, capture=False, variant='support'):
+        if variant not in ('support', 'geometry', 'blend05'):
+            raise ValueError('Unknown reference variant')
         self.model = model
         self.decoder = model.sem_seg_head.predictor
         self.enabled, self.capture = enabled, capture
+        self.variant = variant
         self.last = {}
         self.canvas = None
 
@@ -85,7 +88,11 @@ class SupportReferenceAttachment:
             raise RuntimeError('Attachment requires the full model forward for geometry')
         valid = F.interpolate(self.canvas[:, None].float(), size=masks.shape[-2:],
                               mode='nearest-exact')[:, 0].bool()
-        result = self.adapter(masks, encoder, native, valid)
+        if self.variant == 'blend05':
+            from maskdino.utils.utils import inverse_sigmoid
+            result = inverse_sigmoid(.5 * encoder.detach().sigmoid() + .5 * native.detach().sigmoid())
+        else:
+            result = self.adapter(masks, encoder, native, valid)
         if self.capture:
             features, eligible = support_descriptor(masks, encoder, native, valid)
             self.last = {'native': native.detach(), 'actual': result.detach(),
@@ -106,10 +113,12 @@ class SupportReferenceAttachment:
             raise RuntimeError('Unsupported native configuration')
         self.original = decoder.forward
         self.compiled = compile_forward(self.original, self.replace)
-        self.adapter = SupportReferencePrototype().to(self.model.device)
-        # New modules do not inherit the parent's current eval state automatically.
-        self.adapter.train(decoder.training)
-        decoder.add_module(MODULE_NAME, self.adapter)
+        self.adapter = None
+        if self.variant != 'blend05':
+            self.adapter = SupportReferencePrototype(use_profiles=self.variant == 'support').to(self.model.device)
+            # New modules do not inherit the parent's current eval state automatically.
+            self.adapter.train(decoder.training)
+            decoder.add_module(MODULE_NAME, self.adapter)
         decoder.forward = self._forward
         self.pre = self.model.register_forward_pre_hook(self._prepare)
         self.post = self.model.register_forward_hook(self._finish, always_call=True)
@@ -119,7 +128,8 @@ class SupportReferenceAttachment:
         self.pre.remove()
         self.post.remove()
         del self.decoder.forward
-        delattr(self.decoder, MODULE_NAME)
+        if self.adapter is not None:
+            delattr(self.decoder, MODULE_NAME)
         self.canvas = None
         self.last = {}
 

@@ -87,9 +87,12 @@ class SupportReferencePrototype(nn.Module):
     Native auxiliary-0 box loss could train this adapter after integration.
     That routing is NOT tested here: this is only an isolated prototype.
     """
-    def __init__(self, bins=16, hidden=64):
+    def __init__(self, bins=16, hidden=64, use_profiles=True):
         super().__init__()
+        if type(use_profiles) is not bool:
+            raise ValueError('use_profiles must be bool')
         self.bins = bins
+        self.use_profiles = use_profiles
         # Do not shift the detector/data-augmentation RNG stream on construction.
         with torch.random.fork_rng(devices=[]):
             self.head = nn.Sequential(nn.Linear(4 * bins + 16, hidden), nn.ReLU(),
@@ -101,6 +104,9 @@ class SupportReferencePrototype(nn.Module):
                 native_mask_reference_logits, valid_pixels):
         features, eligible = support_descriptor(mask_logits, encoder_reference_logits,
             native_mask_reference_logits, valid_pixels, self.bins)
+        if not self.use_profiles:
+            features = torch.cat((torch.zeros_like(features[..., :4*self.bins]),
+                                  features[..., 4*self.bins:]), -1)
         delta = self.head(features)
         base = native_mask_reference_logits.detach()
         adjusted = base + delta.to(base.dtype)

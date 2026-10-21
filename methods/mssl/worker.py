@@ -105,6 +105,9 @@ def worker_main(args):
                         break
                 else:
                     raise RuntimeError("Best-checkpoint selection requires a validation EvalHook")
+            if "support_reference" in experiment:
+                from methods.support_reference.monitor import make_hook
+                existing.append(make_hook(self.cfg.OUTPUT_DIR))
             return existing
 
         def __init__(self, config):
@@ -152,13 +155,36 @@ def worker_main(args):
             "mask_policy": "raw semantic for original single-box images in BOTH groups; multi-box native unchanged, no extra loss",
             "final_decoder_only": "box_regression" not in experiment and experiment.get("mssl_scope", {}).get("aux_weight", 0) == 0,
             "regression_log_key_semantics": "CIoU replaces loss_giou*; matching remains GIoU" if "box_regression" in experiment else "native GIoU",
-            "new_learned_parameters": 0})
+            "new_learned_parameters": (5444 if experiment.get('support_reference', {}).get('variant') in ('geometry', 'support') else 0),
+            "support_reference": experiment.get('support_reference'),
+            "initial_reference_calibration": 'support_reference' in experiment})
+        if 'support_reference' in experiment:
+            metadata = read_json(Path(args.output) / 'method.json')
+            metadata.update(method='Reference initialization / '+experiment['support_reference']['variant'],
+                options=experiment['support_reference'], final_decoder_only=False,
+                mssl_final_decoder_only=experiment['mssl']['enabled'])
+            write_json(Path(args.output) / 'method.json', metadata)
     if args.mode == "train":
         trainer = Trainer(cfg)
         trainer.resume_or_load(resume=False)
+        if experiment.get('reference_initialization_sha256'):
+            from methods.support_reference.monitor import native_digest
+            if native_digest(trainer.model) != experiment['reference_initialization_sha256']:
+                raise RuntimeError('Formal native initialization differs from passed cold-start smoke')
+        if experiment.get('reference_startup_only', False):
+            from methods.support_reference.monitor import native_digest, optimizer_contract
+            write_json(Path(args.output)/'reference_startup_gate.json', {
+                'status': 'passed', 'native_initialization_sha256': native_digest(trainer.model),
+                'optimizer': optimizer_contract(trainer.model, trainer.optimizer),
+                'successful_updates': 0, 'ap_evaluation': False})
+            return
         return trainer.train()
     model = Trainer.build_model(cfg)
-    DetectionCheckpointer(model).load(cfg.MODEL.WEIGHTS)
+    if 'support_reference' in experiment:
+        state = torch.load(cfg.MODEL.WEIGHTS, map_location='cpu', weights_only=False)
+        model.load_state_dict(state['model'], strict=True)
+    else:
+        DetectionCheckpointer(model).load(cfg.MODEL.WEIGHTS)
     return Trainer.test(cfg, model)
 
 

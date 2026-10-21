@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "variants": [
+    "native",
+    "blend05",
+    "geometry",
+    "support"
+  ],
+  "successful_updates_each": 20,
+  "shared_native_initialization_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+  "identical_image_and_box_augmentation_prefix_microbatches": 480,
+  "no_ap_evaluation": true,
+  "no_formal_warm_start": true,
+  "receipts": [
+    {
+      "status": "passed",
+      "variant": "native",
+      "successful_updates": 20,
+      "attempts": 30,
+      "amp_skips": 10,
+      "initial_native_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "initial_asset": {
+        "source": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+        "sha256": "16fd03f0b0123e85b959cb9b64aaf9eeb4a7dc68bd9b0b134a9220d4b24c15c6"
+      },
+      "checkpoint_sha256": "bace0814b2242a935ae35dd9ca3fa0a9e5bde867d779b5365c4f3a0c8070a7d0",
+      "strict_checkpoint_reload": true,
+      "optimizer_scheduler_scaler_reload": true,
+      "image_prediction_reload_parity": true,
+      "new_parameter_count": 0,
+      "microbatch": 1,
+      "accumulation_steps": 16,
+      "no_ap_evaluation": true,
+      "elapsed_seconds": 256.331455275,
+      "peak_allocated_GiB": 6.121182918548584
+    },
+    {
+      "status": "passed",
+      "variant": "blend05",
+      "successful_updates": 20,
+      "attempts": 30,
+      "amp_skips": 10,
+      "initial_native_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "initial_asset": {
+        "source": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+        "sha256": "16fd03f0b0123e85b959cb9b64aaf9eeb4a7dc68bd9b0b134a9220d4b24c15c6"
+      },
+      "checkpoint_sha256": "6c0ee2e9fd2a2e280015ac4587cef139f2429417c5423386152c890e26487069",
+      "strict_checkpoint_reload": true,
+      "optimizer_scheduler_scaler_reload": true,
+      "image_prediction_reload_parity": true,
+      "new_parameter_count": 0,
+      "microbatch": 1,
+      "accumulation_steps": 16,
+      "no_ap_evaluation": true,
+      "elapsed_seconds": 257.21423755100005,
+      "peak_allocated_GiB": 6.122159481048584
+    },
+    {
+      "status": "passed",
+      "variant": "geometry",
+      "successful_updates": 20,
+      "attempts": 30,
+      "amp_skips": 10,
+      "initial_native_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "initial_asset": {
+        "source": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+        "sha256": "16fd03f0b0123e85b959cb9b64aaf9eeb4a7dc68bd9b0b134a9220d4b24c15c6"
+      },
+      "checkpoint_sha256": "6af049430293229f215e45794aa08466a63174d526137830f48b86bc480d191f",
+      "strict_checkpoint_reload": true,
+      "optimizer_scheduler_scaler_reload": true,
+      "image_prediction_reload_parity": true,
+      "new_parameter_count": 5444,
+      "microbatch": 1,
+      "accumulation_steps": 16,
+      "no_ap_evaluation": true,
+      "elapsed_seconds": 253.46831289500005,
+      "peak_allocated_GiB": 6.123597145080566
+    },
+    {
+      "status": "passed",
+      "variant": "support",
+      "successful_updates": 20,
+      "attempts": 30,
+      "amp_skips": 10,
+      "initial_native_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+      "initial_asset": {
+        "source": "detectron2://ImageNetPretrained/torchvision/R-50.pkl",
+        "sha256": "16fd03f0b0123e85b959cb9b64aaf9eeb4a7dc68bd9b0b134a9220d4b24c15c6"
+      },
+      "checkpoint_sha256": "b2a0797f304e0917503ba584aa799f3af4aedc72cc21b8a42610198a398d131a",
+      "strict_checkpoint_reload": true,
+      "optimizer_scheduler_scaler_reload": true,
+      "image_prediction_reload_parity": true,
+      "new_parameter_count": 5444,
+      "microbatch": 1,
+      "accumulation_steps": 16,
+      "no_ap_evaluation": true,
+      "elapsed_seconds": 254.36099457800003,
+      "peak_allocated_GiB": 6.123597145080566
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "receipts": [
+    {
+      "variant": "blend05",
+      "images": [
+        1,
+        4
+      ],
+      "strict_smoke_checkpoint": true,
+      "observed_vs_plain_predictions_bitwise": true,
+      "four_stage_candidate_shapes": true
+    },
+    {
+      "variant": "geometry",
+      "images": [
+        1,
+        4
+      ],
+      "strict_smoke_checkpoint": true,
+      "observed_vs_plain_predictions_bitwise": true,
+      "four_stage_candidate_shapes": true
+    },
+    {
+      "variant": "support",
+      "images": [
+        1,
+        4
+      ],
+      "strict_smoke_checkpoint": true,
+      "observed_vs_plain_predictions_bitwise": true,
+      "four_stage_candidate_shapes": true
+    }
+  ],
+  "source_train_only": true,
+  "ap_evaluation": false
+}

@@ -56,6 +56,10 @@ def adapter_sources(cfg):
     if "mssl_scope" in cfg:
         files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/mssl_scope").rglob("*"))
                   if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
+    if "support_reference" in cfg:
+        files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/support_reference").rglob("*"))
+                  if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
+        files.append('polypbench/analysis/support_reference_prototype.py')
     return {file: sha256(root/file) for file in files}
 
 

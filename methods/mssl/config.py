@@ -84,6 +84,12 @@ def build_cfg(experiment, output, device=None):
         cfg.MODEL.META_ARCHITECTURE = "ScopeMaskDINO"
         cfg.MODEL.MSSL_SCOPE_FINAL_WEIGHT = experiment["mssl_scope"]["final_weight"]
         cfg.MODEL.MSSL_SCOPE_AUX_WEIGHT = experiment["mssl_scope"]["aux_weight"]
+    if "support_reference" in experiment:
+        from methods.support_reference.config import validate
+        from methods.support_reference.model import SupportReferenceMaskDINO
+        validate(experiment)
+        cfg.MODEL.META_ARCHITECTURE = "SupportReferenceMaskDINO"
+        cfg.MODEL.SUPPORT_REFERENCE_VARIANT = experiment['support_reference']['variant']
     cfg.DATASETS.TRAIN, cfg.DATASETS.TEST = ("bench_train",), ("bench_val",)
     cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = experiment["model"]["num_classes"]
     cfg.MODEL.WEIGHTS = experiment["model"]["weights"]

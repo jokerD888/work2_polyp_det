@@ -1,1 +1,1 @@
-"""Opt-in engineering attachment; no training/CLI registration."""
+"""Opt-in support-reference experiments; existing V1 configs stay unchanged."""
