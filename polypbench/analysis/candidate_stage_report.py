@@ -15,18 +15,23 @@ SEQUENCE = ["dense_native_legal", "encoder_top300", "decoder_init"] + [f"decoder
 
 def report(queue_root, image_root, output):
     root = Path(queue_root); out = Path(output); out.mkdir(parents=True, exist_ok=False)
-    model_reports = {}; results = {}
+    model_reports = {}; results = {}; verifications = {}
     for model in ("baseline", "mssl"):
         verification = read_json(root / model / "verification.json")
         if verification["status"] != "passed":
             raise RuntimeError("Only parity-verified traces can enter the report")
+        verifications[model] = verification
         model_reports[model] = {r["image_id"]: r for r in
             (read_json(path) for path in sorted((root / model / "images").glob("*.json")))}
     assert set(model_reports["baseline"]) == set(model_reports["mssl"])
     for iid in model_reports["baseline"]:
         assert model_reports["baseline"][iid]["annotation_ids"] == model_reports["mssl"][iid]["annotation_ids"]
-    lines = ["# Candidate-stage mechanism report", "",
-        "Balanced 72-image mechanism sample. Counts are not population prevalence, AP attribution or causal effects.", "",
+    full = verifications["baseline"].get("cohort_kind") == "full_polypgen"
+    if verifications["baseline"].get("cohort_kind") != verifications["mssl"].get("cohort_kind"):
+        raise RuntimeError("Model cohorts differ")
+    scope = (f"Complete fixed PolypGen cohort: {len(model_reports['baseline'])} images, including negatives. Frequencies describe this benchmark; they are not causal effects or clinical population prevalence."
+             if full else "Balanced mechanism sample. Counts are not population prevalence, AP attribution or causal effects.")
+    lines = ["# Candidate-stage mechanism report", "", scope, "",
         "Initial aux[0] boxes equal actual initialization; Decoder 1 starts at aux[1]. Same-query IoU trajectories are in each image NPZ.", ""]
     examples = []
     for model, reports in model_reports.items():

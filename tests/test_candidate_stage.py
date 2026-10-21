@@ -170,7 +170,8 @@ class NativeDecoderCPUTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             temp = Path(tmp)
             saved = temp / "source"; saved.mkdir()
-            report = summarize_image(data, image, [{"id": 1, "bbox": [20,20,40,40]}], saved)
+            report = summarize_image(data, image, [{"id": 1, "bbox": [20,20,40,40]}], saved, [.01,.04,.2])
+            self.assertEqual(report["gt_metadata"][0]["relative_area_quartile"], "q3")
             self.assertIn("decoder_09->final_top100", report["transitions"])
             arrays = np.load(saved / "1.npz")
             self.assertEqual(arrays["decoder_init_gt_iou"].shape, (1,300))

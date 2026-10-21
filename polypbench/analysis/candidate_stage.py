@@ -1,4 +1,4 @@
-"""Read-only native MaskDINO stage tracing. GPU entry point is remote-only.
+"""Read-only native MaskDINO stage tracing with explicit GPU execution gates.
 
 Observe Python return frames, without replacing forward, TopK or mask2box.
 The observer is pinned to the checked native revision and fails on drift.
@@ -165,7 +165,7 @@ class NativeCapture:
         self.data["mapped_hw"] = tuple(images.image_sizes[0])
 
 
-def summarize_image(data, image, annotations, directory):
+def summarize_image(data, image, annotations, directory, area_cuts=None):
     """All GT-dependent work happens here, after model forward has completed."""
     padded, mapped = data["padded_hw"], data["mapped_hw"]
     original = (image["height"], image["width"])
@@ -190,7 +190,15 @@ def summarize_image(data, image, annotations, directory):
     report = {"image_id": image["id"], "file_name": image["file_name"],
               "center": image["center"], "sampling_stratum": image["sampling_stratum"],
               "gt": len(gt), "annotation_ids": [a["id"] for a in annotations],
-              "padded_hw": padded, "mapped_hw": mapped, "stages": {}}
+              "padded_hw": padded, "mapped_hw": mapped, "stages": {}, "gt_metadata": []}
+    for a in annotations:
+        area = a["bbox"][2]*a["bbox"][3]
+        ratio = area/(image["height"]*image["width"])
+        report["gt_metadata"].append({"annotation_id": a["id"], "box_area_pixels": area,
+            "box_area_ratio": ratio, "relative_area_quartile":
+            "q"+str(int(np.searchsorted(area_cuts, ratio, side="left"))+1) if area_cuts is not None else None,
+            "pixel_area_bin": "lt32sq" if area < 32**2 else "32sq_to_lt96sq" if area < 96**2 else "ge96sq"})
+    report["native_top100_score_ge_05"] = int((data["native_top100_scores"] >= .5).sum())
     arrays = {"gt_xyxy": gt, "top300_token_ids": top, "dense_native_legal": legal,
               "dense_valid_image_centers": cell_valid, "spatial_shapes": data["spatial_shapes"],
               "dense_class_scores": data["dense_class_scores"],
@@ -263,10 +271,13 @@ def run(job_path):
     job_path = Path(job_path).resolve()
     job = read_json(job_path)
     location = job.get("runtime_location")
-    if location not in ("training_machine", "local_after_queue") or job.get("device") != "cuda":
+    if location not in ("training_machine", "local_after_queue", "local_full_cohort") or job.get("device") != "cuda":
         raise ValueError("Stage forward requires an explicit GPU execution location")
     if location == "local_after_queue":
         from .candidate_stage_local import authorize_child
+        authorize_child(job["local_controller_config"])
+    if location == "local_full_cohort":
+        from .candidate_stage_full import authorize_child
         authorize_child(job["local_controller_config"])
     root = Path(job["workspace"]).resolve()
     expected = job["expected_sha256"]
@@ -304,6 +315,8 @@ def run(job_path):
     versions = {k: v._version for k, v in model.state_dict(keep_vars=True).items()}
     mapper = DatasetMapper(cfg, False)
     sample = read_json(job["sample"])["images"]
+    if len(sample) != job.get("expected_images", len(sample)) or len({im["id"] for im in sample}) != len(sample):
+        raise RuntimeError("Trace cohort is incomplete or duplicated")
     gt = read_json(job["annotations"])
     anns = defaultdict(list)
     image_map = {im["id"]: im for im in gt["images"]}
@@ -346,7 +359,7 @@ def run(job_path):
             np.testing.assert_allclose(data["final_class_scores"], references["all_query_class_scores"][n], rtol=1e-5, atol=1e-6)
             all_boxes = to_original(data["decoder_09"], data["padded_hw"], data["mapped_hw"], (image["height"], image["width"]))
             np.testing.assert_allclose(all_boxes, xyxy(references["all_query_boxes"][n]), rtol=1e-5, atol=1e-3)
-            report = summarize_image(data, image, anns[image["id"]], directory)
+            report = summarize_image(data, image, anns[image["id"]], directory, job.get("relative_area_quartile_cuts"))
             if sha256(path) != image_hash:
                 raise RuntimeError("Image changed during trace")
             report["image_sha256"] = image_hash
@@ -360,13 +373,16 @@ def run(job_path):
         for key, digest in expected.items():
             if sha256(job[key]) != digest:
                 raise RuntimeError(f"Input changed: {key}")
-        aggregate_reports(reports, out)
+        if sum(r["gt"] for r in reports) != job.get("expected_gt", sum(r["gt"] for r in reports)):
+            raise RuntimeError("Trace GT denominator differs from protocol")
+        aggregate_reports(reports, out, job.get("cohort_kind", "balanced_mechanism_sample"))
         write_json(out / "verification.json", {"status": "passed", "images": len(reports),
             "checkpoint_sha256": expected["checkpoint"], "native_commit": commit,
             "observed_vs_plain": "bitwise boxes and fused scores on every image",
             "frozen_reference": "all300 boxes/class scores and Top100 boxes/scores/query IDs on every image",
             "model_tensor_versions_unchanged": True, "gt_supplied_to_model": False,
             "elapsed_seconds": time.monotonic()-start, "sample_population_claim": False,
+            "cohort_kind": job.get("cohort_kind", "balanced_mechanism_sample"), "gt": sum(r["gt"] for r in reports),
             "torch": torch.__version__, "gpu": torch.cuda.get_device_name()})
         write_json(out / "state.json", {"status": "completed"})
     except BaseException as error:
@@ -375,10 +391,11 @@ def run(job_path):
         raise
 
 
-def aggregate_reports(reports, out):
+def aggregate_reports(reports, out, cohort_kind="balanced_mechanism_sample"):
     groups = defaultdict(list)
     for r in reports:
-        for key in ("all", "center=" + r["center"], "stratum=" + r["sampling_stratum"]):
+        multiplicity = "negative" if r["gt"] == 0 else "single" if r["gt"] == 1 else "multi"
+        for key in ("all", "center=" + r["center"], "stratum=" + r["sampling_stratum"], "multiplicity="+multiplicity):
             groups[key].append(r)
     summary = {}
     for key, items in groups.items():
@@ -389,16 +406,20 @@ def aggregate_reports(reports, out):
                 "max_iou_median": float(np.median(values)) if values else None,
                 "thresholds": {str(t): {metric: sum(r["stages"][name]["thresholds"][str(t)][metric] for r in items)
                     for metric in ("one_to_one_coverage", "marginal_gt_covered")} for t in THRESHOLDS}}
-        summary[key] = {"images": len(items), "gt": sum(r["gt"] for r in items), "stages": stages}
+        summary[key] = {"images": len(items), "gt": sum(r["gt"] for r in items), "stages": stages,
+            "negative_images": sum(r["gt"] == 0 for r in items),
+            "negative_images_with_score_ge_05": sum(r["gt"] == 0 and r.get("native_top100_score_ge_05", 0) > 0 for r in items)}
     write_json(out / "summary.json", {"groups": summary, "population_prevalence_estimate": False,
-        "limits": "Balanced mechanism sample; stage geometry is not a causal decomposition or AP attribution."})
+        "cohort_kind": cohort_kind, "complete_benchmark": cohort_kind == "full_polypgen",
+        "limits": "Stage geometry is not a causal decomposition or AP attribution. Complete-cohort counts describe this benchmark, not clinical prevalence or seed/patient generalization."})
     rows = []
     for r in reports:
         for j, aid in enumerate(r["annotation_ids"]):
             for name, stage in r["stages"].items():
+                meta = r.get("gt_metadata", [{} for _ in r["annotation_ids"]])[j]
                 rows.append({"image_id": r["image_id"], "annotation_id": aid, "center": r["center"],
                     "stratum": r["sampling_stratum"], "stage": name,
-                    "max_iou": stage["max_iou"][j], "best_query_or_token_id": stage["best_query_or_token_id"][j]})
+                    "max_iou": stage["max_iou"][j], "best_query_or_token_id": stage["best_query_or_token_id"][j], **meta})
     with (out / "per_gt.csv").open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]) if rows else ["image_id"])
         writer.writeheader(); writer.writerows(rows)

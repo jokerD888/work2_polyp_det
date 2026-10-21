@@ -21,9 +21,11 @@ def run(traces, output):
         for path in [directory / "verification.json", directory / "summary.json", *sorted((directory / "images").glob("*.json"))]:
             source_hashes[str(path)] = sha256(path)
         verification = read_json(directory / "verification.json")
-        if verification["status"] != "passed" or verification["images"] != 72:
-            raise RuntimeError("Require the fixed, fully verified 72-image trace")
+        if verification["status"] != "passed":
+            raise RuntimeError("Require a fully parity-verified trace")
         reports = [read_json(p) for p in sorted((directory / "images").glob("*.json"))]
+        if len(reports) != verification["images"] or len({r["image_id"] for r in reports}) != len(reports):
+            raise RuntimeError("Missing or duplicated image traces")
         model_rows = []; masks = defaultdict(list)
         for report in reports:
             path = directory / "images" / f"{report['image_id']}.npz"
@@ -50,12 +52,19 @@ def run(traces, output):
                         "best_query_init_encoder_area_ratio": float(mw*mh/(ew*eh)),
                         "best_query_init_encoder_center_shift": norm_center_shift,
                         "best_query_encoder_init_box_iou": float(a["encoder_init_same_query_iou"][best_q])}
+                    if report.get("gt_metadata"):
+                        row.update(report["gt_metadata"][j])
                     for stage in ("dense_native_legal", "encoder_top300", "decoder_init", "decoder_09", "final_top100"):
                         row[stage] = report["stages"][stage]["max_iou"][j]
                     rows.append(row); model_rows.append(row)
         groups = {"all": model_rows}
         groups.update({key: [r for r in model_rows if r["multiplicity"] == key] for key in ("single", "multi")})
         groups.update({"center="+c: [r for r in model_rows if r["center"] == c] for c in sorted({r["center"] for r in model_rows})})
+        for field in ("relative_area_quartile", "pixel_area_bin"):
+            for value in sorted({r[field] for r in model_rows if r.get(field) is not None}):
+                groups[field+"="+value] = [r for r in model_rows if r.get(field) == value]
+                for multiplicity in ("single", "multi"):
+                    groups[field+"="+value+"/"+multiplicity] = [r for r in model_rows if r.get(field) == value and r["multiplicity"] == multiplicity]
         groups_out = {}
         for name, items in groups.items():
             thresholds = {}
@@ -79,7 +88,9 @@ def run(traces, output):
                     "init_lost_median_padding_fraction": float(np.median([r["best_query_padding_foreground_fraction"] for r in lost])) if lost else None,
                     "init_lost_gt_ids": [r["annotation_id"] for r in lost]}
             groups_out[name] = {"gt": len(items), "thresholds": thresholds}
-        summaries[model] = {"groups": groups_out, "all_selected_masks": {
+        summaries[model] = {"images": len(reports), "gt": len(model_rows),
+            "cohort_kind": verification.get("cohort_kind", "balanced_mechanism_sample"),
+            "groups": groups_out, "all_selected_masks": {
             "count": len(masks["empty"]), "empty": sum(masks["empty"]),
             "one_row": sum(masks["one_row"]), "one_column": sum(masks["one_column"]),
             "padding_foreground_positive": sum(v > 0 for v in masks["padding_foreground_fraction"])}}
@@ -90,7 +101,7 @@ def run(traces, output):
                     raise RuntimeError("Follow-up counts disagree with native stage report")
     write_json(out / "per_gt.json", rows)
     write_json(out / "summary.json", {"models": summaries,
-        "limits": "Balanced mechanism sample, marginal events overlap. Empty/area/center proxies are observational, not causal or calibrated reliability labels.",
+        "limits": "Cohort-specific marginal events overlap; they are not additive causal losses. Empty/area/center proxies are observational, not calibrated reliability labels. GT size-group statistics use marginal support; one-to-one coverage is separately reported at image/center/multiplicity level.",
         "source_npz_sha256": source_hashes})
     for path, digest in source_hashes.items():
         if sha256(path) != digest:

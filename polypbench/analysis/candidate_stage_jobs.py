@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import sys
 import time
+from collections import defaultdict
 
 import numpy as np
 
@@ -23,19 +24,53 @@ def frozen_image_hashes(root, sample):
     return result
 
 
-def freeze(workspace, output):
+def full_cohort_sample(gt):
+    groups = defaultdict(list)
+    for ann in gt["annotations"]:
+        groups[ann["image_id"]].append(ann)
+    images = sorted(gt["images"], key=lambda r: r["id"])
+    if len({im["id"] for im in images}) != len(images):
+        raise ValueError("Duplicate image IDs")
+    image_map = {im["id"]: im for im in images}
+    ratios = [a["bbox"][2]*a["bbox"][3]/(image_map[a["image_id"]]["height"]*image_map[a["image_id"]]["width"])
+              for a in gt["annotations"]]
+    cuts = np.quantile(ratios, [.25, .5, .75]).tolist()
+    result = [{**im, "gt_count": len(groups[im["id"]]),
+        "sampling_stratum": "negative" if not groups[im["id"]] else "single" if len(groups[im["id"]]) == 1 else "multi"}
+        for im in images]
+    return {"images": result}, cuts
+
+
+def freeze(workspace, output, full_cohort=False):
     root = Path(workspace).resolve(); out = Path(output).resolve()
     out.mkdir(parents=True, exist_ok=False)
     protocol = root / "docs/protocols/candidate_stage_20261021"
-    sample = read_json(protocol / "sample.images.json")
+    if full_cohort:
+        sample, area_cuts = full_cohort_sample(read_json(root / "data/polypgen_zeroshot_stills_v2/provided_boxes.coco.json"))
+        if len(sample["images"]) != 1473 or sum(im["gt_count"] for im in sample["images"]) != 1533:
+            raise RuntimeError("Full PolypGen cohort differs from the fixed 1473-image/1533-GT protocol")
+    else:
+        sample = read_json(protocol / "sample.images.json"); area_cuts = None
     ids = [im["id"] for im in sample["images"]]
     models = read_json(protocol / "models.json")
     manifest = {"native_commit": NATIVE_COMMIT, "models": {}, "files_sha256": {},
         "annotations_sha256": sha256(root / "data/polypgen_zeroshot_stills_v2/provided_boxes.coco.json"),
         "image_sha256": frozen_image_hashes(root, sample),
-        "native_source_sha256": {}, "stage_status": "prepared_not_gpu_executed"}
-    for relative in ("sample.images.json", "protocol.json"):
-        shutil.copyfile(protocol / relative, out / relative)
+        "native_source_sha256": {}, "stage_status": "prepared_not_gpu_executed",
+        "cohort_kind": "full_polypgen" if full_cohort else "balanced_mechanism_sample",
+        "expected_images": len(ids), "expected_gt": sum(im["gt_count"] for im in sample["images"]),
+        "relative_area_quartile_cuts": area_cuts}
+    if full_cohort:
+        write_json(out / "sample.images.json", sample)
+        write_json(out / "protocol.json", {"scope": "all fixed PolypGen provided-box still images, including negatives; no outcome-based selection",
+            "cohort_kind": "full_polypgen", "images": len(ids), "gt": manifest["expected_gt"],
+            "relative_area_quartile_cuts": area_cuts, "size_bins_use": "provided GT geometry only; descriptive, never model input or training hyperparameters",
+            "base_stage_protocol_sha256": sha256(protocol / "protocol.json"),
+            "thresholds": [.5, .75, .9], "training": False,
+            "limits": "Complete empirical benchmark frequencies; stage changes remain observational and do not establish causality or patient/seed generalization."})
+    else:
+        for relative in ("sample.images.json", "protocol.json"):
+            shutil.copyfile(protocol / relative, out / relative)
     native = root / "third_party/MaskDINO"
     for path in sorted(native.rglob("*")):
         if path.is_file() and path.suffix in (".py", ".yaml") and ".git" not in path.parts:
@@ -103,6 +138,10 @@ def prepare(bundle, workspace, assets_root, image_root, annotations, output):
             "image_root": str(Path(image_root).resolve()), "output": str(out / label),
             "native_source_sha256": manifest["native_source_sha256"]}
         job["image_sha256"] = manifest["image_sha256"]
+        job.update(cohort_kind=manifest.get("cohort_kind", "balanced_mechanism_sample"),
+            expected_images=manifest.get("expected_images", len(sample)),
+            expected_gt=manifest.get("expected_gt", sum(im["gt_count"] for im in sample)),
+            relative_area_quartile_cuts=manifest.get("relative_area_quartile_cuts"))
         job["observer_source_sha256"] = {relative: sha256(root / relative) for relative in (
             "polypbench/analysis/candidate_stage.py", "polypbench/analysis/matching.py",
             "methods/mssl/config.py", "methods/mssl/model.py", "methods/mssl/loss.py")}
@@ -152,9 +191,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="action", required=True)
     p = sub.add_parser("freeze"); p.add_argument("--workspace", required=True); p.add_argument("--output", required=True)
+    p = sub.add_parser("freeze-full"); p.add_argument("--workspace", required=True); p.add_argument("--output", required=True)
     p = sub.add_parser("prepare")
     for key in ("bundle", "workspace", "assets-root", "image-root", "annotations", "output"):
         p.add_argument("--" + key, required=True)
     p = sub.add_parser("run"); p.add_argument("--queue-root", required=True)
     args = vars(parser.parse_args()); action = args.pop("action")
-    {"freeze": freeze, "prepare": prepare, "run": run_queue}[action](**args)
+    if action == "freeze-full":
+        freeze(**args, full_cohort=True)
+    else:
+        {"freeze": freeze, "prepare": prepare, "run": run_queue}[action](**args)
