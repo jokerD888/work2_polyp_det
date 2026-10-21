@@ -1,0 +1,141 @@
+{
+  "selection": "two annotation-only hash-ranked images per multiplicity/minimum-area quartile",
+  "minimum_relative_box_area_quartile_cuts": [
+    0.07996700906325947,
+    0.15537845165088038,
+    0.3054924487188637
+  ],
+  "stratum_population": {
+    "single/q4": 220,
+    "multi/q1": 40,
+    "single/q2": 216,
+    "single/q3": 219,
+    "single/q1": 180,
+    "multi/q2": 4,
+    "multi/q3": 1
+  },
+  "images": [
+    {
+      "id": 407,
+      "file_name": "cju414lf2l1lt0801rl3hjllj.jpg",
+      "width": 610,
+      "height": 528,
+      "gt": 4,
+      "minimum_relative_box_area": 0.04528688524590164,
+      "stratum": "multi/q1"
+    },
+    {
+      "id": 397,
+      "file_name": "cju40m0rjkpw80871z6n6yg1u.jpg",
+      "width": 586,
+      "height": 528,
+      "gt": 2,
+      "minimum_relative_box_area": 0.008959044368600682,
+      "stratum": "multi/q1"
+    },
+    {
+      "id": 242,
+      "file_name": "cju2y5zas8m7f0801d34g5owq.jpg",
+      "width": 586,
+      "height": 479,
+      "gt": 2,
+      "minimum_relative_box_area": 0.08781448837524136,
+      "stratum": "multi/q2"
+    },
+    {
+      "id": 367,
+      "file_name": "cju3v56bwgy8v0871w14pz8fx.jpg",
+      "width": 570,
+      "height": 531,
+      "gt": 2,
+      "minimum_relative_box_area": 0.11008358938778208,
+      "stratum": "multi/q2"
+    },
+    {
+      "id": 431,
+      "file_name": "cju430pm2lz0y0755jkhcc3d1.jpg",
+      "width": 626,
+      "height": 547,
+      "gt": 2,
+      "minimum_relative_box_area": 0.21662159557505067,
+      "stratum": "multi/q3"
+    },
+    {
+      "id": 853,
+      "file_name": "cju8bj2ssrmlm0871gc2ug2rs.jpg",
+      "width": 469,
+      "height": 449,
+      "gt": 1,
+      "minimum_relative_box_area": 0.0066767657101068,
+      "stratum": "single/q1"
+    },
+    {
+      "id": 493,
+      "file_name": "cju5g163vd6mt0817uccuga6u.jpg",
+      "width": 545,
+      "height": 547,
+      "gt": 1,
+      "minimum_relative_box_area": 0.0796269895845563,
+      "stratum": "single/q1"
+    },
+    {
+      "id": 21,
+      "file_name": "cju18gzrq18zw0878wbf4ftw6.jpg",
+      "width": 626,
+      "height": 546,
+      "gt": 1,
+      "minimum_relative_box_area": 0.13369378225608258,
+      "stratum": "single/q2"
+    },
+    {
+      "id": 332,
+      "file_name": "cju34zivp3fq80988opxbaqyn.jpg",
+      "width": 580,
+      "height": 528,
+      "gt": 1,
+      "minimum_relative_box_area": 0.09580721003134796,
+      "stratum": "single/q2"
+    },
+    {
+      "id": 358,
+      "file_name": "cju3ua8u0g9rg0801uayhdxhu.jpg",
+      "width": 622,
+      "height": 530,
+      "gt": 1,
+      "minimum_relative_box_area": 0.19096038342534732,
+      "stratum": "single/q3"
+    },
+    {
+      "id": 380,
+      "file_name": "cju3xjqtpikx50817tppy6g84.jpg",
+      "width": 622,
+      "height": 530,
+      "gt": 1,
+      "minimum_relative_box_area": 0.2211733300976764,
+      "stratum": "single/q3"
+    },
+    {
+      "id": 221,
+      "file_name": "cju2uwz9f5yf1085506cfamfx.jpg",
+      "width": 1220,
+      "height": 1011,
+      "gt": 1,
+      "minimum_relative_box_area": 0.3596309448525239,
+      "stratum": "single/q4"
+    },
+    {
+      "id": 694,
+      "file_name": "cju7db7lp2f400755tntd1ohf.jpg",
+      "width": 612,
+      "height": 522,
+      "gt": 1,
+      "minimum_relative_box_area": 0.4003831417624521,
+      "stratum": "single/q4"
+    }
+  ],
+  "lsj_seeds": [
+    42,
+    31415
+  ],
+  "population_prevalence_estimate": false
+}

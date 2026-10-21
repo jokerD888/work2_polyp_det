@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "tests_run": 16,
+  "failures": 0,
+  "errors": 0,
+  "device": "cpu",
+  "optimizer_steps": 0,
+  "source_sha256": {
+    "methods/support_reference/integration.py": "c4ce4ed15dbca816ffcc2bbe0a74c4b8bb53492fad4e75b060781ebfb3adf9a2",
+    "polypbench/analysis/support_reference_prototype.py": "52cc5b92e6d883846f08279af25aff155dd7e3896f94162a2e955d5da8c67d12",
+    "polypbench/analysis/support_reference_acceptance.py": "4064337d868238270dd0a95754b283b995c815a3f4585357c24754ffb34ca69d",
+    "tests/test_support_reference_prototype.py": "570c1ad0fc9bd1115bbd4f095be6a1a3be3686e3ba6fd2e80261760a7489f8b3",
+    "tests/test_support_reference_integration.py": "6cf67d28f73bcd9feb23c5f767a502ca81ca21926681907f5bb6e40f58a46ccc"
+  }
+}

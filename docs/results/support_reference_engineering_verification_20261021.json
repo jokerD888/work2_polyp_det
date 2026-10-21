@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "optimizer_steps": 0,
+  "eval_cases": 8,
+  "train_cases": 34,
+  "native_tensors_unchanged": true,
+  "input_hashes_rechecked": 35,
+  "elapsed_seconds": 89.53046770000003,
+  "torch": "2.7.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 5070",
+  "no_polypgen_inputs": true,
+  "performance_or_novelty_claim": false
+}

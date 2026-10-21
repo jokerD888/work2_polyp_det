@@ -1,5 +1,7 @@
 # E/F与阶段追踪之后：第二机制的决策
 
+**工程更新：空间支持参考框校准已通过真实Detector接入验收：16项CPU检查、8张源域FP32推理一致、34个AMP训练视图一致、2组batch2与2组固定非零参考扰动。Baseline有效匹配35/36，MSSL15/15；0次optimizer更新，无PolypGen输入。详见[support_reference_engineering_execution_20261021.md](support_reference_engineering_execution_20261021.md)。下一步为原始起点优化smoke与受控训练准备，不把工程通过当涨点或第二创新成立；当前没有完整训练队列。**
+
 **规格更新：空间支持条件参考框校准的v0规格及独立CPU原型已完成，见[support_reference_mechanism_spec_20261021.md](support_reference_mechanism_spec_20261021.md)。采用原生参考起点＋坐标残差，拟复用aux0原生框监督；不是现成可靠性门控。尚未接入Detector、未训练，后续先验收真实路由与源域有效监督。普通MLP本身不作为第二创新，空间profile的独立价值待对照。以下保留既有审计和实验结论。**
 
 **最新决策：最后一轮CPU可识别性审计已完成，Go仅限机制设计，未放行新训练。较稳定的初始化前线索是Mask空间占用支持；正常候选大基数、实际GT恢复见证稀少及源域训练证据缺额均保留。详见`initialization_identifiability_decision_20261021.md`；不再扩展本轮统计或阈值搜索。**
