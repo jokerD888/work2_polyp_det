@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-10-23T04:11:02.0593323+00:00",
+  "queue": "D:\\code\\work2_polypy_det\\runs\\reference-features-full-20261023-r2",
+  "protocol_sha256": "78ffca3e85aa633b62222117752feca647718b1fb8fab7c0789e0e5a1c6c4677",
+  "source_commit": "00fa14da82487a3f6b71a5b2ec33bb766ef29c3c",
+  "planned_run_ids": {
+    "native": "features-native-s42-20261023T040838Z",
+    "mask_extra": "features-mask_extra-s42-20261023T040838Z",
+    "encoder_extra": "features-encoder_extra-s42-20261023T040838Z"
+  },
+  "engineering": {
+    "status": "passed",
+    "source_train_only": true,
+    "optimizer_steps": 0,
+    "no_ap_evaluation": true,
+    "eval_cases": 8,
+    "train_cases": 16,
+    "batch2_cases": 2,
+    "native_tensors_unchanged": true,
+    "native_initial_reference_unchanged": true,
+    "extra_direct_dn_residual": false,
+    "elapsed_seconds": 39.372035226
+  },
+  "queue_snapshot": {
+    "status": "running",
+    "controller_pid": 2149,
+    "completed": [
+      "unit_and_regression_checks",
+      "existing_mssl_regression_checks"
+    ],
+    "updated_at": "2026-10-23T12:08:53.342908+08:00",
+    "stage": "native_cold_smoke",
+    "child_pid": 2798
+  },
+  "smoke_snapshot": {
+    "status": "running",
+    "attempts": 15,
+    "successful_updates": 5,
+    "elapsed_seconds": 118.4891332
+  },
+  "formal_training_completed": false,
+  "polypgen_results_available": false,
+  "no_automatic_mssl_combination": true
+}
