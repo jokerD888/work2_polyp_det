@@ -90,6 +90,12 @@ def build_cfg(experiment, output, device=None):
         validate(experiment)
         cfg.MODEL.META_ARCHITECTURE = "SupportReferenceMaskDINO"
         cfg.MODEL.SUPPORT_REFERENCE_VARIANT = experiment['support_reference']['variant']
+    if "reference_features" in experiment:
+        from methods.reference_features.config import validate
+        from methods.reference_features.model import ReferenceFeaturesMaskDINO
+        validate(experiment)
+        cfg.MODEL.META_ARCHITECTURE = "ReferenceFeaturesMaskDINO"
+        cfg.MODEL.REFERENCE_FEATURES_VARIANT = experiment['reference_features']['variant']
     cfg.DATASETS.TRAIN, cfg.DATASETS.TEST = ("bench_train",), ("bench_val",)
     cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = experiment["model"]["num_classes"]
     cfg.MODEL.WEIGHTS = experiment["model"]["weights"]

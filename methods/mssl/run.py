@@ -60,6 +60,9 @@ def adapter_sources(cfg):
         files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/support_reference").rglob("*"))
                   if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
         files.append('polypbench/analysis/support_reference_prototype.py')
+    if "reference_features" in cfg:
+        files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/reference_features").rglob("*"))
+                  if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
     return {file: sha256(root/file) for file in files}
 
 

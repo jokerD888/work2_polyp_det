@@ -108,6 +108,9 @@ def worker_main(args):
             if "support_reference" in experiment:
                 from methods.support_reference.monitor import make_hook
                 existing.append(make_hook(self.cfg.OUTPUT_DIR))
+            if "reference_features" in experiment:
+                from methods.reference_features.monitor import make_hook
+                existing.append(make_hook(self.cfg.OUTPUT_DIR))
             return existing
 
         def __init__(self, config):
@@ -164,15 +167,29 @@ def worker_main(args):
                 options=experiment['support_reference'], final_decoder_only=False,
                 mssl_final_decoder_only=experiment['mssl']['enabled'])
             write_json(Path(args.output) / 'method.json', metadata)
+        if 'reference_features' in experiment:
+            metadata = read_json(Path(args.output) / 'method.json')
+            metadata.update(method='First-layer extra feature read / '+experiment['reference_features']['variant'],
+                options=experiment['reference_features'], final_decoder_only=False,
+                initial_reference_calibration=False, reference_features=experiment['reference_features'],
+                new_learned_parameters='recorded exactly in reference_optimizer_contract.json',
+                ordinary_only_direct_residual=True, no_new_loss=True)
+            write_json(Path(args.output) / 'method.json', metadata)
     if args.mode == "train":
         trainer = Trainer(cfg)
         trainer.resume_or_load(resume=False)
         if experiment.get('reference_initialization_sha256'):
-            from methods.support_reference.monitor import native_digest
+            if 'reference_features' in experiment:
+                from methods.reference_features.monitor import native_digest
+            else:
+                from methods.support_reference.monitor import native_digest
             if native_digest(trainer.model) != experiment['reference_initialization_sha256']:
                 raise RuntimeError('Formal native initialization differs from passed cold-start smoke')
         if experiment.get('reference_startup_only', False):
-            from methods.support_reference.monitor import native_digest, optimizer_contract
+            if 'reference_features' in experiment:
+                from methods.reference_features.monitor import native_digest, optimizer_contract
+            else:
+                from methods.support_reference.monitor import native_digest, optimizer_contract
             write_json(Path(args.output)/'reference_startup_gate.json', {
                 'status': 'passed', 'native_initialization_sha256': native_digest(trainer.model),
                 'optimizer': optimizer_contract(trainer.model, trainer.optimizer),
@@ -180,7 +197,7 @@ def worker_main(args):
             return
         return trainer.train()
     model = Trainer.build_model(cfg)
-    if 'support_reference' in experiment:
+    if 'support_reference' in experiment or 'reference_features' in experiment:
         state = torch.load(cfg.MODEL.WEIGHTS, map_location='cpu', weights_only=False)
         model.load_state_dict(state['model'], strict=True)
     else:
