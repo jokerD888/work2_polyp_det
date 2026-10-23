@@ -80,7 +80,7 @@ def launch(output, acceptance):
     write_json(output/'protocol.json', p)
     write_json(output/'state.json', {'status': 'starting', 'completed': []})
     env = os.environ.copy()
-    env.update(PYTHONPATH=str(source), PYTHONUNBUFFERED='1')
+    env.update(PYTHONPATH=str(source)+os.pathsep+baseline['repo']['path'], PYTHONUNBUFFERED='1')
     env['PATH'] = str(Path(sys.executable).parent)+os.pathsep+env['PATH']
     with (output/'pipeline.log').open('w') as log:
         child = subprocess.Popen([sys.executable, '-m', 'methods.reference_features.campaign', 'run',
