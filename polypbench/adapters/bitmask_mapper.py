@@ -31,6 +31,12 @@ class BitmaskLSJMapper:
         shape = image.shape[:2]
         record["image"] = torch.as_tensor(np.ascontiguousarray(image.transpose(2, 0, 1)))
         record["padding_mask"] = torch.as_tensor(np.ascontiguousarray(padding))
+        if "local_semantic_rle" in record:
+            from pycocotools import mask as mask_util
+            semantic = mask_util.decode(record.pop("local_semantic_rle"))
+            semantic = transforms.apply_segmentation(semantic)
+            semantic[padding] = 0
+            record["local_semantic_mask"] = torch.as_tensor(np.ascontiguousarray(semantic > 0))
         annotations = []
         for obj in record.pop("annotations", []):
             obj.pop("keypoints", None)

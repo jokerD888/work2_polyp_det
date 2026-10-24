@@ -1,5 +1,7 @@
 # PolypBench
 
+**训练机同步（2026-10-24）：研究代码在 `codex/candidate-stage-diagnostics` 分支。** 默认 `main` 未包含当前 MSSL 研究目录。请按[训练机交接说明](docs/comparison_training_machine_handoff_20261024.md)取得正确分支，再使用[对比实验执行 Prompt](docs/comparison_training_machine_prompt_20261024.md)。代码仓库包含 MSSL 累积训练器和历史源码归档；数据、权重、`runs/` 与第三方环境不随 Git 分发。
+
 **2026-10-20：MSSL V1及五组实验已完成并归档。** 当前统一入口为[方法冻结与五组证据索引](docs/mssl_v1_release_20261020.md)，包含实际训练源码包、配置、选定权重SHA256、全部指标和验收记录。CIoU链路13阶段全部通过；PolypsSet/PolypDB尚未评估，独立外测与多Seed尚未完成。
 
 2026-10-20补充：[源域质量错排与Query筛选诊断](docs/results/mssl_quality_source_20261020.md)已完成。两组全部240张原生预测重放一致；MSSL的300→100覆盖无损失，同GT候选仍有有限质量错排。建议下一步设计一个保留一对一语义的成熟最终Box质量对齐对照，尚未开发Quality Head或启动新训练。

@@ -27,6 +27,7 @@ class AccumulatingAMPTrainer(AMPTrainer):
         side_sums = [0.] * 4
         quality_means = {}
         scope_means = {}
+        local_means = {}
         for micro_index in range(self.accumulation_steps):
             start = time.perf_counter()
             data = next(self._data_loader_iter)
@@ -41,6 +42,8 @@ class AccumulatingAMPTrainer(AMPTrainer):
             if not torch.isfinite(loss).all():
                 raise FloatingPointError(f"Nonfinite training loss at optimizer iteration {self.iter}")
             self.grad_scaler.scale(loss).backward()
+            for key, value in getattr(self.model, 'last_local_stats', {}).items():
+                local_means[key] = local_means.get(key, 0.) + value / self.accumulation_steps
             diagnostics = getattr(self.model.criterion, "last_diagnostics", None)
             if diagnostics:
                 eligible += diagnostics["eligible"]
@@ -66,6 +69,8 @@ class AccumulatingAMPTrainer(AMPTrainer):
             storage.put_scalar("quality/" + key, value)
         for key, value in scope_means.items():
             storage.put_scalar("mssl_scope/" + key, value)
+        for key, value in local_means.items():
+            storage.put_scalar('local_contrast/'+key, value)
         if hasattr(self.model.criterion,"last_diagnostics"):
             storage.put_scalar("mssl/eligible_per_microbatch",eligible/self.accumulation_steps)
             for name,value in zip(("left","top","right","bottom"),side_sums):

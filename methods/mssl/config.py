@@ -97,6 +97,13 @@ def build_cfg(experiment, output, device=None):
         cfg.MODEL.META_ARCHITECTURE = "ReferenceFeaturesMaskDINO"
         cfg.MODEL.REFERENCE_FEATURES_VARIANT = experiment['reference_features']['variant']
     cfg.DATASETS.TRAIN, cfg.DATASETS.TEST = ("bench_train",), ("bench_val",)
+    if "local_contrast" in experiment:
+        from detectron2.config import CfgNode
+        from methods.local_contrast.config import validate
+        from methods.local_contrast.model import LocalContrastMaskDINO
+        validate(experiment)
+        cfg.MODEL.META_ARCHITECTURE = "LocalContrastMaskDINO"
+        cfg.MODEL.LOCAL_CONTRAST = CfgNode(experiment['local_contrast'])
     cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES = experiment["model"]["num_classes"]
     cfg.MODEL.WEIGHTS = experiment["model"]["weights"]
     cfg.OUTPUT_DIR, cfg.SEED = str(output), experiment["seed"]

@@ -59,6 +59,8 @@ def worker_main(args):
     from detectron2.data import DatasetCatalog, MetadataCatalog
     from .config import build_cfg
     from .data import load_records
+    if 'local_contrast' in experiment:
+        from methods.local_contrast.data import load_records
     for split in ("train", "val", "test"):
         if split in experiment["dataset"]:
             entry = experiment["dataset"][split]
@@ -111,6 +113,9 @@ def worker_main(args):
             if "reference_features" in experiment:
                 from methods.reference_features.monitor import make_hook
                 existing.append(make_hook(self.cfg.OUTPUT_DIR))
+            if "local_contrast" in experiment:
+                from methods.local_contrast.monitor import make_hook
+                existing.append(make_hook(self.cfg.OUTPUT_DIR))
             return existing
 
         def __init__(self, config):
@@ -134,6 +139,8 @@ def worker_main(args):
         def build_train_loader(cls, config):
             from detectron2.data import build_detection_train_loader
             from .data import MSSLMapper
+            if 'local_contrast' in experiment:
+                from methods.local_contrast.data import LocalMapper as MSSLMapper
             micro = config.clone()
             micro.defrost()
             micro.SOLVER.IMS_PER_BATCH = experiment["runtime"]["micro_batch"]
@@ -175,9 +182,27 @@ def worker_main(args):
                 new_learned_parameters='recorded exactly in reference_optimizer_contract.json',
                 ordinary_only_direct_residual=True, no_new_loss=True)
             write_json(Path(args.output) / 'method.json', metadata)
+    if 'local_contrast' in experiment and comm.is_main_process():
+        metadata = read_json(Path(args.output)/'method.json')
+        metadata.update(method='MSSL V1 + local contrast / '+experiment['local_contrast']['variant'],
+            local_contrast=experiment['local_contrast'], final_decoder_only=False,
+            mssl_final_decoder_only=True, new_learned_parameters=0,
+            mask_policy='MSSL native data unchanged; full semantic union only excludes local background; shared Box fallback')
+        write_json(Path(args.output)/'method.json', metadata)
     if args.mode == "train":
         trainer = Trainer(cfg)
         trainer.resume_or_load(resume=False)
+        if 'local_contrast' in experiment:
+            from methods.local_contrast.monitor import native_digest, optimizer_contract
+            local_initial = native_digest(trainer.model)
+            if experiment.get('local_expected_initialization_sha256'):
+                if local_initial != experiment['local_expected_initialization_sha256']:
+                    raise RuntimeError('Local contrast native initialization differs from engineering gate')
+            if experiment.get('local_startup_only', False):
+                write_json(Path(args.output)/'local_startup_gate.json', dict(status='passed',
+                    native_sha256=local_initial, optimizer=optimizer_contract(trainer.model, trainer.optimizer),
+                    successful_updates=0, ap_evaluation=False))
+                return
         if experiment.get('reference_initialization_sha256'):
             if 'reference_features' in experiment:
                 from methods.reference_features.monitor import native_digest
@@ -197,7 +222,7 @@ def worker_main(args):
             return
         return trainer.train()
     model = Trainer.build_model(cfg)
-    if 'support_reference' in experiment or 'reference_features' in experiment:
+    if any(k in experiment for k in ('support_reference', 'reference_features', 'local_contrast')):
         state = torch.load(cfg.MODEL.WEIGHTS, map_location='cpu', weights_only=False)
         model.load_state_dict(state['model'], strict=True)
     else:

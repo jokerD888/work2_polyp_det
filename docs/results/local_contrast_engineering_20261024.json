@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "cases": 14,
+  "native_prediction_tensors_rng_exact": true,
+  "native_scalar_loss_rtol": 2.384185791015625e-07,
+  "native_scalar_loss_atol": 0,
+  "mapper_native_labels_exact": true,
+  "construction_rng_exact": true,
+  "shared_stride8_feature_and_upstream_gradients": true,
+  "no_new_parameters": true,
+  "initialization_sha256": "4f4017a861f05148cb91c38eecf02f032c0030e0ea7c0f15b559ce04d0605571",
+  "image_only_inference_exact": true,
+  "optimizer_updates": 0,
+  "ap_evaluation": false,
+  "target_data_used": false,
+  "peak_allocated_GiB": 5.958491802215576
+}

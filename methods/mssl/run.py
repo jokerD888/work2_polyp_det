@@ -23,6 +23,10 @@ def validate_dataset(cfg):
     result["mssl_raw_masks_sha256"] = {
         Path(row["file_name"]).name: sha256(mask_root / Path(row["file_name"]).name)
         for row in annotation["images"] if counts.get(row["id"]) == 1}
+    if "local_contrast" in cfg:
+        result['local_all_semantic_masks_sha256'] = {
+            Path(row['file_name']).name: sha256(mask_root/Path(row['file_name']).name)
+            for row in annotation['images']}
     return result
 
 
@@ -62,6 +66,9 @@ def adapter_sources(cfg):
         files.append('polypbench/analysis/support_reference_prototype.py')
     if "reference_features" in cfg:
         files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/reference_features").rglob("*"))
+                  if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
+    if "local_contrast" in cfg:
+        files += [p.relative_to(root).as_posix() for p in sorted((root/"methods/local_contrast").rglob("*"))
                   if p.is_file() and p.suffix in (".py", ".yaml", ".md", ".sh")]
     return {file: sha256(root/file) for file in files}
 

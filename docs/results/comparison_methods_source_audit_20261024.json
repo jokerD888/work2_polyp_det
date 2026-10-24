@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-24",
+  "scope": "Official paper/documentation search and read-only author-code audit; no external-model training or runtime acceptance",
+  "audited_files": [
+    {
+      "tag": "ecc_train",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/train.py",
+      "blob_sha": "fa1695fdafe93bf58e4a4dddd78e15558b060ddd",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ecc_model",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/model.py",
+      "blob_sha": "0a691f20fe4c6d25c99e54a2c9f70d22db05d158",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "di_config",
+      "url": "https://github.com/CQU-ADHRI-Lab/DI-MaskDINO/blob/main/configs/dimaskdino_r50_4scale_bs16_50ep.yaml",
+      "blob_sha": "bb95679e74c4a509666021b76b4b06fcdda94a42",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ecc_train_rest",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/train.py",
+      "blob_sha": "fa1695fdafe93bf58e4a4dddd78e15558b060ddd",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ecc_data",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/data.py",
+      "blob_sha": "0a556c38e48eb7aca721f13f040ef57c8262fa53",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ecc_mining",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/adaptive_hard_mining.py",
+      "blob_sha": "bbc0402e3cfd788942dfaa7a3f1a8fdc143726a3",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ecc_model_rest",
+      "url": "https://github.com/yuncheng97/ECC-PolypDet/blob/main/model.py",
+      "blob_sha": "0a691f20fe4c6d25c99e54a2c9f70d22db05d158",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "dfine_m",
+      "url": "https://github.com/Peterande/D-FINE/blob/master/configs/dfine/dfine_hgnetv2_m_coco.yml",
+      "blob_sha": "9837eacc64e8db31b8bf4dddd2728a56ed4a0f82",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "dfine_backbone",
+      "url": "https://github.com/Peterande/D-FINE/blob/master/configs/dfine/include/dfine_hgnetv2.yml",
+      "blob_sha": "91ad4a0859d85faf4748e1f822174e11e9ab3bd4",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "ob_readme",
+      "url": "https://github.com/seanyan62/YOLO-OB/blob/master/README.md",
+      "blob_sha": "4094c22aca0622860ab1d2ede87de9e33e2b7f42",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "extra0",
+      "url": "https://github.com/lyuwenyu/RT-DETR/blob/main/rtdetrv2_pytorch/configs/rtdetrv2/rtdetrv2_r50vd_6x_coco.yml",
+      "blob_sha": "63f0bd6901179a62bb97674e7e385c9bd34b78df",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "extra1",
+      "url": "https://github.com/IDEA-Research/DINO/blob/main/config/DINO/DINO_4scale.py",
+      "blob_sha": "76f77c3953dd4170a23760fa3d126722d687ae73",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "extra2",
+      "url": "https://github.com/Peterande/D-FINE/blob/master/src/nn/backbone/hgnetv2.py",
+      "blob_sha": "85d99d6c74f0971e7a48fc68e0f827053dcf40e8",
+      "encoding": "utf-8"
+    },
+    {
+      "tag": "extra3",
+      "url": "https://github.com/seanyan62/YOLO-OB/blob/master/train.py",
+      "blob_sha": "6ac0584ab9f39b047b96f96e83616b3b94adff9e",
+      "encoding": "utf-8"
+    }
+  ],
+  "recommendation": [
+    "DI-MaskDINO R50",
+    "DINO R50 official 4-scale",
+    "Mask R-CNN R50-FPN",
+    "ECC-PolypDet R50 subject to implementation fidelity gate",
+    "D-FINE-M HGNetv2-B2",
+    "YOLO11m"
+  ],
+  "pending": [
+    "external model runtime compatibility",
+    "actual checkpoint pretraining provenance",
+    "ECC SFFPN default route and contrast-region coordinate consistency",
+    "MbIoU full formula and training implementation"
+  ]
+}
