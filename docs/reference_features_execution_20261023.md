@@ -1,5 +1,7 @@
 # H1/H2 第一层额外特征读取执行记录
 
+**完成更新：2026-10-24 04:32（北京时间），r2全部21项任务完成。H1/H2各1473张PolypGen推理验收通过，防自动睡眠已释放。H1：Kvasir Val AP65.203、PolypGen AP48.849（相对Baseline +0.031）；H2：Val64.444、PolypGen48.236（相对Baseline -0.582、相对H1 -0.613）。H2没有显示第二空间参照的独立收益，按预定停止规则，不启动MSSL组合、不扩大层数或注意力头。该结论针对当前同预算单Seed实现，不证明所有Encoder补充特征方案无效。保留MSSL V1（PolypGen49.751）。完整结果见`runs/reference-features-full-20261023-r2/summary.md`和`comparison.json`。以下保留验收与启动时记录。**
+
 用户授权：先规格/查新和工程验收，通过后只做H1/H2两组独立完整训练；不直接组合MSSL。规格见[reference_features_spec_20261023.md](reference_features_spec_20261023.md)。
 
 ## 工程验收已通过

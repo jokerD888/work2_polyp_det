@@ -1,5 +1,7 @@
 # E/F与阶段追踪之后：第二机制的决策
 
+**2026-10-24最新：H1/H2独立完整训练及PolypGen评估于04:32全部完成。H1 AP48.849，H2 AP48.236，原生Baseline48.818；H2未超过Baseline或H1，未支持当前Encoder额外空间参照设计。按预定停止规则结束该实现，不启动MSSL组合、不继续搜索层数/注意力头。正式保留MSSL V1 AP49.751。源域Val分别65.203/64.444。详见[H1/H2执行与完成记录](reference_features_execution_20261023.md)。以下均为历史决策，不代表继续运行相关队列。**
+
 **2026-10-23最新：三组坐标初始化对照于04:32完成，PolypGen AP：blend05 49.436、geometry48.398、support48.332；Baseline48.818，MSSL V1 49.751。停止当前坐标MLP校准，不自动组合MSSL。用户批准转入第一层额外空间特征读取H1/H2：保持原生Mask初始几何，只改变额外采样参照。真实源域工程验收已通过，新有限队列`runs/reference-features-full-20261023-r2/`已启动冷优化门禁，后接两组同预算完整训练及PolypGen评估。见[新执行记录](reference_features_execution_20261023.md)。以下旧状态均按历史时间理解，不代表当前还有E/F/Q任务。**
 
 **训练更新：四条件原始预训练起点Smoke均通过，每组20次成功优化（各30次尝试、10次AMP跳过），共同原生参数SHA及480个图像/Box增强microbatch前缀相同。collector源域预检、19项CPU＋15项V1回归、三个正式Trainer起点/optimizer门禁均通过。三组Baseline独立完整训练已加入`runs/support-reference-full-20261021/`冻结队列，当前blend05开始，随后geometry、support；各50等效epoch，再按固定协议评估PolypGen。详见[support_reference_training_execution_20261021.md](support_reference_training_execution_20261021.md)。没有新AP结论，不自动组合MSSL。以下为历史决策记录。**
